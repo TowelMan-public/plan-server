@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 
 import com.example.demo.exception.FailureCreateAuthenticationTokenException;
 import com.example.demo.response.TokenResponse;
+import com.example.demo.service.OriginalUserDetailsService;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
@@ -38,8 +39,8 @@ public class JwtProvider {
 	private String refreshTokenSecretKey;
 
 
-    //@Autowired
-    private UserDetailsServiceImp service;
+    @Autowired
+    private OriginalUserDetailsService service;
     @Autowired
 	PasswordEncoder passwordEncoder;
 
@@ -99,7 +100,7 @@ public class JwtProvider {
      */
     public TokenResponse getTokens(String refreshToken) throws FailureCreateAuthenticationTokenException {
     	if(validateRefreshToken(refreshToken)) {
-    		UserDetailsImp user;
+    		var user = new UserDetailsImp();
     		user.setUserId(getUserIdByRefreshToken(refreshToken));
     		
 	    	var tokenResponse = new TokenResponse();
