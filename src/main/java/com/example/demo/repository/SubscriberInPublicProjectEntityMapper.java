@@ -4,8 +4,11 @@ import com.example.demo.dto.SubscriberInPublicProjectEntityExample;
 import com.example.demo.entity.SubscriberInPublicProjectEntity;
 
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface SubscriberInPublicProjectEntityMapper {
 
     long countByExample(SubscriberInPublicProjectEntityExample example);

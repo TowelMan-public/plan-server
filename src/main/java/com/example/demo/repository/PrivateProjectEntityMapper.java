@@ -4,8 +4,11 @@ import com.example.demo.dto.PrivateProjectEntityExample;
 import com.example.demo.entity.PrivateProjectEntity;
 
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface PrivateProjectEntityMapper {
 	
     long countByExample(PrivateProjectEntityExample example);

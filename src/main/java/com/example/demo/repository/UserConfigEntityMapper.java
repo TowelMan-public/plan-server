@@ -4,8 +4,11 @@ import com.example.demo.dto.UserConfigEntityExample;
 import com.example.demo.entity.UserConfigEntity;
 
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface UserConfigEntityMapper {
 
     long countByExample(UserConfigEntityExample example);

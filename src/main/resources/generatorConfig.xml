@@ -233,5 +233,19 @@
 	    modelType="flat">
     </table>
     
+    <table schema="plan" tableName="other_config"
+     	domainObjectName="OtherConfigEntity"
+     	enableInsert="true"
+	    enableSelectByPrimaryKey="true"
+	    enableSelectByExample="true"
+	    enableUpdateByPrimaryKey="true"
+	    enableUpdateByExample="true"
+	    enableDeleteByPrimaryKey="true"
+	    enableDeleteByExample="true"
+	    enableCountByExample="true"
+	    selectByExampleQueryId="true"
+	    modelType="flat">
+    </table>
+    
   </context>
 </generatorConfiguration>

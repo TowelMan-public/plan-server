@@ -4,8 +4,11 @@ import com.example.demo.dto.ProjectNoticeEntityExample;
 import com.example.demo.entity.ProjectNoticeEntity;
 
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface ProjectNoticeEntityMapper {
 
     long countByExample(ProjectNoticeEntityExample example);

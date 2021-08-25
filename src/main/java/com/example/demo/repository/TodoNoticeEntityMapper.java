@@ -4,8 +4,11 @@ import com.example.demo.dto.TodoNoticeEntityExample;
 import com.example.demo.entity.TodoNoticeEntity;
 
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface TodoNoticeEntityMapper {
 
     long countByExample(TodoNoticeEntityExample example);

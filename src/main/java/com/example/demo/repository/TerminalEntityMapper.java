@@ -4,8 +4,11 @@ import com.example.demo.dto.TerminalEntityExample;
 import com.example.demo.entity.TerminalEntity;
 
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface TerminalEntityMapper {
 	
     long countByExample(TerminalEntityExample example);

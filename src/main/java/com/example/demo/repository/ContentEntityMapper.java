@@ -4,8 +4,11 @@ import com.example.demo.dto.ContentEntityExample;
 import com.example.demo.entity.ContentEntity;
 
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface ContentEntityMapper {
 	
     long countByExample(ContentEntityExample example);

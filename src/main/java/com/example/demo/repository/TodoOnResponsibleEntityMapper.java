@@ -4,8 +4,11 @@ import com.example.demo.dto.TodoOnResponsibleEntityExample;
 import com.example.demo.entity.TodoOnResponsibleEntity;
 
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface TodoOnResponsibleEntityMapper {
 
     long countByExample(TodoOnResponsibleEntityExample example);
