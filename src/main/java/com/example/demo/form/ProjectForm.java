@@ -48,20 +48,6 @@ public class ProjectForm {
 			.run();
 	}
 	
-	public void validatePut() throws ValidateException {
-		new ValidateManager()
-			.or()
-				.add(new StringValidator(projectName)
-						.addValidatable(new NotBlankStringValidatable()))
-			.or()
-				.add(new DateValidator(startDate)
-						.addValidatable(new NotNullValidatable()))
-			.or()
-				.add(new DateValidator(finishDate)
-						.addValidatable(new NotNullValidatable()))
-			.run();
-	}
-	
 	public void validatePutIsCompleted() throws ValidateException {
 		new ValidateManager()
 			.or()

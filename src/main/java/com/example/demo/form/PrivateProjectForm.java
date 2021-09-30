@@ -13,19 +13,7 @@ public class PrivateProjectForm {
 	@Setter
 	private String projectName;
 	
-	@Getter
-	@Setter
-	private Integer privateProjectId;
-	
 	public void validatePost()  throws ValidateException {
-		new ValidateManager()
-			.or()
-				.add(new StringValidator(projectName)
-						.addValidatable(new NotBlankStringValidatable()))
-			.run();
-	}
-	
-	public void validatePut()  throws ValidateException {
 		new ValidateManager()
 			.or()
 				.add(new StringValidator(projectName)
