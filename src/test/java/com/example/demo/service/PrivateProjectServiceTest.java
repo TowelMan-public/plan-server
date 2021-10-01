@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.demo.exception.AlreadyUsedTerminalNameException;
 import com.example.demo.exception.NotFoundValueException;
 import com.example.demo.response.PrivateProjectResponse;
 import com.github.springtestdbunit.annotation.DatabaseSetup;

@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.demo.exception.AlreadyUsedTerminalNameException;
 import com.example.demo.response.TerminalResponse;
 
 @Service

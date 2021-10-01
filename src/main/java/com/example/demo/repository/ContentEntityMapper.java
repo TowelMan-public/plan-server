@@ -1,12 +1,12 @@
 package com.example.demo.repository;
 
-import com.example.demo.dto.ContentEntityExample;
-import com.example.demo.entity.ContentEntity;
-
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
+import com.example.demo.dto.ContentEntityExample;
+import com.example.demo.entity.ContentEntity;
 
 @Mapper
 public interface ContentEntityMapper {

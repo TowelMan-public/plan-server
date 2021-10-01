@@ -1,12 +1,12 @@
 package com.example.demo.repository;
 
-import com.example.demo.dto.UserEntityExample;
-import com.example.demo.entity.UserEntity;
-
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
+import com.example.demo.dto.UserEntityExample;
+import com.example.demo.entity.UserEntity;
 
 @Mapper
 public interface UserEntityMapper {

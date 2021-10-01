@@ -15,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.demo.exception.BadRequestException;
 import com.example.demo.exception.NotFoundValueException;
 import com.example.demo.exception.NotHaveAuthorityToOperateProjectException;
-import com.example.demo.exception.NotJoinedPublicProjectException;
 import com.example.demo.exception.NotSelectedAsTodoResponsibleException;
 import com.example.demo.form.TodoForm;
 import com.example.demo.response.TodoOnProjectResponse;

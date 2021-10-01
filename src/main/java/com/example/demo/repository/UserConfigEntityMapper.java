@@ -1,12 +1,12 @@
 package com.example.demo.repository;
 
-import com.example.demo.dto.UserConfigEntityExample;
-import com.example.demo.entity.UserConfigEntity;
-
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
+import com.example.demo.dto.UserConfigEntityExample;
+import com.example.demo.entity.UserConfigEntity;
 
 @Mapper
 public interface UserConfigEntityMapper {

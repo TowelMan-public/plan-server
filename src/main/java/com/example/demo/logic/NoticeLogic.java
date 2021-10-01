@@ -7,12 +7,8 @@ import org.springframework.stereotype.Component;
 
 import com.example.demo.dto.NoticeEntityExample;
 import com.example.demo.dto.ProjectNoticeEntityExample;
-import com.example.demo.dto.PublicProjectEntityExample;
-import com.example.demo.dto.SubscriberInPublicProjectEntityExample;
 import com.example.demo.dto.TerminalEntityExample;
 import com.example.demo.dto.TodoNoticeEntityExample;
-import com.example.demo.dto.TodoOnProjectEntityExample;
-import com.example.demo.dto.TodoOnResponsibleEntityExample;
 import com.example.demo.entity.NoticeEntity;
 import com.example.demo.entity.ProjectNoticeEntity;
 import com.example.demo.entity.TodoNoticeEntity;
@@ -20,12 +16,8 @@ import com.example.demo.entity.UnsentNoticeEntity;
 import com.example.demo.repository.NoticeEntityMapper;
 import com.example.demo.repository.OriginalForNoticeMapper;
 import com.example.demo.repository.ProjectNoticeEntityMapper;
-import com.example.demo.repository.PublicProjectEntityMapper;
-import com.example.demo.repository.SubscriberInPublicProjectEntityMapper;
 import com.example.demo.repository.TerminalEntityMapper;
 import com.example.demo.repository.TodoNoticeEntityMapper;
-import com.example.demo.repository.TodoOnProjectEntityMapper;
-import com.example.demo.repository.TodoOnResponsibleEntityMapper;
 import com.example.demo.repository.UnsentNoticeEntityMapper;
 import com.example.demo.repository.UserConfigEntityMapper;
 
