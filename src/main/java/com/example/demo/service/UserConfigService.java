@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.response.UserConfigResponse;
 
@@ -12,21 +13,25 @@ public class UserConfigService {
 		return null;
 	}
 
+	@Transactional
 	public void updateBeforeDeadlineForProjectNotice(Integer userId, Boolean beforeDeadlineForProjectNotice) {
 		// TODO 自動生成されたメソッド・スタブ
 		
 	}
 
+	@Transactional
 	public void updateBeforeDeadlineForTodoNotice(Integer userId, Boolean beforeDeadlineForTodoNotice) {
 		// TODO 自動生成されたメソッド・スタブ
 		
 	}
 
+	@Transactional
 	public void updateIsPushSatrtedTodoNotice(Integer userId, Boolean isPushSatrtedTodoNotice) {
 		// TODO 自動生成されたメソッド・スタブ
 		
 	}
 
+	@Transactional
 	public void updatePushInsertedTodoNotice(Integer userId, Boolean pushInsertedTodoNotice) {
 		// TODO 自動生成されたメソッド・スタブ
 		

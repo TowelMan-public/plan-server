@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.form.TodoForm;
 import com.example.demo.response.TodoOnProjectResponse;
@@ -11,6 +12,7 @@ import com.example.demo.response.TodoOnProjectResponse;
 @Service
 public class TodoService {
 
+	@Transactional
 	public Integer insert(Integer userId, TodoForm form) {
 		// TODO 自動生成されたメソッド・スタブ
 		
@@ -18,42 +20,50 @@ public class TodoService {
 		
 	}
 
+	@Transactional
 	public TodoOnProjectResponse get(Integer userId, Integer todoOnProjectId) {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}
 
+	@Transactional
 	public List<TodoOnProjectResponse> getList(Integer userId, TodoForm form) {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}
 
+	@Transactional
 	public void updateIsCopyContentsToResponsible(Integer userId, Integer todoOnProjectId,
 			Boolean isCopyContentsToResponsible) {
 		// TODO 自動生成されたメソッド・スタブ
 		
 	}
 
+	@Transactional
 	public void updateTodoName(Integer userId, Integer todoOnProjectId, String todoName) {
 		// TODO 自動生成されたメソッド・スタブ
 		
 	}
 
+	@Transactional
 	public void updateStartDate(Integer userId, Integer todoOnProjectId, Date startDate) {
 		// TODO 自動生成されたメソッド・スタブ
 		
 	}
 
+	@Transactional
 	public void updateFinishDate(Integer userId, Integer todoOnProjectId, Date finishDate) {
 		// TODO 自動生成されたメソッド・スタブ
 		
 	}
 
+	@Transactional
 	public void delete(Integer userId, Integer todoOnProjectId) {
 		// TODO 自動生成されたメソッド・スタブ
 		
 	}
 
+	@Transactional
 	public void setIsCompleted(Integer userId, Integer todoOnProjectId, Boolean isCompleted) {
 		// TODO 自動生成されたメソッド・スタブ
 		

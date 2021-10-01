@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.form.ProjectForm;
 import com.example.demo.response.PublicProjectResponse;
@@ -11,11 +12,13 @@ import com.example.demo.response.PublicProjectResponse;
 @Service
 public class PublicProjectService {
 
+	@Transactional
 	public Integer insert(Integer userId, ProjectForm form) {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;//TODO 新しいID
 	}
 
+	@Transactional
 	public PublicProjectResponse get(Integer userId, Integer publicProjectId) {//NotFoundValueException
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
@@ -26,11 +29,13 @@ public class PublicProjectService {
 		return null;
 	}
 
+	@Transactional
 	public void updateProjectName(Integer userId, Integer publicProjectId, String projectName) {
 		// TODO 自動生成されたメソッド・スタブ
 		
 	}
 
+	@Transactional
 	public void updateFinishDate(Integer userId, Integer publicProjectId, Date finishDate) {
 		// TODO 自動生成されたメソッド・スタブ
 		
