@@ -16,7 +16,7 @@ public class PublicProjectService {
 		return null;//TODO 新しいID
 	}
 
-	public PublicProjectResponse get(Integer userId, Integer publicProjectId) {
+	public PublicProjectResponse get(Integer userId, Integer publicProjectId) {//NotFoundValueException
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}
@@ -26,17 +26,17 @@ public class PublicProjectService {
 		return null;
 	}
 
-	public void updateProjectName(String projectName) {
+	public void updateProjectName(Integer userId, Integer publicProjectId, String projectName) {
 		// TODO 自動生成されたメソッド・スタブ
 		
 	}
 
-	public void updateFinishDate(Date finishDate) {
+	public void updateFinishDate(Integer userId, Integer publicProjectId, Date finishDate) {
 		// TODO 自動生成されたメソッド・スタブ
 		
 	}
 
-	public void updateStartDate(Date startDate) {
+	public void updateStartDate(Integer userId, Integer publicProjectId, Date startDate) {
 		// TODO 自動生成されたメソッド・スタブ
 		
 	}
@@ -46,7 +46,7 @@ public class PublicProjectService {
 		
 	}
 
-	public void setIsCompleted(Integer userId, Boolean isCompleted) {
+	public void setIsCompleted(Integer userId, Integer publicProjectId, Boolean isCompleted) {
 		// TODO 自動生成されたメソッド・スタブ
 		
 	}

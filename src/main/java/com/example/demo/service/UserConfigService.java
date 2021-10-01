@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.response.UserConfigResponse;
 
 @Service
-public class UserConfigServer {
+public class UserConfigService {
 
 	public UserConfigResponse get(Integer userId) {
 		// TODO 自動生成されたメソッド・スタブ

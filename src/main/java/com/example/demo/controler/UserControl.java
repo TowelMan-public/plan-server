@@ -59,15 +59,15 @@ public class UserControl {
 	@PutMapping
 	public void updateUser(@AuthenticationPrincipal UserDetailsImp user, @RequestBody UserForm form) {
 		if(form.getUserName() != null && !form.getUserName().isBlank()) {
-			server.updateUserName(form.getUserName());
+			server.updateUserName(user.getUserId(), form.getUserName());
 		}
 		
 		if(form.getUserNickName() != null && !form.getUserNickName().isBlank()) {
-			server.updateUserNickName(form.getUserNickName());
+			server.updateUserNickName(user.getUserId(), form.getUserNickName());
 		}
 		
 		if(form.getPassword() != null && !form.getPassword().isBlank()) {
-			server.updatePassword(form.getPassword());
+			server.updatePassword(user.getUserId(), form.getPassword());
 		}
 	}
 	

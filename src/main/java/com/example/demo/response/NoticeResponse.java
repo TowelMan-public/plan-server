@@ -1,8 +1,10 @@
 package com.example.demo.response;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class NoticeResponse {
 	public static final String TODO_NOTICE = "TODO_NOTICE";
 	public static final String PROJECT_NOTICE = "PROJECT_NOTICE";

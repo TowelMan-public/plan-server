@@ -23,22 +23,22 @@ public class UserService {
 		
 	}
 
-	public void insert(UserForm form) {
+	public void insert(UserForm form) {//AlreadyUsedUserNameException
 		// TODO 自動生成されたメソッド・スタブ
 		
 	}
 
-	public void updatePassword(String password) {
+	public void updatePassword(Integer userId, String password) {
 		// TODO 自動生成されたメソッド・スタブ
 		
 	}
 
-	public void updateUserNickName(String userNickName) {
+	public void updateUserNickName(Integer userId, String userNickName) {
 		// TODO 自動生成されたメソッド・スタブ
 		
 	}
 
-	public void updateUserName(String userName) {
+	public void updateUserName(Integer userId, String userName) {//AlreadyUsedUserNameException
 		// TODO 自動生成されたメソッド・スタブ
 		
 	}

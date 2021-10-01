@@ -5,8 +5,10 @@ import java.util.Date;
 import com.example.demo.entity.PublicProjectEntity;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class PublicProjectResponse {
 	private Integer publicProjectId;
 	private String projectName;

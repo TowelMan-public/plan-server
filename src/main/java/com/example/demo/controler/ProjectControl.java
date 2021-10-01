@@ -48,13 +48,13 @@ public class ProjectControl {
 			@PathVariable("publicProjectId") Integer publicProjectId,
 			@RequestBody ProjectForm form) {
 		if(form.getProjectName() != null && !form.getProjectName().isBlank()) {
-			service.updateProjectName(form.getProjectName());
-		}
-		if(form.getFinishDate() != null) {
-			service.updateFinishDate(form.getFinishDate());	
+			service.updateProjectName(user.getUserId(), publicProjectId, form.getProjectName());
 		}
 		if(form.getStartDate() != null) {
-			service.updateStartDate(form.getStartDate());
+			service.updateStartDate(user.getUserId(), publicProjectId, form.getStartDate());
+		}
+		if(form.getFinishDate() != null) {
+			service.updateFinishDate(user.getUserId(), publicProjectId, form.getFinishDate());	
 		}
 	}
 	
@@ -63,10 +63,12 @@ public class ProjectControl {
 		service.delete(user.getUserId(), publicProjectId);
 	}
 	
-	@PostMapping("is_completed")
-	public void setIsCompleted(@AuthenticationPrincipal UserDetailsImp user, @RequestBody ProjectForm form) throws ValidateException {
+	@PostMapping("{publicProjectId}/is_completed")
+	public void setIsCompleted(@AuthenticationPrincipal UserDetailsImp user,
+			@PathVariable("publicProjectId") Integer publicProjectId,
+			@RequestBody ProjectForm form) throws ValidateException {
 		form.validatePutIsCompleted();
-		service.setIsCompleted(user.getUserId(), form.getIsCompleted());
+		service.setIsCompleted(user.getUserId(), publicProjectId, form.getIsCompleted());
 	}
 	
 }

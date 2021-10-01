@@ -41,12 +41,12 @@ public class ResponsibleTodoService {
 		
 	}
 
-	public void setIsCompletedAll(Integer userId, Integer todoOnProjectId) {
+	public void setIsCompletedAll(Integer userId, Integer todoOnProjectId, Boolean isCompleted) {
 		// TODO 自動生成されたメソッド・スタブ
 		
 	}
 
-	public void setIsCompleted(Integer userId, Integer todoOnProjectId) {
+	public void setIsCompleted(Integer userId, Integer todoOnProjectId, Boolean isCompleted) {
 		// TODO 自動生成されたメソッド・スタブ
 		
 	}

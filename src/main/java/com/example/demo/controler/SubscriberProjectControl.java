@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.configurer.UrlConfig;
 import com.example.demo.exception.ValidateException;
 import com.example.demo.form.SubscriberInProjectForm;
+import com.example.demo.response.SubscriberInPublicProjectResponse;
 import com.example.demo.security.UserDetailsImp;
-import com.example.demo.service.SubscriberInPublicProjectResponse;
 import com.example.demo.service.SubscriberProjectService;
 
 @RequestMapping(UrlConfig.ROOT_URL_V1 + "/project/{publicProjectId}/subscriber")
@@ -31,7 +31,7 @@ public class SubscriberProjectControl {
 			@PathVariable("publicProjectId") Integer publicProjectId,
 			@RequestBody SubscriberInProjectForm form) throws ValidateException {
 		form.validatePost();
-		service.insert(user.getUserId(), form);
+		service.insert(user.getUserId(), publicProjectId, form);
 	}
 	
 	@GetMapping

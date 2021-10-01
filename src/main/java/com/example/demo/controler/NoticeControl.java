@@ -1,5 +1,7 @@
 package com.example.demo.controler;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +22,7 @@ public class NoticeControl {
 	NoticeService service;
 	
 	@GetMapping
-	public NoticeResponse getNoticeList(@AuthenticationPrincipal UserDetailsImp user, NoticeForm form) {
+	public List<NoticeResponse> getNoticeList(@AuthenticationPrincipal UserDetailsImp user, NoticeForm form) {
 		if(form.getTerminalName() != null && !form.getTerminalName().isBlank()) {
 			return service.getUnacquiredNotice(user.getUserId(), form.getTerminalName());
 		}else {

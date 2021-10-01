@@ -1,11 +1,13 @@
-package com.example.demo.service;
+package com.example.demo.response;
 
 import com.example.demo.entity.SubscriberInPublicProjectEntity;
 import com.example.demo.entity.UserEntity;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class SubscriberInPublicProjectResponse {
 	private Integer publicProjectId;
 	private String userName;

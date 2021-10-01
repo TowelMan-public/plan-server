@@ -4,8 +4,10 @@ import com.example.demo.entity.TodoOnProjectEntity;
 import com.example.demo.entity.TodoOnResponsibleEntity;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class TodoOnResponsibleResponse {
 	private String todoName;
 	private Integer todoOnResponsibleId;

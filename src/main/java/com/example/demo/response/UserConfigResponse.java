@@ -3,8 +3,10 @@ package com.example.demo.response;
 import com.example.demo.entity.UserConfigEntity;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class UserConfigResponse {
 	private Integer beforeDeadlineForTodoNotice;
 	private Integer beforeDeadlineForProjectNotice;

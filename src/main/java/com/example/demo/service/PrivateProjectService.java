@@ -19,17 +19,17 @@ public class PrivateProjectService {
 		return null;
 	}
 
-	public PrivateProjectResponse get(Integer userId, Integer privateProjectId) {
+	public PrivateProjectResponse get(Integer userId, Integer privateProjectId) {//NotFoundValueException
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}
 
-	public void updateProjectName(Integer userId, Integer privateProjectId, String projectName) {
+	public void updateProjectName(Integer userId, Integer privateProjectId, String projectName) {//NotFoundValueException
 		// TODO 自動生成されたメソッド・スタブ
 		
 	}
 
-	public void delete(Integer userId, Integer privateProjectId) {
+	public void delete(Integer userId, Integer privateProjectId) {//NotFoundValueException
 		// TODO 自動生成されたメソッド・スタブ
 		
 	}

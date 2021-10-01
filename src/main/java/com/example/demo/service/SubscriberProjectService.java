@@ -4,12 +4,15 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.example.demo.exception.AlreadyJoinedPublicProjectException;
+import com.example.demo.exception.NotHaveAuthorityToOperateProjectException;
 import com.example.demo.form.SubscriberInProjectForm;
+import com.example.demo.response.SubscriberInPublicProjectResponse;
 
 @Service
 public class SubscriberProjectService {
 
-	public void insert(Integer userId, SubscriberInProjectForm form) {
+	public void insert(Integer userId, Integer publicProjectId, SubscriberInProjectForm form) {
 		// TODO 自動生成されたメソッド・スタブ
 		
 	}

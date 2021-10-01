@@ -11,13 +11,13 @@ import com.example.demo.configurer.UrlConfig;
 import com.example.demo.form.UserConfigForm;
 import com.example.demo.response.UserConfigResponse;
 import com.example.demo.security.UserDetailsImp;
-import com.example.demo.service.UserConfigServer;
+import com.example.demo.service.UserConfigService;
 
 @RequestMapping(UrlConfig.ROOT_URL_V1 + "/user/config")
 @RestController
 public class UserConfigControl {
 	@Autowired
-	UserConfigServer server;
+	UserConfigService server;
 	
 	@GetMapping
 	public UserConfigResponse getUserConfig(@AuthenticationPrincipal UserDetailsImp user) {

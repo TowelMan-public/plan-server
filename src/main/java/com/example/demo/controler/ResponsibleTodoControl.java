@@ -66,7 +66,7 @@ public class ResponsibleTodoControl {
 			@RequestBody ResponsibleTodoForm form,
 			@PathVariable("todoOnProjectId") Integer todoOnProjectId) throws ValidateException  {
 		form.validatePutIsCompleted();
-		service.setIsCompletedAll(user.getUserId(), todoOnProjectId);
+		service.setIsCompletedAll(user.getUserId(), todoOnProjectId, form.getIsCompleted());
 	}
 	
 	@PutMapping("{todoOnProjectId}/responsible/is_completed")
@@ -74,6 +74,6 @@ public class ResponsibleTodoControl {
 			@RequestBody ResponsibleTodoForm form,
 			@PathVariable("todoOnProjectId") Integer todoOnProjectId) throws ValidateException  {
 		form.validatePutIsCompletedOnUser();
-		service.setIsCompleted(user.getUserId(), todoOnProjectId);
+		service.setIsCompleted(user.getUserId(), todoOnProjectId, form.getIsCompleted());
 	}
 }
