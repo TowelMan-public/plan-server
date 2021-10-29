@@ -72,10 +72,10 @@
     <notice_project notice_id="11" project_id="9" message="" />
     <notice_project notice_id="12" project_id="10" message="" />
         
-    <project project_is="1" />
-    <project project_is="2" />
-    <project project_is="3" />
-    <project project_is="4" />
+    <project project_id="1" />
+    <project project_id="2" />
+    <project project_id="3" />
+    <project project_id="4" />
     
     <project project_id="5" />
     <project project_id="6" />

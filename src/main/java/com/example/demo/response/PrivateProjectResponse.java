@@ -3,9 +3,11 @@ package com.example.demo.response;
 import com.example.demo.entity.PrivateProjectEntity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
+@EqualsAndHashCode
 @NoArgsConstructor
 public class PrivateProjectResponse {
 	private Integer projectId;

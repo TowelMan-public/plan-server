@@ -6,9 +6,11 @@ import com.example.demo.entity.TodoOnProjectEntity;
 import com.example.demo.entity.TodoOnResponsibleEntity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
+@EqualsAndHashCode
 @NoArgsConstructor
 public class TodoOnResponsibleResponse {
 	private Integer todoOnProjectId;

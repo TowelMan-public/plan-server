@@ -38,9 +38,8 @@ public class JwtProvider {
 	@Setter
 	private String refreshTokenSecretKey;
 
-
     @Autowired
-    private OriginalUserDetailsService service;
+    OriginalUserDetailsService service;
     @Autowired
 	PasswordEncoder passwordEncoder;
 

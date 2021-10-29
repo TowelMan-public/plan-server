@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.example.demo.validate.validatable.IntegerValidatable;
 import com.example.demo.validate.validatable.ObjectValidatable;
-import com.example.demo.validate.validatable.StringValidatable;
 
 public class IntegerValidator implements Validator {
 	private Integer integer;

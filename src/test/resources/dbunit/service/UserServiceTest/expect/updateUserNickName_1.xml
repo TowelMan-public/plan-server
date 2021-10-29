@@ -17,10 +17,10 @@
     <have_terminal_list terminal_id="5" user_id="2" terminal_name="terminal2" />
     <have_terminal_list terminal_id="6" user_id="2" terminal_name="terminal3" />
     
-    <project project_is="1" />
-    <project project_is="2" />
-    <project project_is="3" />
-    <project project_is="4" />
+    <project project_id="1" />
+    <project project_id="2" />
+    <project project_id="3" />
+    <project project_id="4" />
     
     <project project_id="5" />
     <project project_id="6" />
@@ -85,43 +85,8 @@
 	<todo todo_id="195" />
 	<todo todo_id="198" />
     
-    <todo_on_project todo_on_project_id="101" project_id="7" todo_name="rerum consequuntur voluptatem alias doloribus." start_date="2021-06-30 06:06:19" finish_date="2021-06-30 06:06:19" is_copy_contents_to_users="0" is_completed="0" is_deleted="0" />
-	<todo_on_project todo_on_project_id="102" project_id="2" todo_name="et enim facilis vitae architecto sit sapiente laudantium cum nemo!" start_date="2020-12-12 04:04:40" finish_date="2020-12-12 04:04:40" is_copy_contents_to_users="1" is_completed="0" is_deleted="0" />
-	<todo_on_project todo_on_project_id="103" project_id="9" todo_name="quia eaque placeat ut fugiat." start_date="2021-09-26 12:12:59" finish_date="2021-09-26 12:12:59" is_copy_contents_to_users="0" is_completed="0" is_deleted="0" />
-	<todo_on_project todo_on_project_id="104" project_id="6" todo_name="incidunt molestias doloremque consequuntur et voluptas et necessitatibus aut." start_date="2021-10-09 04:04:55" finish_date="2021-10-09 04:04:55" is_copy_contents_to_users="0" is_completed="0" is_deleted="0" />
-	<todo_on_project todo_on_project_id="105" project_id="10" todo_name="omnis velit eos quis blanditiis ea similique fugit vel." start_date="2021-06-15 10:10:22" finish_date="2021-06-15 10:10:22" is_copy_contents_to_users="0" is_completed="0" is_deleted="0" />
-	<todo_on_project todo_on_project_id="106" project_id="7" todo_name="fugiat odit fuga et nihil odio et." start_date="2021-04-06 04:04:13" finish_date="2021-04-06 04:04:13" is_copy_contents_to_users="1" is_completed="0" is_deleted="0" />
-	<todo_on_project todo_on_project_id="107" project_id="1" todo_name="omnis asperiores praesentium nobis impedit et aliquid perspiciatis." start_date="2021-08-27 15:03:08" finish_date="2021-08-27 15:03:08" is_copy_contents_to_users="0" is_completed="0" is_deleted="0" />
-	<todo_on_project todo_on_project_id="108" project_id="8" todo_name="placeat maiores aut error accusantium molestiae nisi nam voluptas." start_date="2021-01-09 17:05:12" finish_date="2021-01-09 17:05:12" is_copy_contents_to_users="0" is_completed="0" is_deleted="0" />
-	<todo_on_project todo_on_project_id="109" project_id="4" todo_name="id ea ut rerum dolore accusantium labore." start_date="2021-03-27 09:09:50" finish_date="2021-03-27 09:09:50" is_copy_contents_to_users="0" is_completed="0" is_deleted="0" />
-	<todo_on_project todo_on_project_id="110" project_id="7" todo_name="expedita voluptatem aut perferendis quam dolorum." start_date="2021-02-09 23:11:56" finish_date="2021-02-09 23:11:56" is_copy_contents_to_users="0" is_completed="0" is_deleted="0" />
-	<todo_on_project todo_on_project_id="111" project_id="2" todo_name="ut nostrum ex libero aut tempora voluptate ullam quia." start_date="2020-12-12 04:04:40" finish_date="2020-12-12 04:04:40" is_copy_contents_to_users="1" is_completed="0" is_deleted="0" />
-	<todo_on_project todo_on_project_id="112" project_id="7" todo_name="iste aut recusandae aut est animi!" start_date="2021-05-08 05:05:59" finish_date="2021-05-08 05:05:59" is_copy_contents_to_users="0" is_completed="0" is_deleted="0" />
-	<todo_on_project todo_on_project_id="113" project_id="7" todo_name="non eveniet debitis voluptatibus eos laudantium." start_date="2021-02-28 17:05:40" finish_date="2021-02-28 17:05:40" is_copy_contents_to_users="0" is_completed="0" is_deleted="0" />
-	<todo_on_project todo_on_project_id="114" project_id="7" todo_name="iure at nulla est." start_date="2021-05-09 00:12:48" finish_date="2021-05-09 00:12:48" is_copy_contents_to_users="0" is_completed="0" is_deleted="0" />
-	<todo_on_project todo_on_project_id="115" project_id="10" todo_name="consequuntur laborum numquam excepturi quod beatae reiciendis earum et." start_date="2021-04-08 03:03:52" finish_date="2021-04-08 03:03:52" is_copy_contents_to_users="0" is_completed="0" is_deleted="0" />
-	<todo_on_project todo_on_project_id="116" project_id="4" todo_name="quod quia in nisi eum accusantium corrupti." start_date="2021-07-15 10:10:07" finish_date="2021-07-15 10:10:07" is_copy_contents_to_users="0" is_completed="0" is_deleted="0" />
-	<todo_on_project todo_on_project_id="117" project_id="3" todo_name="aut sit saepe consectetur ex aspernatur doloremque provident." start_date="2021-09-26 12:12:59" finish_date="2021-09-26 12:12:59" is_copy_contents_to_users="0" is_completed="0" is_deleted="0" />
-	<todo_on_project todo_on_project_id="118" project_id="8" todo_name="in dolor perferendis et architecto omnis eum recusandae." start_date="2020-11-04 18:06:34" finish_date="2020-11-04 18:06:34" is_copy_contents_to_users="0" is_completed="0" is_deleted="0" />
-	<todo_on_project todo_on_project_id="119" project_id="9" todo_name="cumque corporis et voluptas porro natus exercitationem iure sit." start_date="2021-05-31 02:02:03" finish_date="2021-05-31 02:02:03" is_copy_contents_to_users="0" is_completed="0" is_deleted="0" />
-	<todo_on_project todo_on_project_id="120" project_id="3" todo_name="sunt laborum quasi." start_date="2021-08-28 20:08:30" finish_date="2021-08-28 20:08:30" is_copy_contents_to_users="0" is_completed="0" is_deleted="0" />
-	    
-    <todo_on_responsible todo_on_project_id="103" user_id="1" todo_on_responsible_id="105" project_id="5" is_completed="0" is_deleted="0" />
-	<todo_on_responsible todo_on_project_id="104" user_id="2" todo_on_responsible_id="120" project_id="5" is_completed="0" is_deleted="0" />
-	<todo_on_responsible todo_on_project_id="105" user_id="1" todo_on_responsible_id="177" project_id="10" is_completed="0" is_deleted="0" />
-	<todo_on_responsible todo_on_project_id="106" user_id="4" todo_on_responsible_id="198" project_id="6" is_completed="0" is_deleted="0" />
-	<todo_on_responsible todo_on_project_id="107" user_id="4" todo_on_responsible_id="190" project_id="8" is_completed="0" is_deleted="0" />
-	<todo_on_responsible todo_on_project_id="108" user_id="2" todo_on_responsible_id="183" project_id="9" is_completed="0" is_deleted="0" />
-	<todo_on_responsible todo_on_project_id="110" user_id="1" todo_on_responsible_id="110" project_id="5" is_completed="0" is_deleted="0" />
-	<todo_on_responsible todo_on_project_id="111" user_id="3" todo_on_responsible_id="136" project_id="9" is_completed="0" is_deleted="0" />
-	<todo_on_responsible todo_on_project_id="112" user_id="1" todo_on_responsible_id="195" project_id="6" is_completed="0" is_deleted="0" />
-	<todo_on_responsible todo_on_project_id="112" user_id="2" todo_on_responsible_id="112" project_id="9" is_completed="0" is_deleted="0" />
-	<todo_on_responsible todo_on_project_id="113" user_id="3" todo_on_responsible_id="175" project_id="8" is_completed="0" is_deleted="0" />
-	<todo_on_responsible todo_on_project_id="114" user_id="3" todo_on_responsible_id="155" project_id="5" is_completed="0" is_deleted="0" />
-	<todo_on_responsible todo_on_project_id="114" user_id="4" todo_on_responsible_id="141" project_id="6" is_completed="0" is_deleted="0" />
-	<todo_on_responsible todo_on_project_id="117" user_id="2" todo_on_responsible_id="188" project_id="10" is_completed="0" is_deleted="0" />
-	<todo_on_responsible todo_on_project_id="120" user_id="4" todo_on_responsible_id="186" project_id="10" is_completed="0" is_deleted="0" />
-	    
+      
+   
     <content content_id="1" todo_id="110" content_title="recusandae ad nam nisi est omnis ea nostrum." content_explanation="aliquid sed quia et." is_completed="0" is_deleted="0" />
 	<content content_id="2" todo_id="108" content_title="est libero repellendus est eaque ad." content_explanation="tenetur non aliquam architecto labore quia expedita molestiae." is_completed="0" is_deleted="0" />
 	<content content_id="3" todo_id="119" content_title="vitae velit qui molestiae est qui eos." content_explanation="eum explicabo quo dolor!" is_completed="0" is_deleted="0" />

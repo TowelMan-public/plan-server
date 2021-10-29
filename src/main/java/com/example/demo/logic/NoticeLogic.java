@@ -21,6 +21,11 @@ import com.example.demo.repository.TodoNoticeEntityMapper;
 import com.example.demo.repository.UnsentNoticeEntityMapper;
 import com.example.demo.repository.UserConfigEntityMapper;
 
+/**
+ * 通知周りの共通処理クラス
+ * @author towelman
+ *
+ */
 @Component
 public class NoticeLogic {
 	private static final String PUBLIC_PROJECT_NAME = "{{PUBLIC_PROJECT_NAME}}";

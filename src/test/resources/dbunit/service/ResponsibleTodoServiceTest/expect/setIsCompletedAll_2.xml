@@ -36,10 +36,10 @@
     <notice_todo notice_id="4" todo_id="4" message="todo_1が完了してなかったです！" />
     <notice_todo notice_id="5" todo_id="4" message="todo_1が完了してなかったです！" />
     
-    <project project_is="1" />
-    <project project_is="2" />
-    <project project_is="3" />
-    <project project_is="4" />
+    <project project_id="1" />
+    <project project_id="2" />
+    <project project_id="3" />
+    <project project_id="4" />
     
     <project project_id="5" />
     <project project_id="6" />

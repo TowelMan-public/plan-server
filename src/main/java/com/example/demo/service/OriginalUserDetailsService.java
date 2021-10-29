@@ -1,8 +1,10 @@
 package com.example.demo.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.exception.NotFoundValueException;
+import com.example.demo.logic.UserLogic;
 import com.example.demo.security.UserDetailsImp;
 
 /**
@@ -11,8 +13,8 @@ import com.example.demo.security.UserDetailsImp;
 @Service
 public class OriginalUserDetailsService {
 
-	//@Autowired
-	//UserLogic userLogic;
+	@Autowired
+	UserLogic userLogic;
 	
 	/**
 	 * ユーザー名からユーザ情報の取得
@@ -21,10 +23,8 @@ public class OriginalUserDetailsService {
 	 * @throws com.example.demo.exception.NotFoundValueException ユーザー名が存在しない
 	*/
 	public UserDetailsImp loadUserByUserName(String userName) throws NotFoundValueException {
-		//return new UserDetailsImp(
-		//		userLogic.getUserByUserIdName(userIdName));
-		//TODO
-		return null;
+		return new UserDetailsImp(
+				userLogic.getUserByUserName(userName));
 	}
 
 	/**
@@ -33,10 +33,12 @@ public class OriginalUserDetailsService {
 	 * @return ユーザ情報
 	 * @throws com.example.demo.exception.NotFoundValueException ユーザーIdが存在しない
 	*/
-	public UserDetailsImp loadUserByUserId(Integer userId) throws NotFoundValueException {		
-		//return new UserDetailsImp(
-		//		userLogic.getUserByUserId(userId));
-		//TODO
-		return null;
+	public UserDetailsImp loadUserByUserId(Integer userId) throws NotFoundValueException {	
+		var entity = userLogic.getUserByUserId(userId);
+		
+		if(entity == null || entity.getIsDeleted())
+			throw new NotFoundValueException("userId", userId.toString());
+		
+		return new UserDetailsImp(entity);
 	}
 }

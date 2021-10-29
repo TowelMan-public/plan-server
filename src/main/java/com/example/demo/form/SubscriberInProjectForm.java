@@ -5,9 +5,7 @@ import com.example.demo.validate.ValidateManager;
 import com.example.demo.validate.validatable.MaxValueIntegerValidatable;
 import com.example.demo.validate.validatable.MinValueIntegerValidatable;
 import com.example.demo.validate.validatable.NotBlankStringValidatable;
-import com.example.demo.validate.validatable.NotNullValidatable;
 import com.example.demo.validate.validator.IntegerValidator;
-import com.example.demo.validate.validator.ObjectValidator;
 import com.example.demo.validate.validator.StringValidator;
 
 import lombok.Getter;

@@ -6,7 +6,7 @@ import static org.junit.Assert.assertThrows;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestExecutionListeners;
@@ -15,10 +15,10 @@ import org.springframework.test.context.support.DirtiesContextTestExecutionListe
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.demo.exception.BadRequestException;
 import com.example.demo.exception.NotFoundValueException;
 import com.example.demo.exception.NotHaveAuthorityToOperateProjectException;
 import com.example.demo.exception.NotJoinedPublicProjectException;
-import com.example.demo.exception.BadRequestException;
 import com.example.demo.form.ContentForm;
 import com.example.demo.response.ContentResponse;
 import com.github.springtestdbunit.DbUnitTestExecutionListener;

@@ -1,10 +1,9 @@
 package com.example.demo.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertThrows;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,11 +13,10 @@ import org.springframework.test.context.support.DirtiesContextTestExecutionListe
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.demo.entity.UserEntity;
 import com.example.demo.exception.AlreadyUsedUserNameException;
 import com.example.demo.exception.NotFoundValueException;
 import com.example.demo.form.UserForm;
-import com.example.demo.security.UserDetailsImp;
+import com.example.demo.response.UserResponse;
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.ExpectedDatabase;
@@ -43,14 +41,11 @@ public class UserServiceTest {
 	
 	@Transactional 
 	@Test
-	public void get_1() {
+	public void get_1() throws NotFoundValueException {
 		var userName = "tester1";
-		var expect = new UserEntity();
-		expect.setUserId(1);
+		var expect = new UserResponse();
 		expect.setUserName("tester1");
 		expect.setUserNickname("n1");
-		expect.setPassword("$2a$10$4BGnHULkeXgi2zwPgTX9LOVyDTrj7LZIFCrV3iSip2UvqkU2iayZK");
-		expect.setIsDeleted(false);
 		
 		assertThat(service.get(userName)).isEqualTo(expect);
 	}
@@ -68,23 +63,11 @@ public class UserServiceTest {
 	@Test
 	public void get_3() {
 		var userId = 1;
-		var expect = new UserEntity();
-		expect.setUserId(1);
+		var expect = new UserResponse();
 		expect.setUserName("tester1");
 		expect.setUserNickname("n1");
-		expect.setPassword("$2a$10$4BGnHULkeXgi2zwPgTX9LOVyDTrj7LZIFCrV3iSip2UvqkU2iayZK");
-		expect.setIsDeleted(false);
 		
 		assertThat(service.get(userId)).isEqualTo(expect);
-	}
-	
-	@Transactional 
-	@Test
-	public void get_4() {
-		var userId = 4;
-		
-		assertThrows(NotFoundValueException.class ,
-				() -> service.get(userId));
 	}
 	
 	@Transactional 
@@ -104,15 +87,18 @@ public class UserServiceTest {
 		    value="/dbunit/service/UserServiceTest/expect/insert_1.xml",
 		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
-	public void insert_1() throws NotFoundValueException {
+	public void insert_1() throws NotFoundValueException, AlreadyUsedUserNameException {
 		var form = new UserForm();
 		form.setPassword("password");
 		form.setUserName("tester_new");
 		form.setUserNickName("new");
 		
 		service.insert(form);
-		var enitty = originalUserDetailsService.loadUserByUserName("tester_new");		
-		assertThat(passwordEncoder.matches("password", enitty.getPassword())).isTrue();
+		
+		var entity1 = originalUserDetailsService.loadUserByUserName("tester_new");
+		var entity2 = service.get(form.getUserName());
+		assertThat(entity2.getUserNickname()).isEqualTo(form.getUserNickName());
+		assertThat(passwordEncoder.matches("password", entity1.getPassword())).isTrue();
 	}
 	
 	@Transactional 
@@ -134,7 +120,7 @@ public class UserServiceTest {
 		var password = "password";
 		
 		service.updatePassword(userId, password);
-		var enitty = originalUserDetailsService.loadUserByUserName("tester_new");	
+		var enitty = originalUserDetailsService.loadUserByUserName("tester1");	
 		assertThat(passwordEncoder.matches("password", enitty.getPassword())).isTrue();
 	}
 	
@@ -157,7 +143,7 @@ public class UserServiceTest {
 		    value="/dbunit/service/UserServiceTest/expect/updateUserName_1.xml",
 		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
-	public void updateUserName_1() {
+	public void updateUserName_1() throws AlreadyUsedUserNameException {
 		var userId = 1;
 		var userName = "tester1_new-ver";
 		

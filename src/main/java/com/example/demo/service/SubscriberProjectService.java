@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.demo.form.SubscriberInProjectForm;
 import com.example.demo.response.SubscriberInPublicProjectResponse;
 
 @Service

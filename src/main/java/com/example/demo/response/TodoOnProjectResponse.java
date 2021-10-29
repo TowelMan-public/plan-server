@@ -5,9 +5,11 @@ import java.util.Date;
 import com.example.demo.entity.TodoOnProjectEntity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
+@EqualsAndHashCode
 @NoArgsConstructor
 public class TodoOnProjectResponse {
 	private Integer todoOnProjectId;

@@ -1,9 +1,11 @@
 package com.example.demo.response;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
+@EqualsAndHashCode
 @NoArgsConstructor
 public class NoticeResponse {
 	public static final String TODO_NOTICE = "TODO_NOTICE";
