@@ -19,12 +19,21 @@ public class UserConfigControl {
 	@Autowired
 	UserConfigService server;
 	
+	/**
+	 * ユーザーの設定を取得する
+	 * @param user
+	 * @return ユーザーの設定
+	 */
 	@GetMapping
 	public UserConfigResponse getUserConfig(@AuthenticationPrincipal UserDetailsImp user) {
 		return server.get(user.getUserId());
 	}
 	
-	
+	/**
+	 * ユーザーの設定を変更する
+	 * @param user
+	 * @param form
+	 */
 	public void updateUserConfig(@AuthenticationPrincipal UserDetailsImp user, @RequestBody UserConfigForm form){
 		if(form.getBeforeDeadlineForProjectNotice() != null) {
 			server.updateBeforeDeadlineForProjectNotice(user.getUserId(), form.getBeforeDeadlineForProjectNotice());
@@ -36,7 +45,7 @@ public class UserConfigControl {
 			server.updateIsPushSatrtedTodoNotice(user.getUserId(), form.getIsPushSatrtedTodoNotice());
 		}
 		if(form.getPushInsertedTodoNotice() != null) {
-			server.updatePushInsertedTodoNotice(user.getUserId(), form.getPushInsertedTodoNotice());
+			server.updateIsPushInsertedTodoNotice(user.getUserId(), form.getPushInsertedTodoNotice());
 		}
 	}
 }

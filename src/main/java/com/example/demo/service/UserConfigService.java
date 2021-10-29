@@ -1,40 +1,64 @@
 package com.example.demo.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.demo.logic.UserConfigLogic;
 import com.example.demo.response.UserConfigResponse;
 
 @Service
 public class UserConfigService {
-
+	@Autowired
+	UserConfigLogic userConfigLogic;
+	
+	/**
+	 * ユーザーの設定を取得する
+	 * @param userId ユーザーID
+	 * @return ユーザーの設定
+	 */
 	public UserConfigResponse get(Integer userId) {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
+		return new UserConfigResponse(userConfigLogic.get(userId));
 	}
 
+	/**
+	 * beforeDeadlineForProjectNoticeの値を変更する
+	 * @param userId ユーザーID
+	 * @param beforeDeadlineForProjectNotice 単位は秒
+	 */
 	@Transactional
 	public void updateBeforeDeadlineForProjectNotice(Integer userId, Integer beforeDeadlineForProjectNotice) {
-		// TODO 自動生成されたメソッド・スタブ
-		
+		userConfigLogic.updateBeforeDeadlineForProjectNotice(userId, beforeDeadlineForProjectNotice);
 	}
 
+	/**
+	 * beforeDeadlineForTodoNoticeの値を変更する
+	 * @param userId ユーザーID
+	 * @param beforeDeadlineForTodoNotice 単位は秒
+	 */
 	@Transactional
 	public void updateBeforeDeadlineForTodoNotice(Integer userId, Integer beforeDeadlineForTodoNotice) {
-		// TODO 自動生成されたメソッド・スタブ
-		
+		userConfigLogic.updateBeforeDeadlineForTodoNotice(userId, beforeDeadlineForTodoNotice);		
 	}
 
+	/**
+	 * isPushSatrtedTodoNoticeの値を変更する
+	 * @param userId ユーザーID
+	 * @param isPushSatrtedTodoNotice trueならON、falseならOFF
+	 */
 	@Transactional
 	public void updateIsPushSatrtedTodoNotice(Integer userId, Boolean isPushSatrtedTodoNotice) {
-		// TODO 自動生成されたメソッド・スタブ
-		
+		userConfigLogic.updateIsPushSatrtedTodoNotice(userId, isPushSatrtedTodoNotice);
 	}
 
+	/**
+	 * isPushInsertedTodoNoticeの値を変更する
+	 * @param userId ユーザーID
+	 * @param isPushInsertedTodoNotice trueならON、falseならOFF
+	 */
 	@Transactional
-	public void updatePushInsertedTodoNotice(Integer userId, Boolean pushInsertedTodoNotice) {
-		// TODO 自動生成されたメソッド・スタブ
-		
+	public void updateIsPushInsertedTodoNotice(Integer userId, Boolean isPushInsertedTodoNotice) {
+		userConfigLogic.updatePushInsertedTodoNotice(userId, isPushInsertedTodoNotice);
 	}
 
 }

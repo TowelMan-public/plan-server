@@ -94,6 +94,6 @@ public class UserConfigServiceTest {
 		var userId = 1;		
 		var config = true;
 		
-		service.updatePushInsertedTodoNotice(userId, config);
+		service.updateIsPushInsertedTodoNotice(userId, config);
 	}
 }
