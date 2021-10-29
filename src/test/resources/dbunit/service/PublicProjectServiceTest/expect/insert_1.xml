@@ -17,7 +17,7 @@
     <have_terminal_list terminal_id="5" user_id="2" terminal_name="terminal2" />
     <have_terminal_list terminal_id="6" user_id="2" terminal_name="terminal3" />
     
-    <notice notice_id="1" userId="1" />
+    <notice notice_id="1" user_id="1" />
     
     <notice_project notice_id="1" project_id="5" message="" />
     

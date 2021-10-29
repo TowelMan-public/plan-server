@@ -41,7 +41,7 @@ public class UserTerminalServiceTest {
 		    value="/dbunit/service/UserTerminalServiceTest/expect/insert_1.xml",
 		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
-	public void insert_1() {
+	public void insert_1() throws AlreadyUsedTerminalNameException {
 		var userId = 1;
 		var terminalName = "new_terminal";
 		
@@ -67,9 +67,11 @@ public class UserTerminalServiceTest {
 		expect.setTerminalName("terminal1");
 		expectList.add(expect);
 		
+		expect = new TerminalResponse();
 		expect.setTerminalName("terminal2");
 		expectList.add(expect);
 		
+		expect = new TerminalResponse();
 		expect.setTerminalName("terminal3");
 		expectList.add(expect);
 		
@@ -82,7 +84,7 @@ public class UserTerminalServiceTest {
 		    value="/dbunit/service/UserTerminalServiceTest/expect/updateTerminalName_1.xml",
 		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
-	public void updateTerminalName_1() {
+	public void updateTerminalName_1() throws AlreadyUsedTerminalNameException, NotFoundValueException {
 		var userId = 1;
 		var oldTerminalName = "terminal1";
 		var newTerminalName = "terminal1_newwer";
@@ -107,7 +109,7 @@ public class UserTerminalServiceTest {
 		    value="/dbunit/service/UserTerminalServiceTest/expect/delete_1.xml",
 		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
-	public void delete_1() {
+	public void delete_1() throws NotFoundValueException {
 		var userId = 1;
 		var terminalName = "terminal1";
 		

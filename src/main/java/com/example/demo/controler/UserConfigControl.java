@@ -13,6 +13,14 @@ import com.example.demo.response.UserConfigResponse;
 import com.example.demo.security.UserDetailsImp;
 import com.example.demo.service.UserConfigService;
 
+/**
+ * ユーザーの設定に関するAPIのアクセスポイント
+ * 
+ * @version 1
+ * @since 1
+ * @author towelman
+ *
+ */
 @RequestMapping(UrlConfig.ROOT_URL_V1 + "/user/config")
 @RestController
 public class UserConfigControl {

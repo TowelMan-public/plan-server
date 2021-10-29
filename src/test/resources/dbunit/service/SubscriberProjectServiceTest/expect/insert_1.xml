@@ -23,9 +23,9 @@
     <notice notice_id="4" userId="2" />
     <notice notice_id="5" userId="2" />
     
-    <unsend_notice unsend_notice_id="1" notice_id="5" terminal_id="4" />
-    <unsend_notice unsend_notice_id="2" notice_id="5" terminal_id="5" />
-    <unsend_notice unsend_notice_id="3" notice_id="5" terminal_id="6" />
+    <unsent_notice unsend_notice_id="1" notice_id="5" terminal_id="4" />
+    <unsent_notice unsend_notice_id="2" notice_id="5" terminal_id="5" />
+    <unsent_notice unsend_notice_id="3" notice_id="5" terminal_id="6" />
     
     <notice_project notice_id="1" project_id="5" message="" />
     <notice_project notice_id="2" project_id="6" message="" />

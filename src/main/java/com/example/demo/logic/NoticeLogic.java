@@ -9,6 +9,7 @@ import com.example.demo.dto.NoticeEntityExample;
 import com.example.demo.dto.ProjectNoticeEntityExample;
 import com.example.demo.dto.TerminalEntityExample;
 import com.example.demo.dto.TodoNoticeEntityExample;
+import com.example.demo.dto.UnsentNoticeEntityExample;
 import com.example.demo.entity.NoticeEntity;
 import com.example.demo.entity.ProjectNoticeEntity;
 import com.example.demo.entity.TodoNoticeEntity;
@@ -359,5 +360,17 @@ public class NoticeLogic {
 		});
 		
 		return noticeId;
+	}
+
+	/**
+	 * 未送信の通知のうち、指定された機種IDに一致するものを削除する
+	 * @param terminalId 機種ID
+	 */
+	public void deleteUnsentNoticeByTerminal(Integer terminalId) {
+		var dto = new UnsentNoticeEntityExample();
+		dto.or()
+			.andTerminalIdEqualTo(terminalId);
+		
+		unsentNoticeEntityMapper.deleteByExample(dto);
 	}
 }
