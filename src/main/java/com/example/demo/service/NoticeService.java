@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.exception.NotFoundValueException;
 import com.example.demo.logic.NoticeLogic;
+import com.example.demo.logic.PrivateProjectLogic;
 import com.example.demo.logic.TodoOnProjectLogic;
 import com.example.demo.logic.UserTerminalLogic;
 import com.example.demo.logic.SubscriberLogic;
@@ -29,6 +30,9 @@ public class NoticeService {
 	SubscriberLogic subscriberLogic;
 	@Autowired
 	TodoOnProjectLogic todoOnProjectLogic;
+	@Autowired
+	PrivateProjectLogic privateProjectLogic;
+	
 	
 	/**
 	 * 未送信（未取得）の通知リストを取得する
@@ -67,7 +71,8 @@ public class NoticeService {
 		for(var response: rowResponseList) {
 			if(response.getNoticeType().equals(NoticeResponse.TODO_NOTICE)) {
 				var todoOnProjectEntity = todoOnProjectLogic.getNonThrow(response.getId());
-				if(!subscriberLogic.haveNormalAuthority(userId, todoOnProjectEntity.getProjectId()))
+				if(!privateProjectLogic.isPrivateProject(todoOnProjectEntity.getProjectId()) 
+						&& !subscriberLogic.haveNormalAuthority(userId, todoOnProjectEntity.getProjectId()))
 					continue;
 			}
 			
