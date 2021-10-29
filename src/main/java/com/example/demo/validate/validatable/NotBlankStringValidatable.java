@@ -9,5 +9,4 @@ public class NotBlankStringValidatable implements StringValidatable{
 		else
 			return null;
 	}
-
 }

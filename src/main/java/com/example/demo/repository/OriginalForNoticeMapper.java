@@ -21,11 +21,15 @@ public interface OriginalForNoticeMapper {
 	
 	public List<TodoOnResponsibleEntity> getDelayApproachingTodo(@Param("lastRunDate") Date lastRunDate, @Param("nowRunDate") Date nowRunDate);
 	
-	public void deletePublicProjectNoticeAuto(); 
+	public void erasePublicProjectNoticeAuto(); 
 	
-	public void deleteTodoNotice(); 
+	public void eraseTodoNoticeAuto(); 
 	
-	public void deleteUnNeededNotice(); 
+	public void eraseProjectNoticeOfDeletedUser(); 
 	
-	public void deleteNoticeParent();
+	public void eraseTodoNoticeOfDeletedUser();
+	
+	public void eraseUnNeededNotice();
+	
+	public void eraseNoticeParent();
 }

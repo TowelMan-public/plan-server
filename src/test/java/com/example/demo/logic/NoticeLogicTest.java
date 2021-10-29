@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.demo.utility.CommonUtility;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.ExpectedDatabase;
 import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
@@ -16,58 +17,8 @@ import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 public class NoticeLogicTest {	
 	@Autowired
 	NoticeLogic logic;
-	
-	@Transactional 
-	@Test
-	@ExpectedDatabase(
-		    value="/dbunit/logic/NoticeLogicTest/expect/createInvitationPublicProjectNotice_1.xml",
-		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
-	)
-	public void createInvitationPublicProjectNotice_1() {
-		var userId =-1;
-		var publicProjectId = -1;
-		
-		logic.createInvitationPublicProjectNotice(userId, publicProjectId);
-	}
-	
-	@Transactional 
-	@Test
-	@ExpectedDatabase(
-		    value="/dbunit/logic/NoticeLogicTest/expect/createInvitationPublicProjectNotice_2.xml",
-		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
-	)
-	public void createInvitationPublicProjectNotice_2() {
-		var userId =-1;
-		var publicProjectId = -1;
-		
-		logic.createInvitationPublicProjectNotice(userId, publicProjectId);
-	}
-	
-	@Transactional 
-	@Test
-	@ExpectedDatabase(
-		    value="/dbunit/logic/NoticeLogicTest/expect/createCompletedTodoNotice_1.xml",
-		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
-	)
-	public void createCompletedTodoNotice_1() {
-		var userId =-1;
-		var todoId = -1;
-		
-		logic.createCompletedTodoNotice(userId, todoId);
-	}
-	
-	@Transactional 
-	@Test
-	@ExpectedDatabase(
-		    value="/dbunit/logic/NoticeLogicTest/expect/createCompletedTodoNotice_2.xml",
-		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
-	)
-	public void createCompletedTodoNotice_2() {
-		var userId =-1;
-		var todoId = -1;
-		
-		logic.createCompletedTodoNotice(userId, todoId);
-	}
+	@Autowired
+	CommonUtility utillity;
 	
 	@Transactional 
 	@Test
@@ -76,8 +27,8 @@ public class NoticeLogicTest {
 		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
 	public void createApproachingPeriodTodoNoticeAuto_1() {
-		var lastRunDate = new Date();
-		var nowRunDate = new Date();
+		var lastRunDate = utillity.stringToDate("2021-9-14");
+		var nowRunDate = utillity.stringToDate("2021-9-20");
 		
 		logic.createApproachingPeriodTodoNoticeAuto(lastRunDate, nowRunDate);
 	}
@@ -89,9 +40,9 @@ public class NoticeLogicTest {
 		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
 	public void createApproachingPeriodTodoNoticeAuto_2() {
-		var lastRunDate = new Date();
-		var nowRunDate = new Date();
-		
+		var lastRunDate = utillity.stringToDate("2021-7-5");
+		var nowRunDate = utillity.stringToDate("2021-7-30");
+				
 		logic.createApproachingPeriodTodoNoticeAuto(lastRunDate, nowRunDate);
 	}
 	
@@ -102,8 +53,8 @@ public class NoticeLogicTest {
 		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
 	public void createDelayApproachingTodoNoticeAuto_1() {
-		var lastRunDate = new Date();
-		var nowRunDate = new Date();
+		var lastRunDate = utillity.stringToDate("2021-9-17");
+		var nowRunDate = utillity.stringToDate("2021-9-21");
 		
 		logic.createDelayApproachingTodoNoticeAuto(lastRunDate, nowRunDate);
 	}
@@ -114,13 +65,65 @@ public class NoticeLogicTest {
 		    value="/dbunit/logic/NoticeLogicTest/expect/createDelayApproachingTodoNoticeAuto_2.xml",
 		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
-	public void createDelayApproachingTodoNoticeAuto_2() {
-		var lastRunDate = new Date();
-		var nowRunDate = new Date();
+	public void createDelayApproachingTodoNoticeAuto_2() {//no action
+		var lastRunDate = utillity.stringToDate("2021-9-1");
+		var nowRunDate = utillity.stringToDate("2021-10-10");
 		
 		logic.createDelayApproachingTodoNoticeAuto(lastRunDate, nowRunDate);
 	}
+
+	@Transactional 
+	@Test
+	@ExpectedDatabase(
+		    value="/dbunit/logic/NoticeLogicTest/expect/createApproachingPubliceriodProjectNoticeAuto_1.xml",
+		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
+	)
+	public void createApproachingPubliceriodProjectNoticeAuto_1() {
+		var lastRunDate = utillity.stringToDate("2021-10-20");
+		var nowRunDate = utillity.stringToDate("2021-10-31");
+		
+		logic.createApproachingPubliceriodProjectNoticeAuto(lastRunDate, nowRunDate);
+	}
 	
+	@Transactional 
+	@Test
+	@ExpectedDatabase(
+		    value="/dbunit/logic/NoticeLogicTest/expect/createApproachingPubliceriodProjectNoticeAuto_2.xml",
+		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
+	)
+	public void createApproachingPubliceriodProjectNoticeAuto_2() {
+		var lastRunDate = utillity.stringToDate("2021-11-2");
+		var nowRunDate = utillity.stringToDate("2021-12-25");
+		
+		logic.createApproachingPubliceriodProjectNoticeAuto(lastRunDate, nowRunDate);
+	}
+	
+	@Transactional 
+	@Test
+	@ExpectedDatabase(
+		    value="/dbunit/logic/NoticeLogicTest/expect/createDealyPeriodPublicProjectNoticeAuto_1.xml",
+		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
+	)
+	public void createDealyPeriodPublicProjectNoticeAuto_1() {
+		var lastRunDate = utillity.stringToDate("2021-10-5");
+		var nowRunDate = utillity.stringToDate("2021-11-2");
+		
+		logic.createDealyPeriodPublicProjectNoticeAuto(lastRunDate, nowRunDate);
+	}
+	
+	@Transactional 
+	@Test
+	@ExpectedDatabase(
+		    value="/dbunit/logic/NoticeLogicTest/expect/createDealyPeriodPublicProjectNoticeAuto_2.xml",
+		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
+	)
+	public void createDealyPeriodPublicProjectNoticeAuto_2() {
+		var lastRunDate = utillity.stringToDate("2021-8-31");
+		var nowRunDate = utillity.stringToDate("2021-10-1");
+		
+		logic.createDealyPeriodPublicProjectNoticeAuto(lastRunDate, nowRunDate);
+	}
+
 	@Transactional 
 	@Test
 	@ExpectedDatabase(
@@ -128,8 +131,8 @@ public class NoticeLogicTest {
 		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
 	public void createStartedTodoNoticeAuto_1() {
-		var lastRunDate = new Date();
-		var nowRunDate = new Date();
+		var lastRunDate = utillity.stringToDate("2021-9-9");
+		var nowRunDate = utillity.stringToDate("2021-9-11");
 		
 		logic.createStartedTodoNoticeAuto(lastRunDate, nowRunDate);
 	}
@@ -141,8 +144,8 @@ public class NoticeLogicTest {
 		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
 	public void createStartedTodoNoticeAuto_2() {
-		var lastRunDate = new Date();
-		var nowRunDate = new Date();
+		var lastRunDate = utillity.stringToDate("2021-10-1");
+		var nowRunDate = utillity.stringToDate("2021-10-15");
 		
 		logic.createStartedTodoNoticeAuto(lastRunDate, nowRunDate);
 	}
@@ -150,82 +153,92 @@ public class NoticeLogicTest {
 	@Transactional 
 	@Test
 	@ExpectedDatabase(
-		    value="/dbunit/logic/NoticeLogicTest/expect/deletePublicProjectNotice_1.xml",
+		    value="/dbunit/logic/NoticeLogicTest/expect/erasePublicProjectNotice_1.xml",
 		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
-	public void deletePublicProjectNotice_1() {
-		var userId =-1;
-		var publicProjectId = -1;
+	public void erasePublicProjectNotice_1() {
+		var userId = 7;
+		var publicProjectId = 1;
 		
-		logic.deletePublicProjectNotice(userId, publicProjectId);
+		logic.erasePublicProjectNotice(userId, publicProjectId);
 	}
 	
 	@Transactional 
 	@Test
 	@ExpectedDatabase(
-		    value="/dbunit/logic/NoticeLogicTest/expect/deletePublicProjectNotice_2.xml",
+		    value="/dbunit/logic/NoticeLogicTest/expect/erasePublicProjectNotice_2.xml",
 		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
-	public void deletePublicProjectNotice_2() {
-		var userId =-1;
-		var publicProjectId = -1;
+	public void erasePublicProjectNotice_2() {//no action
+		var userId = 2;
+		var publicProjectId = 1;
 		
-		logic.deletePublicProjectNotice(userId, publicProjectId);
+		logic.erasePublicProjectNotice(userId, publicProjectId);
 	}
 	
 	@Transactional 
 	@Test
 	@ExpectedDatabase(
-		    value="/dbunit/logic/NoticeLogicTest/expect/deleteTodoNotice_1.xml",
+		    value="/dbunit/logic/NoticeLogicTest/expect/eraseTodoNotice_1.xml",
 		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
-	public void deleteTodoNotice_1() {
-		var userId =-1;
-		var todoId = -1;
+	public void eraseTodoNotice_1() {
+		var userId = 1;
+		var todoId = 5;
 		
-		logic.deleteTodoNotice(userId, todoId);
+		logic.eraseTodoNotice(userId, todoId);
 	}
 	
 	@Transactional 
 	@Test
 	@ExpectedDatabase(
-		    value="/dbunit/logic/NoticeLogicTest/expect/deleteTodoNotice_2.xml",
+		    value="/dbunit/logic/NoticeLogicTest/expect/eraseTodoNotice_2.xml",
 		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
-	public void deleteTodoNotice_2() {
-		var userId =-1;
-		var todoId = -1;
+	public void eraseTodoNotice_2() {//no action
+		var userId = 2;
+		var todoId = 1;
 		
-		logic.deleteTodoNotice(userId, todoId);
+		logic.eraseTodoNotice(userId, todoId);
 	}
 	
 	@Transactional 
 	@Test
 	@ExpectedDatabase(
-		    value="/dbunit/logic/NoticeLogicTest/expect/deletePublicProjectNoticeAuto.xml",
+		    value="/dbunit/logic/NoticeLogicTest/expect/erasePublicProjectNoticeAuto.xml",
 		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
-	public void deletePublicProjectNoticeAuto() {
-		logic.deletePublicProjectNoticeAuto();
+	public void erasePublicProjectNoticeAuto() {
+		logic.erasePublicProjectNoticeAuto();
 	}
 	
 	@Transactional 
 	@Test
 	@ExpectedDatabase(
-		    value="/dbunit/logic/NoticeLogicTest/expect/deleteTodoNoticeAuto.xml",
+		    value="/dbunit/logic/NoticeLogicTest/expect/eraseTodoNoticeAuto.xml",
 		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
-	public void deleteTodoNoticeAuto() {
-		logic.deletePublicProjectNoticeAuto();
+	public void eraseTodoNoticeAuto() {
+		logic.eraseTodoNoticeAuto();
 	}
 	
 	@Transactional 
 	@Test
 	@ExpectedDatabase(
-		    value="/dbunit/logic/NoticeLogicTest/expect/deleteUnNeededNoticeIdAuto.xml",
+		    value="/dbunit/logic/NoticeLogicTest/expect/eraseUnNeededNoticeIdAuto.xml",
 		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
-	public void deleteUnNeededNoticeIdAuto() {
-		logic.deletePublicProjectNoticeAuto();
+	public void eraseUnNeededNoticeIdAuto() {
+		logic.eraseUnNeededNoticeIdAuto();
+	}
+	
+	@Transactional 
+	@Test
+	@ExpectedDatabase(
+		    value="/dbunit/logic/NoticeLogicTest/expect/eraseNoticeOfDeletedUser.xml",
+		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
+	)
+	public void eraseNoticeOfDeletedUser() {
+		logic.eraseNoticeOfDeletedUser();
 	}
 }

@@ -23,7 +23,7 @@ public class NoticeControl {
 	@GetMapping
 	public List<NoticeResponse> getNoticeList(@AuthenticationPrincipal UserDetailsImp user, NoticeForm form) {
 		if(form.getTerminalName() != null && !form.getTerminalName().isBlank()) {
-			return service.getUnacquiredNotice(user.getUserId(), form.getTerminalName());
+			return service.getUnsendedNotice(user.getUserId(), form.getTerminalName());
 		}else {
 			return service.getNotice(user.getUserId());
 		}

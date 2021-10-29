@@ -56,4 +56,9 @@ public class PublicProjectService {
 		
 	}
 
+	public List<PublicProjectResponse> getSolicited(Integer userId) {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
+
 }

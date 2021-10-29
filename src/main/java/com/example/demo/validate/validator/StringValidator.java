@@ -15,12 +15,12 @@ public class StringValidator implements Validator {
 	
 	public StringValidator addValidatable(ObjectValidatable validatable) {
 		objectValidatable.add(validatable);
-		return null;
+		return this;
 	}
 	
 	public StringValidator addValidatable(StringValidatable validatable) {
 		stringValidatableList.add(validatable);
-		return null;
+		return this;
 	}
 
 	@Override

@@ -6,11 +6,11 @@ import lombok.Setter;
 public class UserConfigForm {
 	@Getter
 	@Setter
-	private Boolean beforeDeadlineForTodoNotice;
+	private Integer beforeDeadlineForTodoNotice;
 	
 	@Getter
 	@Setter
-	private Boolean beforeDeadlineForProjectNotice;
+	private Integer beforeDeadlineForProjectNotice;
 	
 	@Getter
 	@Setter

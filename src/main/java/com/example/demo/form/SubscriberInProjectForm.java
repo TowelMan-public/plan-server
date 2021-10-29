@@ -2,8 +2,11 @@ package com.example.demo.form;
 
 import com.example.demo.exception.ValidateException;
 import com.example.demo.validate.ValidateManager;
+import com.example.demo.validate.validatable.MaxValueIntegerValidatable;
+import com.example.demo.validate.validatable.MinValueIntegerValidatable;
 import com.example.demo.validate.validatable.NotBlankStringValidatable;
 import com.example.demo.validate.validatable.NotNullValidatable;
+import com.example.demo.validate.validator.IntegerValidator;
 import com.example.demo.validate.validator.ObjectValidator;
 import com.example.demo.validate.validator.StringValidator;
 
@@ -32,8 +35,9 @@ public class SubscriberInProjectForm {
 		.or()
 			.add(new StringValidator(userName)
 					.addValidatable(new NotBlankStringValidatable()))
-			.add(new ObjectValidator(authorityId)
-					.addValidatable(new NotNullValidatable()))
+			.add(new IntegerValidator(authorityId)
+					.addValidatable(new MaxValueIntegerValidatable(3))
+					.addValidatable(new MinValueIntegerValidatable(1)))
 		.run();
 	}
 	

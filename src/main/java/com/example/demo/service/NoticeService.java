@@ -11,7 +11,7 @@ import com.example.demo.response.NoticeResponse;
 public class NoticeService {
 
 	@Transactional
-	public List<NoticeResponse> getUnacquiredNotice(Integer userId, String terminalName) {
+	public List<NoticeResponse> getUnsendedNotice(Integer userId, String terminalName) {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}

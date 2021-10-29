@@ -15,12 +15,14 @@ public class PublicProjectResponse {
 	private Date startDate;
 	private Date finishDate;
 	private Boolean isCompleted;
+	private Integer projectAuthority;
 	
-	public PublicProjectResponse(PublicProjectEntity entity) {
+	public PublicProjectResponse(PublicProjectEntity entity, Integer authority) {
 		publicProjectId = entity.getPublicProjectId();
 		projectName = entity.getProjectName();
 		startDate = entity.getStartDate();
 		finishDate = entity.getFinishDate();
 		isCompleted = entity.getIsCompleted();
+		projectAuthority = authority;
 	}
 }

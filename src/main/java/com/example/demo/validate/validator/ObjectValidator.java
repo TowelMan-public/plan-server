@@ -13,7 +13,7 @@ public class ObjectValidator implements Validator {
 	
 	public ObjectValidator addValidatable(ObjectValidatable validatable) {
 		objectValidatable.add(validatable);
-		return null;
+		return this;
 	}
 
 	@Override

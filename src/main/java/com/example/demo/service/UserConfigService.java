@@ -14,13 +14,13 @@ public class UserConfigService {
 	}
 
 	@Transactional
-	public void updateBeforeDeadlineForProjectNotice(Integer userId, Boolean beforeDeadlineForProjectNotice) {
+	public void updateBeforeDeadlineForProjectNotice(Integer userId, Integer beforeDeadlineForProjectNotice) {
 		// TODO 自動生成されたメソッド・スタブ
 		
 	}
 
 	@Transactional
-	public void updateBeforeDeadlineForTodoNotice(Integer userId, Boolean beforeDeadlineForTodoNotice) {
+	public void updateBeforeDeadlineForTodoNotice(Integer userId, Integer beforeDeadlineForTodoNotice) {
 		// TODO 自動生成されたメソッド・スタブ
 		
 	}

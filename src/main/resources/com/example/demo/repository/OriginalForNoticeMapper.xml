@@ -136,65 +136,33 @@
 		  	todo_table.start_date > #{lastRunDate}
 	</select>
 	
-	<delete id="deletePublicProjectNoticeAuto">
+	<delete id="erasePublicProjectNoticeAuto">
 		DELETE delete_table FROM notice_project AS delete_table
-		INNER JOIN(
-			(
-	            SELECT notice_table.notice_id FROM notice AS notice_table	
-	                RIGHT JOIN (
-	                        SELECT * FROM subscriber_in_public_project
-	                    )AS user_in_project_table
-	                    USING(user_id)	
-	                WHERE
-	                    notice_table.user_id IS NULL
-			)UNION(
-	            SELECT notice_table.notice_id FROM notice_project AS notice_table
-	                INNER JOIN public_project AS project_table
-	                    ON notice_table.project_id = project_table.public_project_id		
-	                WHERE
-	                    project_table.is_deleted = true
-			)
-		)AS former_table
-		USING(notice_id)
+		INNER JOIN (
+				SELECT * FROM public_project
+				WHERE
+					is_deleted = 1
+			) AS project_table
+			ON project_table.public_projet_id = delete_table.project_id
 	</delete>
 	
-	<delete id="deleteTodoNotice">
+	<delete id="eraseTodoNoticeAuto">
 		DELETE delete_table FROM notice_todo AS delete_table
-		(
-			INNER JOIN notice AS notice_table
-				USING(notice_id)
-			LEFT JOIN (
-				SELECT user_id FROM todo_on_responsible
-		  		WHERE
-		  			notice_table.user_id = todo_on_responsible.user_id
-		  		  AND
-		  		  	todo_on_responsible.is_deleted = false
-			) AS user_in_todo_table		
-				ON notice_table.user_id = user_in_todo_table.user_id
-			WHERE
-			   	user_in_todo_table.user_id IS NULL
-		)UNION(
-			INNER JOIN(
-					SELECT * FROM todo_on_project
-					WHERE is_deleted = true
-				) AS todo_table
-				ON delete_table.todo_id = todo_table.todo_on_project_id
-		)
+		INNER JOIN (
+				SELECT * FROM todo_on_project
+				WHERE
+					is_deleted = 1
+			) AS todo_project
+			ON project_table.public_projet_id = delete_table.project_id
 	</delete>
 	
-	<delete id="deleteUnNeededNotice">
+	<delete id="eraseUnNeededNotice">
 		DELETE delete_table FROM unsend_notice AS delete_table
 		INNER JOIN notice AS notice_table
 			USING(notice_id)	
-		LEFT JOIN (
-			ELECT * FROM notice_project
-			WHERE delete_table.notice_id = notice_project.notice_id
-		) AS notice_project_table
+		LEFT JOIN notice_project AS notice_project_table
 			ON delete_table.notice_id = notice_project_table.notice_id			
-		LEFT JOIN (
-			ELECT * FROM notice_todo
-			WHERE delete_table.notice_id = notice_todo.notice_id
-		) AS notice_todo_table
+		LEFT JOIN notice_todo AS notice_todo_table
 			ON delete_table.notice_id = notice_todo_table.notice_id			
 		WHERE
 			notice_project_table.notice_id IS NULL
@@ -202,16 +170,39 @@
 		  	notice_todo_table.notice_id IS NULL
 	</delete>
 	
-	<delete id="deleteNoticeParent">
-		DELETE delete_table FROM notice AS delete_table
-		INNER JOIN users AS user_table
-			USING(user_id)			
-		LEFT JOIN (
-			SELECT * FROM notice
-			WHERE delete_table.notice_id = notice.notice_id
-		) AS notice_table
-			ON delete_table.notice_id = notice_table.notice_id			
+	<delete id="eraseNoticeParent">
+		DELETE delete_table FROM notice AS delete_table		
+		LEFT JOIN notice_project AS notice_project_table
+			ON delete_table.notice_id = notice_project_table.notice_id			
+		LEFT JOIN notice_todo AS notice_todo_table
+			ON delete_table.notice_id = notice_todo_table.notice_id			
 		WHERE
-			notice_table.notice_id IS NULL
+			notice_project_table.notice_id IS NULL
+		  AND
+		  	notice_todo_table.notice_id IS NULL
+	</delete>
+	
+	<delete id="eraseProjectNoticeOfDeletedUser">
+		DELETE delete_table FROM notice_project AS delete_table
+		INNER JOIN notice AS notice_table
+			ON delete_table.notice_id = notice_table.notice_id
+		INNER JOIN (
+				SELECT * FROM users 
+				WHERE
+					is_deleted = 1	
+			) AS user_table
+			ON notice_table.user_id = user_table.user_id
+	</delete>
+	
+	<delete id="eraseTodoNoticeOfDeletedUser">
+		DELETE delete_table FROM notice_todo AS delete_table
+		INNER JOIN notice AS notice_table
+			ON delete_table.notice_id = notice_table.notice_id
+		INNER JOIN (
+				SELECT * FROM users 
+				WHERE
+					is_deleted = 1	
+			) AS user_table
+			ON notice_table.user_id = user_table.user_id
 	</delete>
 </mapper>

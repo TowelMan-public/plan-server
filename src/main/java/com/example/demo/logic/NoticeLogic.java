@@ -191,7 +191,7 @@ public class NoticeLogic {
 	 * @param nowRunDate 現在の時刻
 	 */
 	public void createStartedTodoNoticeAuto(Date lastRunDate, Date nowRunDate) {
-		var message = TODO_TITLE + "の締め切りを過ぎました！！";
+		var message = TODO_TITLE + "が始まりました！頑張ってください！";
 		
 		//subscriberInPublicProjectEntityList取得
 		var todoOnResponsibleEntityList = originalForNoticeMapper.getStartedTodo(lastRunDate, nowRunDate);
@@ -208,7 +208,7 @@ public class NoticeLogic {
 	 * @param userId ユーザーID
 	 * @param publicProjectId パブリックプロジェクトID
 	 */
-	public void deletePublicProjectNotice(int userId, int publicProjectId) {
+	public void erasePublicProjectNotice(int userId, int publicProjectId) {
 		//noticeEntityList取得
 		var noticeDto = new NoticeEntityExample();
 		noticeDto
@@ -235,7 +235,7 @@ public class NoticeLogic {
 	 * @param userId ユーザーID
 	 * @param todoId 「やること」のID
 	 */
-	public void deleteTodoNotice(int userId, int todoId) {
+	public void eraseTodoNotice(int userId, int todoId) {
 		//noticeEntityList取得
 		var noticeDto = new NoticeEntityExample();
 		noticeDto
@@ -259,23 +259,32 @@ public class NoticeLogic {
 	/**
 	 * 不要なパブリックプロジェクトの通知を削除する
 	 */
-	public void deletePublicProjectNoticeAuto() {
-		originalForNoticeMapper.deletePublicProjectNoticeAuto();
+	public void erasePublicProjectNoticeAuto() {
+		originalForNoticeMapper.erasePublicProjectNoticeAuto();
 	}
 	
 	/**
 	 * 不要な「やること」の通知を削除する
 	 */
-	public void deleteTodoNoticeAuto() {
-		originalForNoticeMapper.deleteTodoNotice();
+	public void eraseTodoNoticeAuto() {
+		originalForNoticeMapper.eraseTodoNoticeAuto();
 	}
+	
+	/**
+	 * deleteされているUserの通知を削除する
+	 */
+	public void eraseNoticeOfDeletedUser() {
+		originalForNoticeMapper.eraseProjectNoticeOfDeletedUser();
+		originalForNoticeMapper.eraseTodoNoticeOfDeletedUser();
+	}
+	
 	
 	/**
 	 * 必要ない通知ID等を削除する
 	 */
-	public void deleteUnNeededNoticeIdAuto() {
-		originalForNoticeMapper.deleteUnNeededNotice();
-		originalForNoticeMapper.deleteNoticeParent();
+	public void eraseUnNeededNoticeIdAuto() {
+		originalForNoticeMapper.eraseUnNeededNotice();
+		originalForNoticeMapper.eraseNoticeParent();
 	}
 	
 	/**

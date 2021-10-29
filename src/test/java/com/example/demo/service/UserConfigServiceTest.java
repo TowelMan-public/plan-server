@@ -2,17 +2,34 @@ package com.example.demo.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
+import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.response.UserConfigResponse;
+import com.example.demo.service.UserConfigService;
+import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.ExpectedDatabase;
 import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 
+@RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
+@TestExecutionListeners({
+	  DependencyInjectionTestExecutionListener.class,
+	  DirtiesContextTestExecutionListener.class,
+	  TransactionalTestExecutionListener.class,
+	  DbUnitTestExecutionListener.class
+	})
 @DatabaseSetup("/dbunit/service/UserConfigServiceTest/pettern.xml")
 public class UserConfigServiceTest {
 	@Autowired
@@ -21,8 +38,12 @@ public class UserConfigServiceTest {
 	@Transactional 
 	@Test
 	public void get_1() {
-		var userId = -1;		
+		var userId = 1;		
 		var expect = new UserConfigResponse();
+		expect.setBeforeDeadlineForProjectNotice(0);
+		expect.setBeforeDeadlineForTodoNotice(0);
+		expect.setIsPushInsertedStartedTodoNotice(false);
+		expect.setIsPushInsertedTodoNotice(false);
 		
 		assertThat(service.get(userId)).isEqualTo(expect);
 	}
@@ -30,14 +51,14 @@ public class UserConfigServiceTest {
 	@Transactional 
 	@Test
 	@ExpectedDatabase(
-		    value="/dbunit/service/UserConfigServiceTest/expect/updateBeforeDeadlineForProjectNotice_1.xml",
-		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
+			value="/dbunit/service/UserConfigServiceTest/expect/updateBeforeDeadlineForProjectNotice_1.xml",
+			assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
 	public void updateBeforeDeadlineForProjectNotice_1() {
-		var userId = -1;		
-		var config = false;
+		var userId = 1;		
+		var config = 500;
 		
-		service.updateBeforeDeadlineForProjectNotice(userId, config);
+		service.updateBeforeDeadlineForProjectNotice(userId, config);		
 	}
 	
 	@Transactional 
@@ -47,8 +68,8 @@ public class UserConfigServiceTest {
 		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
 	public void updateBeforeDeadlineForTodoNotice_1() {
-		var userId = -1;		
-		var config = false;
+		var userId = 1;		
+		var config = 500;
 		
 		service.updateBeforeDeadlineForTodoNotice(userId, config);
 	}
@@ -60,8 +81,8 @@ public class UserConfigServiceTest {
 		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
 	public void updateIsPushSatrtedTodoNotice_1() {
-		var userId = -1;		
-		var config = false;
+		var userId = 1;		
+		var config = true;
 		
 		service.updateIsPushSatrtedTodoNotice(userId, config);
 	}
@@ -73,8 +94,8 @@ public class UserConfigServiceTest {
 		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
 	public void updatePushInsertedTodoNotice_1() {
-		var userId = -1;		
-		var config = false;
+		var userId = 1;		
+		var config = true;
 		
 		service.updatePushInsertedTodoNotice(userId, config);
 	}

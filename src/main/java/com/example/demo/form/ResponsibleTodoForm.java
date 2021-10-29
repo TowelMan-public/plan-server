@@ -35,6 +35,10 @@ public class ResponsibleTodoForm {
 	@Setter
 	private Date finishDate;
 	
+	@Getter
+	@Setter
+	private Boolean isInclideCompletedTodo;
+	
 	public void validatePostExit() throws ValidateException {
 		new ValidateManager()
 		.or()

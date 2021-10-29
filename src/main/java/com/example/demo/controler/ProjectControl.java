@@ -71,4 +71,9 @@ public class ProjectControl {
 		service.setIsCompleted(user.getUserId(), publicProjectId, form.getIsCompleted());
 	}
 	
+	
+	@GetMapping("solicited")
+	public List<PublicProjectResponse> getSolicitedPublicProjectList(@AuthenticationPrincipal UserDetailsImp user) {
+		return service.getSolicited(user.getUserId());
+	}
 }

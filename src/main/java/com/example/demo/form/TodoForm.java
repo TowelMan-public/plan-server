@@ -43,6 +43,10 @@ public class TodoForm {
 	@Setter
 	private Boolean isInPrivateProjectOnly;
 	
+	@Getter
+	@Setter
+	private Boolean isInclideCompletedTodo;
+	
 	public void validatePost()throws ValidateException {
 		new ValidateManager()
 		.or()

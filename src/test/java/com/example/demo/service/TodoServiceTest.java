@@ -7,26 +7,41 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
+import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.exception.BadRequestException;
 import com.example.demo.exception.NotFoundValueException;
 import com.example.demo.exception.NotHaveAuthorityToOperateProjectException;
+import com.example.demo.exception.NotJoinedPublicProjectException;
 import com.example.demo.exception.NotSelectedAsTodoResponsibleException;
 import com.example.demo.form.TodoForm;
 import com.example.demo.response.TodoOnProjectResponse;
+import com.example.demo.utility.CommonUtility;
+import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.ExpectedDatabase;
 import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 
 @SpringBootTest
-@DatabaseSetup("/dbunit/service/UserTerminalServiceTest/pettern.xml")
+@DatabaseSetup("/dbunit/service/TodoServiceTest/pettern.xml")
+@TestExecutionListeners({
+	  DependencyInjectionTestExecutionListener.class,
+	  DirtiesContextTestExecutionListener.class,
+	  TransactionalTestExecutionListener.class,
+	  DbUnitTestExecutionListener.class
+	})
 public class TodoServiceTest {
 	@Autowired
 	TodoService service;
+	@Autowired
+	CommonUtility utillity;
 	
 	@Transactional 
 	@Test
@@ -35,9 +50,14 @@ public class TodoServiceTest {
 		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
 	public void insert_1() {
-		var userId = -1;
+		var userId = 2;
 		var form = new TodoForm();
-		var expectTodoId = -1;
+		form.setProjectId(4);
+		form.setStartDate(utillity.stringToDate("2021-10-5"));
+		form.setFinishDate(utillity.stringToDate("2021-10-6"));
+		form.setTodoName("newTodo");
+		form.setIsCopyContentsToResponsible(false);
+		var expectTodoId = 16;
 		
 		assertThat(service.insert(userId, form)).isEqualTo(expectTodoId);
 	}
@@ -45,9 +65,13 @@ public class TodoServiceTest {
 	@Transactional 
 	@Test
 	public void insert_2() {//project
-		var userId = -1;
+		var userId = 3;
 		var form = new TodoForm();
-		//TODO
+		form.setProjectId(400);
+		form.setStartDate(utillity.stringToDate("2021-10-5"));
+		form.setFinishDate(utillity.stringToDate("2021-10-6"));
+		form.setTodoName("newTodo");
+		form.setIsCopyContentsToResponsible(false);
 		
 		assertThrows(NotFoundValueException.class ,
 				() -> service.insert(userId, form));
@@ -56,8 +80,13 @@ public class TodoServiceTest {
 	@Transactional 
 	@Test
 	public void insert_3() {
-		var userId = -1;
+		var userId = 1;
 		var form = new TodoForm();
+		form.setProjectId(6);
+		form.setStartDate(utillity.stringToDate("2021-10-5"));
+		form.setFinishDate(utillity.stringToDate("2021-10-6"));
+		form.setTodoName("newTodo");
+		form.setIsCopyContentsToResponsible(false);
 		
 		assertThrows(NotHaveAuthorityToOperateProjectException.class ,
 				() -> service.insert(userId, form));
@@ -66,8 +95,13 @@ public class TodoServiceTest {
 	@Transactional 
 	@Test
 	public void insert_4() {//期間がprojectを超えてる
-		var userId = -1;
+		var userId = 2;
 		var form = new TodoForm();
+		form.setProjectId(6);
+		form.setStartDate(utillity.stringToDate("2021-1-5"));
+		form.setFinishDate(utillity.stringToDate("2021-12-31"));
+		form.setTodoName("newTodo");
+		form.setIsCopyContentsToResponsible(false);
 		
 		assertThrows(BadRequestException.class ,
 				() -> service.insert(userId, form));
@@ -76,11 +110,30 @@ public class TodoServiceTest {
 	@Transactional 
 	@Test
 	public void insert_5() {//private_project in user
-		var userId = -1;
+		var userId = 2;
 		var form = new TodoForm();
-		//TODO
+		form.setProjectId(1);
+		form.setStartDate(utillity.stringToDate("2021-1-5"));
+		form.setFinishDate(utillity.stringToDate("2021-12-31"));
+		form.setTodoName("newTodo");
+		form.setIsCopyContentsToResponsible(false);
 		
 		assertThrows(NotFoundValueException.class ,
+				() -> service.insert(userId, form));
+	}
+	
+	@Transactional 
+	@Test
+	public void insert_6() {//public_project is completed
+		var userId = 2;
+		var form = new TodoForm();
+		form.setProjectId(9);
+		form.setStartDate(utillity.stringToDate("2021-1-5"));
+		form.setFinishDate(utillity.stringToDate("2021-12-31"));
+		form.setTodoName("newTodo");
+		form.setIsCopyContentsToResponsible(false);
+		
+		assertThrows(BadRequestException.class ,
 				() -> service.insert(userId, form));
 	}
 	
@@ -91,10 +144,37 @@ public class TodoServiceTest {
 		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
 	public void get_1() {
-		var userId = -1;
-		var todoOnProjectId = -1;
+		var userId = 1;
+		var todoOnProjectId = 5;
 		var expect = new TodoOnProjectResponse();
-		//TODO
+		expect.setProjectId(6);
+		expect.setTodoName("todo_3");
+		expect.setTodoOnProjectId(5);
+		expect.setStartDate(utillity.stringToDate("2021-09-1"));
+		expect.setFinishDate(utillity.stringToDate("2021-10-16"));
+		expect.setIsCompleted(false);
+		expect.setIsCopyContentsToUsers(false);
+		
+		assertThat(service.get(userId, todoOnProjectId)).isEqualTo(expect);
+	}
+	
+	@Transactional 
+	@Test
+	@ExpectedDatabase(
+		    value="/dbunit/service/TodoServiceTest/expect/get_4.xml",
+		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
+	)
+	public void get_4() {
+		var userId = 3;
+		var todoOnProjectId = 5;
+		var expect = new TodoOnProjectResponse();
+		expect.setProjectId(6);
+		expect.setTodoName("todo_3");
+		expect.setTodoOnProjectId(5);
+		expect.setStartDate(utillity.stringToDate("2021-09-1"));
+		expect.setFinishDate(utillity.stringToDate("2021-10-16"));
+		expect.setIsCompleted(false);
+		expect.setIsCopyContentsToUsers(false);
 		
 		assertThat(service.get(userId, todoOnProjectId)).isEqualTo(expect);
 	}
@@ -102,8 +182,8 @@ public class TodoServiceTest {
 	@Transactional 
 	@Test
 	public void get_2() {
-		var userId = -1;
-		var todoOnProjectId = -1;
+		var userId = 1;
+		var todoOnProjectId = 500;
 		
 		assertThrows(NotFoundValueException.class ,
 				() -> service.get(userId, todoOnProjectId));
@@ -112,44 +192,133 @@ public class TodoServiceTest {
 	@Transactional 
 	@Test
 	public void get_3() {
-		var userId = -1;
-		var todoOnProjectId = -1;
+		var userId = 2;
+		var todoOnProjectId = 10;
 		
-		assertThrows(NotHaveAuthorityToOperateProjectException.class ,
+		assertThrows(NotJoinedPublicProjectException.class ,
 				() -> service.get(userId, todoOnProjectId));
 	}
 	
 	@Transactional 
 	@Test
-	@ExpectedDatabase(
-		    value="/dbunit/service/TodoServiceTest/expect/getList_1.xml",
-		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
-	)
 	public void getList_1(){//指定なし
-		var userId = -1;
+		var userId = 1;
 		var form = new TodoForm();
-		//TODO
 		List<TodoOnProjectResponse> expectList = new ArrayList<>();
 		var expect = new TodoOnProjectResponse();
-		//TODO
+		expect.setProjectId(1);
+		expect.setTodoOnProjectId(1);
+		expect.setTodoName("todo_1");
+		expect.setStartDate(utillity.stringToDate("2021-06-30"));
+		expect.setFinishDate(utillity.stringToDate("2021-06-30"));
+		expect.setIsCopyContentsToUsers(false);
+		expect.setIsCompleted(false);
+		expectList.add(expect);
+		
+		expect = new TodoOnProjectResponse();
+		expect.setProjectId(1);
+		expect.setTodoOnProjectId(2);
+		expect.setTodoName("todo_2");
+		expect.setStartDate(utillity.stringToDate("2021-06-30"));
+		expect.setFinishDate(utillity.stringToDate("2021-06-30"));
+		expect.setIsCopyContentsToUsers(false);
+		expect.setIsCompleted(false);
+		expectList.add(expect);
+		
+		expect = new TodoOnProjectResponse();
+		expect.setProjectId(1);
+		expect.setTodoOnProjectId(3);
+		expect.setTodoName("todo_3");
+		expect.setStartDate(utillity.stringToDate("2021-06-30"));
+		expect.setFinishDate(utillity.stringToDate("2021-06-30"));
+		expect.setIsCopyContentsToUsers(false);
+		expect.setIsCompleted(true);
+		expectList.add(expect);
+		
+		expect = new TodoOnProjectResponse();
+		expect.setProjectId(6);
+		expect.setTodoOnProjectId(4);
+		expect.setTodoName("todo_1");
+		expect.setStartDate(utillity.stringToDate("2021-09-8"));
+		expect.setFinishDate(utillity.stringToDate("2021-09-16"));
+		expect.setIsCopyContentsToUsers(false);
+		expect.setIsCompleted(false);
+		expectList.add(expect);
+		
+		expect = new TodoOnProjectResponse();
+		expect.setProjectId(6);
+		expect.setTodoOnProjectId(5);
+		expect.setTodoName("todo_2");
+		expect.setStartDate(utillity.stringToDate("2021-09-1"));
+		expect.setFinishDate(utillity.stringToDate("2021-09-20"));
+		expect.setIsCopyContentsToUsers(false);
+		expect.setIsCompleted(false);
+		expectList.add(expect);
+		
+		expect = new TodoOnProjectResponse();
+		expect.setProjectId(6);
+		expect.setTodoOnProjectId(6);
+		expect.setTodoName("todo_3");
+		expect.setStartDate(utillity.stringToDate("2021-10-5"));
+		expect.setFinishDate(utillity.stringToDate("2021-10-9"));
+		expect.setIsCopyContentsToUsers(false);
+		expect.setIsCompleted(false);
+		expectList.add(expect);
+		
+		expect = new TodoOnProjectResponse();
+		expect.setProjectId(6);
+		expect.setTodoOnProjectId(7);
+		expect.setTodoName("todo_4");
+		expect.setStartDate(utillity.stringToDate("2021-10-16"));
+		expect.setFinishDate(utillity.stringToDate("2021-10-9"));
+		expect.setIsCopyContentsToUsers(true);
+		expect.setIsCompleted(false);
+		expectList.add(expect);
+		
+		expect = new TodoOnProjectResponse();
+		expect.setProjectId(6);
+		expect.setTodoOnProjectId(8);
+		expect.setTodoName("todo_5");
+		expect.setStartDate(utillity.stringToDate("2021-10-20"));
+		expect.setFinishDate(utillity.stringToDate("2021-10-23"));
+		expect.setIsCopyContentsToUsers(false);
+		expect.setIsCompleted(true);
+		expectList.add(expect);
 		
 		assertThat(service.getList(userId, form)).containsExactlyElementsOf(expectList);
 	}
 	
 	@Transactional 
 	@Test
-	@ExpectedDatabase(
-		    value="/dbunit/service/TodoServiceTest/expect/getList_2.xml",
-		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
-	)
 	public void getList_2(){//指定あり
-		var userId = -1;
+		var userId = 1;
 		var form = new TodoForm();
-		//TODO
+		form.setProjectId(6);
+		form.setStartDate(utillity.stringToDate("2021-9-1"));
+		form.setFinishDate(utillity.stringToDate("2021-10-1"));
+		
 		List<TodoOnProjectResponse> expectList = new ArrayList<>();
 		var expect = new TodoOnProjectResponse();
-		//TODO
+		expect = new TodoOnProjectResponse();
+		expect.setProjectId(6);
+		expect.setTodoOnProjectId(4);
+		expect.setTodoName("todo_1");
+		expect.setStartDate(utillity.stringToDate("2021-09-8"));
+		expect.setFinishDate(utillity.stringToDate("2021-09-16"));
+		expect.setIsCopyContentsToUsers(false);
+		expect.setIsCompleted(false);
+		expectList.add(expect);
 		
+		expect = new TodoOnProjectResponse();
+		expect.setProjectId(6);
+		expect.setTodoOnProjectId(5);
+		expect.setTodoName("todo_2");
+		expect.setStartDate(utillity.stringToDate("2021-09-1"));
+		expect.setFinishDate(utillity.stringToDate("2021-09-20"));
+		expect.setIsCopyContentsToUsers(false);
+		expect.setIsCompleted(false);
+		expectList.add(expect);
+				
 		assertThat(service.getList(userId, form)).containsExactlyElementsOf(expectList);
 	}
 	
@@ -160,9 +329,9 @@ public class TodoServiceTest {
 		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
 	public void updateIsCopyContentsToResponsible_1() {//権限者
-		var userId = -1;
-		var todoOnProjectId = -1;
-		var isCopyContentsToResponsible = false;
+		var userId = 2;
+		var todoOnProjectId = 5;
+		var isCopyContentsToResponsible = true;
 		
 		service.updateIsCopyContentsToResponsible(userId, todoOnProjectId, isCopyContentsToResponsible);
 	}
@@ -174,9 +343,9 @@ public class TodoServiceTest {
 		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
 	public void updateIsCopyContentsToResponsible_2() {//権限はないけど担当者である
-		var userId = -1;
-		var todoOnProjectId = -1;
-		var isCopyContentsToResponsible = false;
+		var userId = 1;
+		var todoOnProjectId = 4;
+		var isCopyContentsToResponsible = true;
 		
 		service.updateIsCopyContentsToResponsible(userId, todoOnProjectId, isCopyContentsToResponsible);
 	}
@@ -184,8 +353,8 @@ public class TodoServiceTest {
 	@Transactional 
 	@Test
 	public void updateIsCopyContentsToResponsible_3() {
-		var userId = -1;
-		var todoOnProjectId = -1;
+		var userId = 2;
+		var todoOnProjectId = 14;
 		var isCopyContentsToResponsible = false;
 		
 		assertThrows(NotFoundValueException.class ,
@@ -195,8 +364,8 @@ public class TodoServiceTest {
 	@Transactional 
 	@Test
 	public void updateIsCopyContentsToResponsible_4() {
-		var userId = -1;
-		var todoOnProjectId = -1;
+		var userId = 3;
+		var todoOnProjectId = 7;
 		var isCopyContentsToResponsible = false;
 		
 		assertThrows(NotSelectedAsTodoResponsibleException.class ,
@@ -210,9 +379,9 @@ public class TodoServiceTest {
 		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
 	public void updateTodoName_1() {
-		var userId = -1;
-		var todoOnProjectId = -1;
-		var todoName = "";
+		var userId = 2;
+		var todoOnProjectId = 5;
+		var todoName = "newer";
 		
 		service.updateTodoName(userId, todoOnProjectId, todoName);
 	}
@@ -220,9 +389,9 @@ public class TodoServiceTest {
 	@Transactional 
 	@Test
 	public void updateTodoName_2() {
-		var userId = -1;
-		var todoOnProjectId = -1;
-		var todoName = "";
+		var userId = 2;
+		var todoOnProjectId = 14;
+		var todoName = "test";
 		
 		assertThrows(NotFoundValueException.class ,
 				() -> service.updateTodoName(userId, todoOnProjectId, todoName));
@@ -231,9 +400,9 @@ public class TodoServiceTest {
 	@Transactional 
 	@Test
 	public void updateTodoName_3() {
-		var userId = -1;
-		var todoOnProjectId = -1;
-		var todoName = "";
+		var userId = 1;
+		var todoOnProjectId = 5;
+		var todoName = "test";
 		
 		assertThrows(NotHaveAuthorityToOperateProjectException.class ,
 				() -> service.updateTodoName(userId, todoOnProjectId, todoName));
@@ -246,9 +415,9 @@ public class TodoServiceTest {
 		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
 	public void updateStartDate_1() {
-		var userId = -1;
-		var todoOnProjectId = -1;
-		var startDate = new Date();
+		var userId = 2;
+		var todoOnProjectId = 5;
+		var startDate = utillity.stringToDate("2021-9-5");
 		
 		service.updateStartDate(userId, todoOnProjectId, startDate);
 	}
@@ -256,8 +425,8 @@ public class TodoServiceTest {
 	@Transactional 
 	@Test
 	public void updateStartDate_2() {
-		var userId = -1;
-		var todoOnProjectId = -1;
+		var userId = 2;
+		var todoOnProjectId = 14;
 		var startDate = new Date();
 		
 		assertThrows(NotFoundValueException.class ,
@@ -267,8 +436,8 @@ public class TodoServiceTest {
 	@Transactional 
 	@Test
 	public void updateStartDate_3() {
-		var userId = -1;
-		var todoOnProjectId = -1;
+		var userId = 1;
+		var todoOnProjectId = 5;
 		var startDate = new Date();
 		
 		assertThrows(NotHaveAuthorityToOperateProjectException.class ,
@@ -278,9 +447,9 @@ public class TodoServiceTest {
 	@Transactional 
 	@Test
 	public void updateStartDate_4() {//todo的な意味
-		var userId = -1;
-		var todoOnProjectId = -1;
-		var startDate = new Date();
+		var userId = 2;
+		var todoOnProjectId = 5;
+		var startDate = utillity.stringToDate("2021-10-5");
 		
 		assertThrows(BadRequestException.class ,
 				() -> service.updateStartDate(userId, todoOnProjectId, startDate));
@@ -289,9 +458,9 @@ public class TodoServiceTest {
 	@Transactional 
 	@Test
 	public void updateStartDate_5() {//project的な意味
-		var userId = -1;
-		var todoOnProjectId = -1;
-		var startDate = new Date();
+		var userId = 2;
+		var todoOnProjectId = 5;
+		var startDate = utillity.stringToDate("2021-1-5");
 		
 		assertThrows(BadRequestException.class ,
 				() -> service.updateStartDate(userId, todoOnProjectId, startDate));
@@ -304,9 +473,9 @@ public class TodoServiceTest {
 		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
 	public void updateFinishDate_1() {
-		var userId = -1;
-		var todoOnProjectId = -1;
-		var finishDate = new Date();
+		var userId = 2;
+		var todoOnProjectId = 5;
+		var finishDate = utillity.stringToDate("2021-9-18");
 		
 		service.updateFinishDate(userId, todoOnProjectId, finishDate);
 	}
@@ -314,8 +483,8 @@ public class TodoServiceTest {
 	@Transactional 
 	@Test
 	public void updateFinishDate_2() {
-		var userId = -1;
-		var todoOnProjectId = -1;
+		var userId = 2;
+		var todoOnProjectId = 14;
 		var finishDate = new Date();
 		
 		assertThrows(NotFoundValueException.class ,
@@ -325,8 +494,8 @@ public class TodoServiceTest {
 	@Transactional 
 	@Test
 	public void updateFinishDate_3() {
-		var userId = -1;
-		var todoOnProjectId = -1;
+		var userId = 1;
+		var todoOnProjectId = 5;
 		var finishDate = new Date();
 		
 		assertThrows(NotHaveAuthorityToOperateProjectException.class ,
@@ -336,9 +505,9 @@ public class TodoServiceTest {
 	@Transactional 
 	@Test
 	public void updateFinishDate_4() {//todo的な意味
-		var userId = -1;
-		var todoOnProjectId = -1;
-		var finishDate = new Date();
+		var userId = 2;
+		var todoOnProjectId = 5;
+		var finishDate = utillity.stringToDate("2021-9-1");
 		
 		assertThrows(BadRequestException.class ,
 				() -> service.updateFinishDate(userId, todoOnProjectId, finishDate));
@@ -347,9 +516,9 @@ public class TodoServiceTest {
 	@Transactional 
 	@Test
 	public void updateFinishDate_5() {//project的な意味
-		var userId = -1;
-		var todoOnProjectId = -1;
-		var finishDate = new Date();
+		var userId = 2;
+		var todoOnProjectId = 5;
+		var finishDate = utillity.stringToDate("2022-1-5");
 		
 		assertThrows(BadRequestException.class ,
 				() -> service.updateFinishDate(userId, todoOnProjectId, finishDate));
@@ -362,8 +531,8 @@ public class TodoServiceTest {
 		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
 	public void delete_1() {
-		var userId = -1;
-		var todoOnProjectId = -1;
+		var userId = 2;
+		var todoOnProjectId = 6;
 		
 		service.delete(userId, todoOnProjectId);
 	}
@@ -371,8 +540,8 @@ public class TodoServiceTest {
 	@Transactional 
 	@Test
 	public void delete_2() {
-		var userId = -1;
-		var todoOnProjectId = -1;
+		var userId = 2;
+		var todoOnProjectId = 15;
 		
 		assertThrows(NotFoundValueException.class ,
 				() -> service.delete(userId, todoOnProjectId));
@@ -381,8 +550,8 @@ public class TodoServiceTest {
 	@Transactional 
 	@Test
 	public void delete_3() {
-		var userId = -1;
-		var todoOnProjectId = -1;
+		var userId = 1;
+		var todoOnProjectId = 7;
 		
 		assertThrows(NotHaveAuthorityToOperateProjectException.class ,
 				() -> service.delete(userId, todoOnProjectId));
@@ -395,8 +564,8 @@ public class TodoServiceTest {
 		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
 	public void setIsCompleted_1() {
-		var userId = -1;
-		var todoOnProjectId = -1;
+		var userId = 2;
+		var todoOnProjectId = 4;
 		var isCompleted = true;
 		
 		service.setIsCompleted(userId, todoOnProjectId, isCompleted);
@@ -409,8 +578,8 @@ public class TodoServiceTest {
 		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
 	public void setIsCompleted_2() {
-		var userId = -1;
-		var todoOnProjectId = -1;
+		var userId = 2;
+		var todoOnProjectId = 4;
 		var isCompleted = false;
 		
 		service.setIsCompleted(userId, todoOnProjectId, isCompleted);
@@ -419,8 +588,8 @@ public class TodoServiceTest {
 	@Transactional 
 	@Test
 	public void setIsCompleted_3() {
-		var userId = -1;
-		var todoOnProjectId = -1;
+		var userId = 2;
+		var todoOnProjectId = 14;
 		var isCompleted = true;
 		
 		assertThrows(NotFoundValueException.class ,
@@ -430,8 +599,8 @@ public class TodoServiceTest {
 	@Transactional 
 	@Test
 	public void setIsCompleted_4() {
-		var userId = -1;
-		var todoOnProjectId = -1;
+		var userId = 3;
+		var todoOnProjectId = 4;
 		var isCompleted = true;
 		
 		assertThrows(NotHaveAuthorityToOperateProjectException.class ,

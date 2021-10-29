@@ -31,7 +31,7 @@ public class SubscriberProjectControl {
 			@PathVariable("publicProjectId") Integer publicProjectId,
 			@RequestBody SubscriberInProjectForm form) throws ValidateException {
 		form.validatePost();
-		service.insert(user.getUserId(), publicProjectId, form);
+		service.insert(user.getUserId(), publicProjectId, form.getUserName());
 	}
 	
 	@GetMapping

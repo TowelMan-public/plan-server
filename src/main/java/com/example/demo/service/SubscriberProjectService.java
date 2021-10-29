@@ -12,7 +12,7 @@ import com.example.demo.response.SubscriberInPublicProjectResponse;
 public class SubscriberProjectService {
 
 	@Transactional
-	public void insert(Integer userId, Integer publicProjectId, SubscriberInProjectForm form) {
+	public void insert(Integer userId, Integer publicProjectId, String userName) {
 		// TODO 自動生成されたメソッド・スタブ
 		
 	}
