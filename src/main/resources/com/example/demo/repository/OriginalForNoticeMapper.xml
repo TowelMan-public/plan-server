@@ -234,11 +234,14 @@
 			INNER JOIN(
 					SELECT 	todo_on_project_id FROM todo_on_project
 					INNER JOIN(
-							SELECT * FROM public_project
+							SELECT public_project.public_project_id AS project_id FROM public_project
 							WHERE
 								public_project.is_deleted = 0
+							UNION ALL SELECT private_project.project_id AS project_id FROM private_project
+							WHERE
+								private_project.is_deleted = 0
 						)AS project_table_for_todo_on_project
-						ON project_table_for_todo_on_project.public_project_id = todo_on_project.project_id
+						ON project_table_for_todo_on_project.project_id = todo_on_project.project_id
 					WHERE
 						todo_on_project.is_deleted = 0
 				) AS todo_table
@@ -246,7 +249,7 @@
 			
 			UNION ALL SELECT
 				notice_project.notice_id AS notice_id,
-				project_id AS id,
+				notice_project.project_id AS id,
 				message AS message,
 				'PROJECT_NOTICE' AS noticeType
 			FROM notice_project
@@ -288,11 +291,14 @@
 			INNER JOIN(
 					SELECT 	todo_on_project_id FROM todo_on_project
 					INNER JOIN(
-							SELECT * FROM public_project
+							SELECT public_project.public_project_id AS project_id FROM public_project
 							WHERE
 								public_project.is_deleted = 0
+							UNION ALL SELECT private_project.project_id AS project_id FROM private_project
+							WHERE
+								private_project.is_deleted = 0
 						)AS project_table_for_todo_on_project
-						ON project_table_for_todo_on_project.public_project_id = todo_on_project.project_id
+						ON project_table_for_todo_on_project.project_id = todo_on_project.project_id
 					WHERE
 						todo_on_project.is_deleted = 0
 				) AS todo_table
@@ -300,7 +306,7 @@
 			
 			UNION ALL SELECT
 				notice_project.notice_id AS notice_id,
-				project_id AS id,
+				notice_project.project_id AS id,
 				message AS message,
 				'PROJECT_NOTICE' AS noticeType
 			FROM notice_project
@@ -311,11 +317,11 @@
 				) AS notice_table_for_project_notice
 				USING(notice_id)
 			INNER JOIN(
-					SELECT * FROM public_project
+					SELECT public_project.public_project_id AS project_id FROM public_project
 					WHERE
 						public_project.is_deleted = 0
 				) AS project_table
-				ON notice_project.project_id = project_table.public_project_id
+				ON notice_project.project_id = project_table.project_id
 		) AS body_table
 		ORDER BY body_table.notice_id
 	</select>
