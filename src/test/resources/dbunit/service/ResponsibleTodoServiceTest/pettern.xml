@@ -20,11 +20,7 @@
     <notice notice_id="1" user_id="1" />
     <notice notice_id="2" user_id="2" />
     <notice notice_id="3" user_id="1" />
-    
-    <notice_todo notice_id="1" todo_id="4" message="" />
-    <notice_todo notice_id="2" todo_id="4" message="" />
-    <notice_todo notice_id="3" todo_id="5" message="" />
-    
+        
     <project project_id="1" />
     <project project_id="2" />
     <project project_id="3" />
@@ -105,5 +101,9 @@
     <content content_id="6" todo_id="7" content_title="content_6" content_explanation="content_explanation_6_for_project6" is_completed="0" is_deleted="1" />
     <content content_id="7" todo_id="7" content_title="content_7" content_explanation="content_explanation_7_for_project6" is_completed="1" is_deleted="0" />
     <content content_id="8" todo_id="7" content_title="content_8" content_explanation="content_explanation_4_for_project6" is_completed="0" is_deleted="0" />
+    
+    <notice_todo notice_id="1" todo_id="4" message="" />
+    <notice_todo notice_id="2" todo_id="4" message="" />
+    <notice_todo notice_id="3" todo_id="5" message="" />
     
 </dataset>

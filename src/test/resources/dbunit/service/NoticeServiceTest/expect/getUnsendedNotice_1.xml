@@ -13,10 +13,13 @@
     <notice notice_id="5" user_id="1" />
     <notice notice_id="6" user_id="1" />
     
-    <unsent_notice unsend_notice_id="1" notice_id="3" terminal_id="1" />
-    <unsent_notice unsend_notice_id="2" notice_id="4" terminal_id="1" />
-    <unsent_notice unsend_notice_id="3" notice_id="5" terminal_id="1" />
-    <unsent_notice unsend_notice_id="4" notice_id="6" terminal_id="1" />
+    <notice_project notice_id="1" project_id="1" message="TEST_Aの締め切りが迫りました" />
+    <notice_project notice_id="3" project_id="2" message="TEST_Bの締め切りを過ぎました！！" />
+    <notice_project notice_id="5" project_id="3" message="TEST_Cが完了しました！おめでとうございます！" />
+    
+    <notice_todo notice_id="2" todo_id="1" message="TEST_Aの締め切りが迫りました" />
+    <notice_todo notice_id="4" todo_id="2" message="TEST_Bが完了しました。頑張りましたね！" />
+    <notice_todo notice_id="6" todo_id="3" message="TEST_Cの締め切りが迫りました" />
         
     <project project_id="1" />
     <project project_id="2" />
@@ -35,13 +38,5 @@
     <todo_on_project todo_on_project_id="1" project_id="1" todo_name="todo_1" start_date="2021-06-30" finish_date="2021-06-30" is_copy_contents_to_users="0" is_completed="0" is_deleted="0" />
 	<todo_on_project todo_on_project_id="2" project_id="1" todo_name="todo_2" start_date="2021-06-30" finish_date="2021-06-30" is_copy_contents_to_users="0" is_completed="1" is_deleted="0" />
     <todo_on_project todo_on_project_id="3" project_id="1" todo_name="todo_3" start_date="2021-06-30" finish_date="2021-06-30" is_copy_contents_to_users="0" is_completed="0" is_deleted="0" />
-    
-    <notice_project notice_id="1" project_id="1" message="TEST_Aの締め切りが迫りました" />
-    <notice_project notice_id="3" project_id="2" message="TEST_Bの締め切りを過ぎました！！" />
-    <notice_project notice_id="5" project_id="3" message="TEST_Cが完了しました！おめでとうございます！" />
-    
-    <notice_todo notice_id="2" todo_id="1" message="TEST_Aの締め切りが迫りました" />
-    <notice_todo notice_id="4" todo_id="2" message="TEST_Bが完了しました。頑張りましたね！" />
-    <notice_todo notice_id="6" todo_id="3" message="TEST_Cの締め切りが迫りました" />
     
 </dataset>

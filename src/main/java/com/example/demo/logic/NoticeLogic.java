@@ -1,6 +1,8 @@
 package com.example.demo.logic;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -21,6 +23,7 @@ import com.example.demo.repository.TerminalEntityMapper;
 import com.example.demo.repository.TodoNoticeEntityMapper;
 import com.example.demo.repository.UnsentNoticeEntityMapper;
 import com.example.demo.repository.UserConfigEntityMapper;
+import com.example.demo.response.NoticeResponse;
 
 /**
  * 通知周りの共通処理クラス
@@ -372,5 +375,13 @@ public class NoticeLogic {
 			.andTerminalIdEqualTo(terminalId);
 		
 		unsentNoticeEntityMapper.deleteByExample(dto);
+	}
+
+	public List<NoticeResponse> getUnsendedNoticeList(Integer terminalId) {
+		return originalForNoticeMapper.getUnsentNoticeList(terminalId);
+	}
+
+	public List<NoticeResponse> getNoticeList(Integer userId) {
+		return originalForNoticeMapper.getNoticeList(userId);
 	}
 }

@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.example.demo.entity.SubscriberInPublicProjectEntity;
 import com.example.demo.entity.TodoOnResponsibleEntity;
+import com.example.demo.response.NoticeResponse;
 
 @Mapper
 public interface OriginalForNoticeMapper {
@@ -32,4 +33,8 @@ public interface OriginalForNoticeMapper {
 	public void eraseUnNeededNotice();
 	
 	public void eraseNoticeParent();
+
+	public List<NoticeResponse> getUnsentNoticeList(@Param("terminalId") Integer terminalId);
+
+	public List<NoticeResponse> getNoticeList(@Param("userId") Integer userId);
 }

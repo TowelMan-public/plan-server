@@ -20,9 +20,10 @@ import com.example.demo.response.NoticeResponse;
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.ExpectedDatabase;
+import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 
 @SpringBootTest
-@DatabaseSetup("/dbunit/service/UserTerminalServiceTest/pettern.xml")
+@DatabaseSetup("/dbunit/service/NoticeServiceTest/pettern.xml")
 @TestExecutionListeners({
 	  DependencyInjectionTestExecutionListener.class,
 	  DirtiesContextTestExecutionListener.class,
@@ -35,32 +36,36 @@ public class NoticeServiceTest {
 	
 	@Transactional 
 	@Test
-	@ExpectedDatabase("/dbunit/service/NoticeServiceTest/expect/getUnacquiredNotice_1.xml")
-	public void getUnsendedNotice_1() {
+	@ExpectedDatabase(
+		    value="/dbunit/service/NoticeServiceTest/expect/getUnsendedNotice_1.xml",
+		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
+	)
+	public void getUnsendedNotice_1() throws NotFoundValueException {
 		var userId = 1;
 		var terminalName = "terminal1";
 		List<NoticeResponse> expectList = new ArrayList<>();
+		
 		var expect = new NoticeResponse();
-		expect.setId(1);
-		expect.setMessage("TEST_Aの締め切りが迫りました");
-		expect.setNoticeType(NoticeResponse.PROJECT_NOTICE);
-		expectList.add(expect);
-		
-		expect = new NoticeResponse();
 		expect.setId(2);
-		expect.setMessage("TEST_Aの締め切りが迫りました");
-		expect.setNoticeType(NoticeResponse.TODO_NOTICE);
-		expectList.add(expect);
-		
-		expect = new NoticeResponse();
-		expect.setId(3);
 		expect.setMessage("TEST_Bの締め切りを過ぎました！！");
 		expect.setNoticeType(NoticeResponse.PROJECT_NOTICE);
 		expectList.add(expect);
 		
 		expect = new NoticeResponse();
-		expect.setId(4);
+		expect.setId(2);
 		expect.setMessage("TEST_Bが完了しました。頑張りましたね！");
+		expect.setNoticeType(NoticeResponse.TODO_NOTICE);
+		expectList.add(expect);
+				
+		expect = new NoticeResponse();
+		expect.setId(3);
+		expect.setMessage("TEST_Cが完了しました！おめでとうございます！");
+		expect.setNoticeType(NoticeResponse.PROJECT_NOTICE);
+		expectList.add(expect);
+		
+		expect = new NoticeResponse();
+		expect.setId(3);
+		expect.setMessage("TEST_Cの締め切りが迫りました");
 		expect.setNoticeType(NoticeResponse.TODO_NOTICE);
 		expectList.add(expect);
 		
@@ -82,6 +87,7 @@ public class NoticeServiceTest {
 	public void getNotice_1() {
 		var userId = 1;
 		List<NoticeResponse> expectList = new ArrayList<>();
+		
 		var expect = new NoticeResponse();
 		expect.setId(1);
 		expect.setMessage("TEST_Aの締め切りが迫りました");
@@ -89,31 +95,31 @@ public class NoticeServiceTest {
 		expectList.add(expect);
 		
 		expect = new NoticeResponse();
-		expect.setId(2);
+		expect.setId(1);
 		expect.setMessage("TEST_Aの締め切りが迫りました");
 		expect.setNoticeType(NoticeResponse.TODO_NOTICE);
 		expectList.add(expect);
-		
+				
 		expect = new NoticeResponse();
-		expect.setId(3);
+		expect.setId(2);
 		expect.setMessage("TEST_Bの締め切りを過ぎました！！");
 		expect.setNoticeType(NoticeResponse.PROJECT_NOTICE);
 		expectList.add(expect);
 		
 		expect = new NoticeResponse();
-		expect.setId(4);
+		expect.setId(2);
 		expect.setMessage("TEST_Bが完了しました。頑張りましたね！");
 		expect.setNoticeType(NoticeResponse.TODO_NOTICE);
 		expectList.add(expect);
-		
+				
 		expect = new NoticeResponse();
-		expect.setId(5);
+		expect.setId(3);
 		expect.setMessage("TEST_Cが完了しました！おめでとうございます！");
 		expect.setNoticeType(NoticeResponse.PROJECT_NOTICE);
 		expectList.add(expect);
 		
 		expect = new NoticeResponse();
-		expect.setId(6);
+		expect.setId(3);
 		expect.setMessage("TEST_Cの締め切りが迫りました");
 		expect.setNoticeType(NoticeResponse.TODO_NOTICE);
 		expectList.add(expect);

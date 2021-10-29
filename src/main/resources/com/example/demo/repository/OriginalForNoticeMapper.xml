@@ -18,6 +18,12 @@
 	    <result column="is_deleted" jdbcType="BIT" property="isDeleted" />
     </resultMap>
     
+    <resultMap id="NoticeResponseMap" type="com.example.demo.response.NoticeResponse">
+	    <result column="id" jdbcType="INTEGER" property="id" />
+	    <result column="message" jdbcType="INTEGER" property="message" />
+	    <result column="noticeType" jdbcType="INTEGER" property="noticeType" />
+    </resultMap>
+    
     <select id="getApproachingPubliceriodProject" resultMap="ProjectBaseResultMap">
 		SELECT * FROM subscriber_in_public_project AS body_table
 		INNER JOIN
@@ -205,4 +211,112 @@
 			) AS user_table
 			ON notice_table.user_id = user_table.user_id
 	</delete>
+	
+	<select id="getNoticeList" resultMap="NoticeResponseMap">
+		SELECT
+			body_table.notice_id AS noticeId,
+			id AS id,
+			message AS message,
+			noticeType AS noticeType
+		FROM(
+			SELECT
+				notice_todo.notice_id AS notice_id,
+				todo_id AS id,
+				message AS message,
+				'TODO_NOTICE' AS noticeType
+			FROM notice_todo
+			INNER JOIN (
+					SELECT * FROM notice
+					WHERE
+						user_id = #{userId}
+				) AS notice_table_for_todo_notice
+				USING(notice_id)
+			INNER JOIN(
+					SELECT 	todo_on_project_id FROM todo_on_project
+					INNER JOIN(
+							SELECT * FROM public_project
+							WHERE
+								public_project.is_deleted = 0
+						)AS project_table_for_todo_on_project
+						ON project_table_for_todo_on_project.public_project_id = todo_on_project.project_id
+					WHERE
+						todo_on_project.is_deleted = 0
+				) AS todo_table
+			ON todo_table.todo_on_project_id = notice_todo.todo_id
+			
+			UNION ALL SELECT
+				notice_project.notice_id AS notice_id,
+				project_id AS id,
+				message AS message,
+				'PROJECT_NOTICE' AS noticeType
+			FROM notice_project
+			INNER JOIN (
+					SELECT * FROM notice
+					WHERE
+						user_id = #{userId}
+				) AS notice_table_for_project_notice
+				USING(notice_id)
+			INNER JOIN(
+					SELECT * FROM public_project
+					WHERE
+						public_project.is_deleted = 0
+				) AS project_table
+				ON notice_project.project_id = project_table.public_project_id
+		) AS body_table
+		ORDER BY body_table.notice_id
+	</select>
+	
+	<select id="getUnsentNoticeList" resultMap="NoticeResponseMap">
+		SELECT
+			notice_id AS "noticeId",
+			id AS "id",
+			message AS "message",
+			noticeType AS "noticeType"
+		FROM(
+			SELECT
+				notice_todo.notice_id AS notice_id,
+				todo_id AS id,
+				message AS message,
+				'TODO_NOTICE' AS noticeType
+			FROM notice_todo
+			INNER JOIN (
+					SELECT * FROM unsent_notice
+					WHERE
+						terminal_id = #{terminalId}
+				) AS notice_table_for_todo_notice
+				USING(notice_id)
+			INNER JOIN(
+					SELECT 	todo_on_project_id FROM todo_on_project
+					INNER JOIN(
+							SELECT * FROM public_project
+							WHERE
+								public_project.is_deleted = 0
+						)AS project_table_for_todo_on_project
+						ON project_table_for_todo_on_project.public_project_id = todo_on_project.project_id
+					WHERE
+						todo_on_project.is_deleted = 0
+				) AS todo_table
+			ON todo_table.todo_on_project_id = notice_todo.todo_id
+			
+			UNION ALL SELECT
+				notice_project.notice_id AS notice_id,
+				project_id AS id,
+				message AS message,
+				'PROJECT_NOTICE' AS noticeType
+			FROM notice_project
+			INNER JOIN (
+					SELECT * FROM unsent_notice
+					WHERE
+						terminal_id = #{terminalId}
+				) AS notice_table_for_project_notice
+				USING(notice_id)
+			INNER JOIN(
+					SELECT * FROM public_project
+					WHERE
+						public_project.is_deleted = 0
+				) AS project_table
+				ON notice_project.project_id = project_table.public_project_id
+		) AS body_table
+		ORDER BY body_table.notice_id
+	</select>
 </mapper>
