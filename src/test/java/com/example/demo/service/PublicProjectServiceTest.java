@@ -15,6 +15,7 @@ import org.springframework.test.context.support.DirtiesContextTestExecutionListe
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.demo.DatabaseTest;
 import com.example.demo.configurer.AuthorityListInPublicProject;
 import com.example.demo.exception.BadRequestException;
 import com.example.demo.exception.NotFoundValueException;
@@ -36,19 +37,19 @@ import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 	  TransactionalTestExecutionListener.class,
 	  DbUnitTestExecutionListener.class
 	})
-public class PublicProjectServiceTest {
+public class PublicProjectServiceTest extends DatabaseTest {
 	@Autowired
 	PublicProjectService service;
 	@Autowired
 	CommonUtility utillity;
-		
+	
 	@Transactional 
 	@Test
 	@ExpectedDatabase(
 		    value="/dbunit/service/PublicProjectServiceTest/expect/insert_1.xml",
 		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
-	public void insert_1() {
+	public void insert_1() {		
 		var userId = 3;
 		var publicProjectId = 11;
 		var form = new ProjectForm();
@@ -61,8 +62,10 @@ public class PublicProjectServiceTest {
 	
 	@Transactional 
 	@Test
-	@ExpectedDatabase(value="/dbunit/service/PublicProjectServiceTest/expect/get_1.xml")
-	public void get_1() {
+	@ExpectedDatabase(value="/dbunit/service/PublicProjectServiceTest/expect/get_1.xml",
+		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
+		    )
+	public void get_1() throws NotFoundValueException, NotJoinedPublicProjectException {
 		var userId = 1;
 		var publicProjectId = 5;
 		var expect = new PublicProjectResponse();
@@ -115,8 +118,10 @@ public class PublicProjectServiceTest {
 	
 	@Transactional 
 	@Test
-	@ExpectedDatabase( value="/dbunit/service/PublicProjectServiceTest/expect/updateProjectName_1.xml"	)
-	public void updateProjectName_1() {
+	@ExpectedDatabase( value="/dbunit/service/PublicProjectServiceTest/expect/updateProjectName_1.xml",
+		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
+		    )
+	public void updateProjectName_1() throws NotFoundValueException, NotHaveAuthorityToOperateProjectException {
 		var userId = 1;
 		var publicProjectId = 5;
 		var projectName = "newer_project";
@@ -148,8 +153,10 @@ public class PublicProjectServiceTest {
 	
 	@Transactional 
 	@Test
-	@ExpectedDatabase( value="/dbunit/service/PublicProjectServiceTest/expect/updateFinishDate_1.xml")
-	public void updateFinishDate_1() {
+	@ExpectedDatabase( value="/dbunit/service/PublicProjectServiceTest/expect/updateFinishDate_1.xml",
+		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
+		    )
+	public void updateFinishDate_1() throws BadRequestException, NotFoundValueException, NotHaveAuthorityToOperateProjectException {
 		var userId = 1;
 		var publicProjectId = 5;
 		var finishDate = utillity.stringToDate("2021-10-25");
@@ -161,7 +168,7 @@ public class PublicProjectServiceTest {
 	@Test
 	public void updateFinishDate_2() {
 		var userId = 3;
-		var publicProjectId = 5;
+		var publicProjectId = 3;
 		var finishDate = utillity.stringToDate("2021-8-1");
 		
 		assertThrows(NotFoundValueException.class ,
@@ -192,8 +199,10 @@ public class PublicProjectServiceTest {
 	
 	@Transactional 
 	@Test
-	@ExpectedDatabase(value="/dbunit/service/PublicProjectServiceTest/expect/updateStartDate_1.xml")
-	public void updateStartDate_1() {
+	@ExpectedDatabase(value="/dbunit/service/PublicProjectServiceTest/expect/updateStartDate_1.xml",
+		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
+		    )
+	public void updateStartDate_1() throws BadRequestException, NotFoundValueException, NotHaveAuthorityToOperateProjectException {
 		var userId = 1;
 		var publicProjectId = 5;
 		var startDate = utillity.stringToDate("2021-8-1");
@@ -236,8 +245,10 @@ public class PublicProjectServiceTest {
 	
 	@Transactional 
 	@Test
-	@ExpectedDatabase(value="/dbunit/service/PublicProjectServiceTest/expect/delete_1.xml")
-	public void delete_1() {
+	@ExpectedDatabase(value="/dbunit/service/PublicProjectServiceTest/expect/delete_1.xml",
+		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
+		    )
+	public void delete_1() throws NotFoundValueException, NotHaveAuthorityToOperateProjectException {
 		var userId = 1;
 		var publicProjectId = 5;
 		
@@ -270,7 +281,7 @@ public class PublicProjectServiceTest {
 		    value="/dbunit/service/PublicProjectServiceTest/expect/setIsCompleted_1.xml",
 		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
-	public void setIsCompleted_1() {
+	public void setIsCompleted_1() throws NotFoundValueException, NotHaveAuthorityToOperateProjectException {
 		var userId = 1;
 		var publicProjectId = 5;
 		var isCompleted = true;
@@ -284,7 +295,7 @@ public class PublicProjectServiceTest {
 		    value="/dbunit/service/PublicProjectServiceTest/expect/setIsCompleted_2.xml",
 		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
-	public void setIsCompleted_2() {
+	public void setIsCompleted_2() throws NotFoundValueException, NotHaveAuthorityToOperateProjectException {
 		var userId = 2;
 		var publicProjectId = 9;
 		var isCompleted = false;

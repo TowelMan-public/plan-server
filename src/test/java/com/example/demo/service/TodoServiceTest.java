@@ -16,6 +16,7 @@ import org.springframework.test.context.support.DirtiesContextTestExecutionListe
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.demo.DatabaseTest;
 import com.example.demo.exception.BadRequestException;
 import com.example.demo.exception.NotFoundValueException;
 import com.example.demo.exception.NotHaveAuthorityToOperateProjectException;
@@ -37,7 +38,7 @@ import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 	  TransactionalTestExecutionListener.class,
 	  DbUnitTestExecutionListener.class
 	})
-public class TodoServiceTest {
+public class TodoServiceTest extends DatabaseTest {
 	@Autowired
 	TodoService service;
 	@Autowired

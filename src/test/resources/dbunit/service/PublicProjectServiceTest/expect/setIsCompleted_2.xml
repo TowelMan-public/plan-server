@@ -44,11 +44,11 @@
     <private_project project_id="3" project_name="TEST_3" user_id="1" is_deleted="0" />
     <private_project project_id="4" project_name="TEST_4" user_id="2" is_deleted="0" />
     
-    <public_project public_project_id="5" project_name="TEST_1" start_date="2021-10-1" finish_date="2021-11-1" is_completed="1" is_deleted="0" />
+    <public_project public_project_id="5" project_name="TEST_1" start_date="2021-10-1" finish_date="2021-11-1" is_completed="0" is_deleted="0" />
     <public_project public_project_id="6" project_name="TEST_2" start_date="2021-9-1" finish_date="2021-11-1" is_completed="0" is_deleted="0" />
     <public_project public_project_id="7" project_name="TEST_3" start_date="2021-8-1" finish_date="2021-8-30" is_completed="0" is_deleted="0" />
     <public_project public_project_id="8" project_name="TEST_4" start_date="2021-10-1" finish_date="2021-11-1" is_completed="0" is_deleted="0" />
-    <public_project public_project_id="9" project_name="TEST_5" start_date="2021-10-1" finish_date="2021-11-1" is_completed="1" is_deleted="0" />
+    <public_project public_project_id="9" project_name="TEST_5" start_date="2021-10-1" finish_date="2021-11-1" is_completed="0" is_deleted="0" />
     <public_project public_project_id="10" project_name="TEST_6" start_date="2021-10-1" finish_date="2021-11-1" is_completed="0" is_deleted="1" />
     
     <subscriber_in_public_project public_project_id="5" user_id="1" authority_id="2" />

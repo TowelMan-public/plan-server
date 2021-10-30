@@ -12,6 +12,7 @@ import org.springframework.test.context.support.DirtiesContextTestExecutionListe
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.demo.DatabaseTest;
 import com.example.demo.exception.NotFoundValueException;
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
@@ -24,7 +25,7 @@ import com.github.springtestdbunit.annotation.DatabaseSetup;
 	  TransactionalTestExecutionListener.class,
 	  DbUnitTestExecutionListener.class
 	})
-public class OriginalUserDetailsServiceTest {
+public class OriginalUserDetailsServiceTest extends DatabaseTest {
 	@Autowired
 	OriginalUserDetailsService service;
 	

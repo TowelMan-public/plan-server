@@ -17,9 +17,8 @@
     <have_terminal_list terminal_id="5" user_id="2" terminal_name="terminal2" />
     <have_terminal_list terminal_id="6" user_id="2" terminal_name="terminal3" />
     
-    <notice notice_id="1" userId="1" />
+    <notice notice_id="1" user_id="1" />
     
-    <notice_project notice_id="1" project_id="5" message="" />
     
     <project project_id="1" />
     <project project_id="2" />
@@ -151,5 +150,6 @@
 	<content content_id="59" todo_id="190" content_title="dolore a libero quis voluptatibus occaecati." content_explanation="dolore quo voluptatibus voluptatem tempore ea excepturi eveniet omnis." is_completed="0" is_deleted="0" />
 	<content content_id="60" todo_id="117" content_title="laboriosam ut expedita quas." content_explanation="nostrum et dolor et et qui corporis." is_completed="1" is_deleted="0" />
 	    
+    <notice_project notice_id="1" project_id="5" message="" />
     
 </dataset>

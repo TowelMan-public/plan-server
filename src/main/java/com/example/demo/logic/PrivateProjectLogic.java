@@ -30,7 +30,9 @@ public class PrivateProjectLogic {
 	 * @return プライベートプロジェクトであればtrue、そうでなければfalse
 	 */
 	public boolean isPrivateProject(Integer projectId) {
-		return privateProjectEntityMapper.selectByPrimaryKey(projectId) != null;
+		var entity = privateProjectEntityMapper.selectByPrimaryKey(projectId);
+		
+		return entity != null && !entity.getIsDeleted();
 	}
 
 	/**

@@ -10,9 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.demo.exception.NotFoundValueException;
 import com.example.demo.logic.NoticeLogic;
 import com.example.demo.logic.PrivateProjectLogic;
+import com.example.demo.logic.SubscriberLogic;
 import com.example.demo.logic.TodoOnProjectLogic;
 import com.example.demo.logic.UserTerminalLogic;
-import com.example.demo.logic.SubscriberLogic;
 import com.example.demo.response.NoticeResponse;
 
 /**

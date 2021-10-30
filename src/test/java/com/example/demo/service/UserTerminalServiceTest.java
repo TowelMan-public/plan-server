@@ -15,6 +15,7 @@ import org.springframework.test.context.support.DirtiesContextTestExecutionListe
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.demo.DatabaseTest;
 import com.example.demo.exception.AlreadyUsedTerminalNameException;
 import com.example.demo.exception.NotFoundValueException;
 import com.example.demo.response.TerminalResponse;
@@ -31,7 +32,7 @@ import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 	  TransactionalTestExecutionListener.class,
 	  DbUnitTestExecutionListener.class
 	})
-public class UserTerminalServiceTest {
+public class UserTerminalServiceTest extends DatabaseTest {
 	@Autowired
 	UserTerminalService service;
 	

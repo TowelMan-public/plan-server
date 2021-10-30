@@ -20,46 +20,46 @@
     <have_terminal_list terminal_id="8" user_id="4" terminal_name="terminal2" />
     <have_terminal_list terminal_id="9" user_id="4" terminal_name="terminal3" />
     
-    <notice notice_id="1" userId="1" />
-    <notice notice_id="2" userId="2" />
-    <notice notice_id="3" userId="1" />
-    <notice notice_id="4" userId="1" />
-    <notice notice_id="5" userId="1" />
-    <notice notice_id="6" userId="1" />
+    <notice notice_id="1" user_id="1" />
+    <notice notice_id="2" user_id="2" />
+    <notice notice_id="3" user_id="1" />
+    <notice notice_id="4" user_id="1" />
+    <notice notice_id="5" user_id="1" />
+    <notice notice_id="6" user_id="1" />
     
-    <notice notice_id="7" userId="1" />
-    <notice notice_id="8" userId="4" />
-    <notice notice_id="9" userId="1" />
-    <notice notice_id="10" userId="1" />
-    <notice notice_id="11" userId="2" />
-    <notice notice_id="12" userId="1" />
+    <notice notice_id="7" user_id="1" />
+    <notice notice_id="8" user_id="4" />
+    <notice notice_id="9" user_id="1" />
+    <notice notice_id="10" user_id="1" />
+    <notice notice_id="11" user_id="2" />
+    <notice notice_id="12" user_id="1" />
     
-    <notice notice_id="13" userId="1" />
+    <notice notice_id="13" user_id="1" />
     
-    <unsend_notice unsend_notice_id="1" notice_id="1" terminal_id="1" />
-    <unsend_notice unsend_notice_id="2" notice_id="1" terminal_id="2" />
-    <unsend_notice unsend_notice_id="3" notice_id="1" terminal_id="3" />
-    <unsend_notice unsend_notice_id="4" notice_id="3" terminal_id="1" />
-    <unsend_notice unsend_notice_id="5" notice_id="3" terminal_id="3" />
-    <unsend_notice unsend_notice_id="6" notice_id="5" terminal_id="1" />
-    <unsend_notice unsend_notice_id="7" notice_id="5" terminal_id="3" />
-    <unsend_notice unsend_notice_id="8" notice_id="6" terminal_id="1" />
-    <unsend_notice unsend_notice_id="9" notice_id="6" terminal_id="2" />
-    <unsend_notice unsend_notice_id="10" notice_id="6" terminal_id="3" />
+    <unsent_notice unsend_notice_id="1" notice_id="1" terminal_id="1" />
+    <unsent_notice unsend_notice_id="2" notice_id="1" terminal_id="2" />
+    <unsent_notice unsend_notice_id="3" notice_id="1" terminal_id="3" />
+    <unsent_notice unsend_notice_id="4" notice_id="3" terminal_id="1" />
+    <unsent_notice unsend_notice_id="5" notice_id="3" terminal_id="3" />
+    <unsent_notice unsend_notice_id="6" notice_id="5" terminal_id="1" />
+    <unsent_notice unsend_notice_id="7" notice_id="5" terminal_id="3" />
+    <unsent_notice unsend_notice_id="8" notice_id="6" terminal_id="1" />
+    <unsent_notice unsend_notice_id="9" notice_id="6" terminal_id="2" />
+    <unsent_notice unsend_notice_id="10" notice_id="6" terminal_id="3" />
     
     
-    <unsend_notice unsend_notice_id="11" notice_id="8" terminal_id="8" />
-    <unsend_notice unsend_notice_id="12" notice_id="8" terminal_id="9" />
-    <unsend_notice unsend_notice_id="13" notice_id="8" terminal_id="10" />
-    <unsend_notice unsend_notice_id="14" notice_id="7" terminal_id="1" />
-    <unsend_notice unsend_notice_id="15" notice_id="7" terminal_id="2" />
-    <unsend_notice unsend_notice_id="16" notice_id="7" terminal_id="3" />
-    <unsend_notice unsend_notice_id="17" notice_id="9" terminal_id="2" />
-    <unsend_notice unsend_notice_id="18" notice_id="9" terminal_id="3" />
-    <unsend_notice unsend_notice_id="19" notice_id="12" terminal_id="5" />
-    <unsend_notice unsend_notice_id="20" notice_id="12" terminal_id="6" />
+    <unsent_notice unsend_notice_id="11" notice_id="8" terminal_id="8" />
+    <unsent_notice unsend_notice_id="12" notice_id="8" terminal_id="9" />
+    <unsent_notice unsend_notice_id="13" notice_id="8" terminal_id="10" />
+    <unsent_notice unsend_notice_id="14" notice_id="7" terminal_id="1" />
+    <unsent_notice unsend_notice_id="15" notice_id="7" terminal_id="2" />
+    <unsent_notice unsend_notice_id="16" notice_id="7" terminal_id="3" />
+    <unsent_notice unsend_notice_id="17" notice_id="9" terminal_id="2" />
+    <unsent_notice unsend_notice_id="18" notice_id="9" terminal_id="3" />
+    <unsent_notice unsend_notice_id="19" notice_id="12" terminal_id="5" />
+    <unsent_notice unsend_notice_id="20" notice_id="12" terminal_id="6" />
     
-    <unsend_notice unsend_notice_id="21" notice_id="13" terminal_id="1" />
+    <unsent_notice unsend_notice_id="21" notice_id="13" terminal_id="1" />
     
     <notice_todo notice_id="1" todo_id="1" message="" />
     <notice_todo notice_id="2" todo_id="4" message="" />

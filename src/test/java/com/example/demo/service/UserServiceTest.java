@@ -13,6 +13,7 @@ import org.springframework.test.context.support.DirtiesContextTestExecutionListe
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.demo.DatabaseTest;
 import com.example.demo.exception.AlreadyUsedUserNameException;
 import com.example.demo.exception.NotFoundValueException;
 import com.example.demo.form.UserForm;
@@ -30,7 +31,7 @@ import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 	  TransactionalTestExecutionListener.class,
 	  DbUnitTestExecutionListener.class
 	})
-public class UserServiceTest {
+public class UserServiceTest extends DatabaseTest {
 	@Autowired
 	UserService service;
 	@Autowired

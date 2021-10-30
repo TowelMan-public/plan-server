@@ -15,6 +15,7 @@ import org.springframework.test.context.support.DirtiesContextTestExecutionListe
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.demo.DatabaseTest;
 import com.example.demo.configurer.AuthorityListInPublicProject;
 import com.example.demo.exception.AlreadyJoinedPublicProjectException;
 import com.example.demo.exception.BadRequestException;
@@ -35,7 +36,7 @@ import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 	  TransactionalTestExecutionListener.class,
 	  DbUnitTestExecutionListener.class
 	})
-public class SubscriberProjectServiceTest {
+public class SubscriberProjectServiceTest extends DatabaseTest {
 	@Autowired
 	SubscriberProjectService service;
 	

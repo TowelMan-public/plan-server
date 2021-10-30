@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.demo.DatabaseTest;
 import com.example.demo.utility.CommonUtility;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.ExpectedDatabase;
@@ -12,7 +13,7 @@ import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 
 @SpringBootTest
 @DatabaseSetup("/dbunit/logic/NoticeLogicTest/pettern.xml")
-public class NoticeLogicTest {	
+public class NoticeLogicTest extends DatabaseTest {	
 	@Autowired
 	NoticeLogic logic;
 	@Autowired

@@ -19,6 +19,8 @@
     
     <notice notice_id="1" user_id="1" />
     
+    <notice_project notice_id="1" project_id="5" message="" />
+    
     <project project_id="1" />
     <project project_id="2" />
     <project project_id="3" />
@@ -87,22 +89,7 @@
 	<todo todo_id="195" />
 	<todo todo_id="198" />
     
-    <todo_on_responsible todo_on_project_id="103" user_id="1" todo_on_responsible_id="105" project_id="5" is_completed="0" is_deleted="0" />
-	<todo_on_responsible todo_on_project_id="104" user_id="2" todo_on_responsible_id="120" project_id="5" is_completed="0" is_deleted="0" />
-	<todo_on_responsible todo_on_project_id="105" user_id="1" todo_on_responsible_id="177" project_id="10" is_completed="0" is_deleted="0" />
-	<todo_on_responsible todo_on_project_id="106" user_id="4" todo_on_responsible_id="198" project_id="6" is_completed="0" is_deleted="0" />
-	<todo_on_responsible todo_on_project_id="107" user_id="4" todo_on_responsible_id="190" project_id="8" is_completed="0" is_deleted="0" />
-	<todo_on_responsible todo_on_project_id="108" user_id="2" todo_on_responsible_id="183" project_id="9" is_completed="0" is_deleted="0" />
-	<todo_on_responsible todo_on_project_id="110" user_id="1" todo_on_responsible_id="110" project_id="5" is_completed="0" is_deleted="0" />
-	<todo_on_responsible todo_on_project_id="111" user_id="3" todo_on_responsible_id="136" project_id="9" is_completed="0" is_deleted="0" />
-	<todo_on_responsible todo_on_project_id="112" user_id="1" todo_on_responsible_id="195" project_id="6" is_completed="0" is_deleted="0" />
-	<todo_on_responsible todo_on_project_id="112" user_id="2" todo_on_responsible_id="112" project_id="9" is_completed="0" is_deleted="0" />
-	<todo_on_responsible todo_on_project_id="113" user_id="3" todo_on_responsible_id="175" project_id="8" is_completed="0" is_deleted="0" />
-	<todo_on_responsible todo_on_project_id="114" user_id="3" todo_on_responsible_id="155" project_id="5" is_completed="0" is_deleted="0" />
-	<todo_on_responsible todo_on_project_id="114" user_id="4" todo_on_responsible_id="141" project_id="6" is_completed="0" is_deleted="0" />
-	<todo_on_responsible todo_on_project_id="117" user_id="2" todo_on_responsible_id="188" project_id="10" is_completed="0" is_deleted="0" />
-	<todo_on_responsible todo_on_project_id="120" user_id="4" todo_on_responsible_id="186" project_id="10" is_completed="0" is_deleted="0" />
-	    
+   
     <content content_id="1" todo_id="110" content_title="recusandae ad nam nisi est omnis ea nostrum." content_explanation="aliquid sed quia et." is_completed="0" is_deleted="0" />
 	<content content_id="2" todo_id="108" content_title="est libero repellendus est eaque ad." content_explanation="tenetur non aliquam architecto labore quia expedita molestiae." is_completed="0" is_deleted="0" />
 	<content content_id="3" todo_id="119" content_title="vitae velit qui molestiae est qui eos." content_explanation="eum explicabo quo dolor!" is_completed="0" is_deleted="0" />

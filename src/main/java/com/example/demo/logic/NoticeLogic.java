@@ -1,6 +1,5 @@
 package com.example.demo.logic;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -19,8 +18,10 @@ import com.example.demo.entity.UnsentNoticeEntity;
 import com.example.demo.repository.NoticeEntityMapper;
 import com.example.demo.repository.OriginalForNoticeMapper;
 import com.example.demo.repository.ProjectNoticeEntityMapper;
+import com.example.demo.repository.PublicProjectEntityMapper;
 import com.example.demo.repository.TerminalEntityMapper;
 import com.example.demo.repository.TodoNoticeEntityMapper;
+import com.example.demo.repository.TodoOnProjectEntityMapper;
 import com.example.demo.repository.UnsentNoticeEntityMapper;
 import com.example.demo.repository.UserConfigEntityMapper;
 import com.example.demo.response.NoticeResponse;
@@ -49,7 +50,10 @@ public class NoticeLogic {
 	OriginalForNoticeMapper originalForNoticeMapper;
 	@Autowired
 	UserConfigEntityMapper userConfigEntityMapper;
-	
+	@Autowired
+	PublicProjectEntityMapper publicProjectEntityMapper;
+	@Autowired
+	TodoOnProjectEntityMapper todoOnProjectEntityMapper;
 	/**
 	 * パブリックプロジェクトに勧誘されたときの通知の作成
 	 * 
@@ -237,7 +241,7 @@ public class NoticeLogic {
 			projectNoticeEntityMapper.deleteByExample(projectNoticeDto);
 		});
 	}
-	
+		
 	/**
 	 * 「やること」に関する通知を削除する
 	 * 
@@ -286,8 +290,7 @@ public class NoticeLogic {
 		originalForNoticeMapper.eraseProjectNoticeOfDeletedUser();
 		originalForNoticeMapper.eraseTodoNoticeOfDeletedUser();
 	}
-	
-	
+		
 	/**
 	 * 必要ない通知ID等を削除する
 	 */
@@ -305,11 +308,12 @@ public class NoticeLogic {
 	 */
 	private void createPublicProjectNotice(int userId, int publicProjectId, String message) {
 		var noticeId = createNotice(userId);
+		var publicProjectName = publicProjectEntityMapper.selectByPrimaryKey(publicProjectId).getProjectName();
 		
 		var projectNoticeEntity = new ProjectNoticeEntity();
 		projectNoticeEntity.setNoticeId(noticeId);
 		projectNoticeEntity.setProjectId(publicProjectId);
-		projectNoticeEntity.setMessage(message);
+		projectNoticeEntity.setMessage(message.replace(PUBLIC_PROJECT_NAME, publicProjectName));
 		
 		projectNoticeEntityMapper.insert(projectNoticeEntity);
 	}
@@ -323,11 +327,12 @@ public class NoticeLogic {
 	 */
 	private void createTodoNotice(int userId, int todoId, String message) {
 		var noticeId = createNotice(userId);
+		var todoTitle = todoOnProjectEntityMapper.selectByPrimaryKey(todoId).getTodoName();
 		
 		var todoNoticeEntity = new TodoNoticeEntity();
 		todoNoticeEntity.setNoticeId(noticeId);
 		todoNoticeEntity.setTodoId(todoId);
-		todoNoticeEntity.setMessage(message);
+		todoNoticeEntity.setMessage(message.replace(TODO_TITLE, todoTitle));
 		
 		todoNoticeEntityMapper.insert(todoNoticeEntity);
 	}

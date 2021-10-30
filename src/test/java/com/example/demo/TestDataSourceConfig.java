@@ -6,9 +6,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 public class TestDataSourceConfig {
-  private static final String URL = "jdbc:postgresql://localhost:5432/test";
-  private static final String USERNAME = "postgres";
-  private static final String PASSWORD = "postgres";
+  private static final String URL = "jdbc:h2:mem:plan;DB_CLOSE_ON_EXIT=false;DATABASE_TO_UPPER=true;MODE=MySQL";
+  private static final String USERNAME = "username";
+  private static final String PASSWORD = "password";
 
   @Bean
   public DataSource dataSource() {

@@ -15,6 +15,7 @@ import org.springframework.test.context.support.DirtiesContextTestExecutionListe
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.demo.DatabaseTest;
 import com.example.demo.exception.NotFoundValueException;
 import com.example.demo.response.NoticeResponse;
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
@@ -30,7 +31,7 @@ import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 	  TransactionalTestExecutionListener.class,
 	  DbUnitTestExecutionListener.class
 	})
-public class NoticeServiceTest {
+public class NoticeServiceTest extends DatabaseTest {
 	@Autowired
 	NoticeService service;
 	

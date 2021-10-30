@@ -13,6 +13,7 @@ import org.springframework.test.context.support.DirtiesContextTestExecutionListe
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.demo.DatabaseTest;
 import com.example.demo.response.UserConfigResponse;
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
@@ -28,7 +29,7 @@ import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 	  DbUnitTestExecutionListener.class
 	})
 @DatabaseSetup("/dbunit/service/UserConfigServiceTest/pettern.xml")
-public class UserConfigServiceTest {
+public class UserConfigServiceTest extends DatabaseTest {
 	@Autowired
 	UserConfigService service;
 	
