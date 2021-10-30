@@ -69,7 +69,7 @@ public class PrivateProjectServiceTest {
 	
 	@Transactional 
 	@Test
-	public void get_1() {
+	public void get_1() throws NotFoundValueException {
 		var userId = 2;
 		var privateProjectId = 4;
 		var expect = new PrivateProjectResponse();
@@ -105,7 +105,7 @@ public class PrivateProjectServiceTest {
 		    value="/dbunit/service/PrivateProjectServiceTest/expect/updateProjectName_1.xml",
 		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
-	public void updateProjectName_1() {
+	public void updateProjectName_1() throws NotFoundValueException {
 		var userId = 2;
 		var privateProjectId = 4;
 		var projectName = "new";
@@ -141,7 +141,7 @@ public class PrivateProjectServiceTest {
 		    value="/dbunit/service/PrivateProjectServiceTest/expect/delete_1.xml",
 		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
-	public void delete_1() {
+	public void delete_1() throws NotFoundValueException {
 		var userId = 2;
 		var privateProjectId = 4;
 		
