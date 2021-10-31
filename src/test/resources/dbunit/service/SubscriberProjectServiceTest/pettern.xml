@@ -22,10 +22,7 @@
     <notice notice_id="3" user_id="1" />
     <notice notice_id="4" user_id="2" />
     
-    <notice_project notice_id="1" project_id="5" message="" />
-    <notice_project notice_id="2" project_id="6" message="" />
-    <notice_project notice_id="3" project_id="6" message="" />
-    <notice_project notice_id="4" project_id="6" message="" />
+   
     
     <project project_id="1" />
     <project project_id="2" />
@@ -157,5 +154,8 @@
 	<content content_id="59" todo_id="190" content_title="dolore a libero quis voluptatibus occaecati." content_explanation="dolore quo voluptatibus voluptatem tempore ea excepturi eveniet omnis." is_completed="0" is_deleted="0" />
 	<content content_id="60" todo_id="117" content_title="laboriosam ut expedita quas." content_explanation="nostrum et dolor et et qui corporis." is_completed="1" is_deleted="0" />
 	    
-    
+     <notice_project notice_id="1" project_id="5" message="" />
+    <notice_project notice_id="2" project_id="6" message="" />
+    <notice_project notice_id="3" project_id="6" message="" />
+    <notice_project notice_id="4" project_id="6" message="" />
 </dataset>

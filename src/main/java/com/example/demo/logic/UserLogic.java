@@ -46,7 +46,12 @@ public class UserLogic {
 	 * @return ユーザー
 	 */
 	public UserEntity getUserByUserId(Integer userId) {
-		return userEntityMapper.selectByPrimaryKey(userId);
+		var entity = userEntityMapper.selectByPrimaryKey(userId);
+		
+		if(entity == null || entity.getIsDeleted().booleanValue())
+			return null;
+		else
+			return entity;
 	}
 
 	/**

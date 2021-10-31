@@ -8,6 +8,8 @@ import org.springframework.stereotype.Component;
 import com.example.demo.configurer.AuthorityListInPublicProject;
 import com.example.demo.dto.SubscriberInPublicProjectEntityExample;
 import com.example.demo.entity.SubscriberInPublicProjectEntity;
+import com.example.demo.exception.AlreadyJoinedPublicProjectException;
+import com.example.demo.exception.BadRequestException;
 import com.example.demo.exception.NotHaveAuthorityToOperateProjectException;
 import com.example.demo.exception.NotJoinedPublicProjectException;
 import com.example.demo.repository.SubscriberInPublicProjectEntityMapper;
@@ -74,6 +76,20 @@ public class SubscriberLogic {
 			return entityList.get(0);
 	}
 
+	public SubscriberInPublicProjectEntity getAuthorityNonThorow(Integer publicProjectId, Integer userId) {
+		var dto = new SubscriberInPublicProjectEntityExample();
+		dto.or()
+			.andPublicProjectIdEqualTo(publicProjectId)
+			.andUserIdEqualTo(userId);
+		
+		var entityList = subscriberInPublicProjectEntityMapper.selectByExample(dto);
+		
+		if(entityList.isEmpty())
+			return null;
+		else
+			return entityList.get(0);
+	}
+	
 	/**
 	 * ユーザーが参画しているパブリックプロジェクトの権利リストを取得する
 	 * @param userId ユーザーID
@@ -116,5 +132,108 @@ public class SubscriberLogic {
 		
 		return subscriberInPublicProjectEntityMapper.selectByExample(dto);
 	}
-	
+
+	/**
+	 * パブリックプロジェクトIDから参画者リストを取得する
+	 * @param publicProjectId パブリックプロジェクトID
+	 * @param authorityId 権限ID
+	 * @return 参画者リスト
+	 */
+	public List<SubscriberInPublicProjectEntity> getSubscriberByPublicProjectId(Integer publicProjectId, Integer authorityId) {
+		var dto = new SubscriberInPublicProjectEntityExample();
+		dto.or()
+			.andPublicProjectIdEqualTo(publicProjectId)
+			.andAuthorityIdEqualTo(authorityId);
+		
+		return subscriberInPublicProjectEntityMapper.selectByExample(dto);
+	}
+
+	/**
+	 * プロジェクト内にユーザーが参画（勧誘含む）しているかを検証する
+	 * @param publicProjectId パブリックプロジェクトID
+	 * @param userId ユーザーID
+	 * @throws NotJoinedPublicProjectException
+	 */
+	public void validateSubscriberFound(Integer publicProjectId, Integer userId) throws NotJoinedPublicProjectException {
+		this.getAuthority(publicProjectId, userId);
+	}
+
+	/**
+	 * 参画者の権限を変更する
+	 * @param publicProjectId パブリックプロジェクトID
+	 * @param userId ユーザーID
+	 * @param authorityId 権限ID
+	 */
+	public void update(Integer publicProjectId, Integer userId, Integer authorityId) {
+		var entity = new SubscriberInPublicProjectEntity();
+		entity.setAuthorityId(authorityId);
+		
+		var dto = new SubscriberInPublicProjectEntityExample();
+		dto.or()
+			.andPublicProjectIdEqualTo(publicProjectId)
+			.andUserIdEqualTo(userId);
+		
+		subscriberInPublicProjectEntityMapper.updateByExampleSelective(entity, dto);
+	}
+
+	/**
+	 * 参画者を除外する
+	 * @param publicProjectId パブリックプロジェクトID
+	 * @param userId ユーザーID
+	 */
+	public void delete(Integer publicProjectId, Integer userId) {
+		var dto = new SubscriberInPublicProjectEntityExample();
+		dto.or()
+			.andPublicProjectIdEqualTo(publicProjectId)
+			.andUserIdEqualTo(userId);
+		
+		subscriberInPublicProjectEntityMapper.deleteByExample(dto);
+	}
+
+	/**
+	 * 既にユーザーが勧誘されているかを検証する
+	 * @param publicProjectId パブリックプロジェクトID
+	 * @param userId ユーザーID
+	 * @throws BadRequestException　ユーザーが参画されている状況に置かれていない
+	 */
+	public void validateAlreadyHaveTentativeAuthority(Integer publicProjectId, Integer userId) throws BadRequestException {
+		var dto = new SubscriberInPublicProjectEntityExample();
+		dto.or()
+			.andPublicProjectIdEqualTo(publicProjectId)
+			.andUserIdEqualTo(userId)
+			.andAuthorityIdEqualTo(AuthorityListInPublicProject.TENTATIVE);
+		
+		if(subscriberInPublicProjectEntityMapper.selectByExample(dto).isEmpty())
+			throw new BadRequestException("Not in a solicited situation.");
+	}
+
+	/**
+	 * ユーザーが参画しているかを検証する
+	 * @param publicProjectId パブリックプロジェクトID
+	 * @param userId ユーザーID
+	 * @throws NotJoinedPublicProjectException
+	 */
+	public void validateUserJoinPublicProject(Integer publicProjectId, Integer userId) throws NotJoinedPublicProjectException {
+		var dto = new SubscriberInPublicProjectEntityExample();
+		dto.or()
+			.andPublicProjectIdEqualTo(publicProjectId)
+			.andUserIdEqualTo(userId)
+			.andAuthorityIdNotEqualTo(AuthorityListInPublicProject.TENTATIVE);
+		
+		if(subscriberInPublicProjectEntityMapper.selectByExample(dto).isEmpty())
+			throw new NotJoinedPublicProjectException();
+	}
+
+	/**
+	 * 参画していないことを検証する
+	 * @param publicProjectId パブリックプロジェクトID
+	 * @param userId ユーザーID
+	 * @throws AlreadyJoinedPublicProjectException
+	 */
+	public void validateNotAlreadyJoinedPublicProject(Integer publicProjectId, Integer userId) throws AlreadyJoinedPublicProjectException {
+		var entity = this.getAuthorityNonThorow(publicProjectId, userId);
+		
+		if(entity != null)
+			throw new AlreadyJoinedPublicProjectException();
+	}
 }

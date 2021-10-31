@@ -46,7 +46,7 @@ public class SubscriberProjectServiceTest extends DatabaseTest {
 		    value="/dbunit/service/SubscriberProjectServiceTest/expect/insert_1.xml",
 		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
-	public void insert_1() {
+	public void insert_1() throws NotFoundValueException, NotHaveAuthorityToOperateProjectException, AlreadyJoinedPublicProjectException {
 		var userId = 1;
 		var publicProjectId = 5;
 		var userName = "tester2";
@@ -100,7 +100,7 @@ public class SubscriberProjectServiceTest extends DatabaseTest {
 
 	@Transactional 
 	@Test
-	public void getList_1() {
+	public void getList_1() throws NotFoundValueException, NotJoinedPublicProjectException {
 		var userId = 3;
 		var publicProjectId = 6;
 		List<SubscriberInPublicProjectResponse> expectList = new ArrayList<>();
@@ -108,16 +108,19 @@ public class SubscriberProjectServiceTest extends DatabaseTest {
 		expect.setPublicProjectId(6);
 		expect.setUserName("tester1");
 		expect.setAuthorityId(AuthorityListInPublicProject.NORMAL);
+		expectList.add(expect);
 		
 		expect = new SubscriberInPublicProjectResponse();
 		expect.setPublicProjectId(6);
 		expect.setUserName("tester2");
 		expect.setAuthorityId(AuthorityListInPublicProject.SUPER);
+		expectList.add(expect);
 		
 		expect = new SubscriberInPublicProjectResponse();
 		expect.setPublicProjectId(6);
 		expect.setUserName("tester3");
 		expect.setAuthorityId(AuthorityListInPublicProject.TENTATIVE);
+		expectList.add(expect);
 		
 		assertThat(service.getList(userId, publicProjectId)).containsExactlyElementsOf(expectList);
 	}
@@ -158,7 +161,7 @@ public class SubscriberProjectServiceTest extends DatabaseTest {
 		    value="/dbunit/service/SubscriberProjectServiceTest/expect/update_1.xml",
 		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
-	public void update_1() {
+	public void update_1() throws NotFoundValueException, BadRequestException, NotHaveAuthorityToOperateProjectException, NotJoinedPublicProjectException {
 		var userId = 2;
 		var publicProjectId = 6;
 		var userName = "tester1";
@@ -182,12 +185,12 @@ public class SubscriberProjectServiceTest extends DatabaseTest {
 	@Transactional 
 	@Test
 	public void update_3() {//userName in project
-		var userId = 2;
-		var publicProjectId = 6;
-		var userName = "tester4";
+		var userId = 1;
+		var publicProjectId = 7;
+		var userName = "tester2";
 		var authorityId = AuthorityListInPublicProject.SUPER;
 		
-		assertThrows(NotFoundValueException.class ,
+		assertThrows(NotJoinedPublicProjectException.class ,
 				() -> service.update(userId, publicProjectId, userName, authorityId));	
 	}
 	
@@ -230,9 +233,10 @@ public class SubscriberProjectServiceTest extends DatabaseTest {
 	@Transactional 
 	@Test
 	@ExpectedDatabase(
-		    value="/dbunit/service/SubscriberProjectServiceTest/expect/delete_1.xml"
+		    value="/dbunit/service/SubscriberProjectServiceTest/expect/delete_1.xml",
+		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
-	public void delete_1() {
+	public void delete_1() throws BadRequestException, NotFoundValueException, NotHaveAuthorityToOperateProjectException, NotJoinedPublicProjectException {
 		var userId = 2;
 		var publicProjectId = 6;
 		var userName = "tester3";
@@ -254,11 +258,11 @@ public class SubscriberProjectServiceTest extends DatabaseTest {
 	@Transactional 
 	@Test
 	public void delete_3() {//userName in project
-		var userId = 2;
-		var publicProjectId = 6;
-		var userName = "tester_nothing";
+		var userId = 1;
+		var publicProjectId = 7;
+		var userName = "tester2";
 		
-		assertThrows(NotFoundValueException.class ,
+		assertThrows(NotJoinedPublicProjectException.class ,
 				() -> service.delete(userId, publicProjectId, userName));	
 	}
 	
@@ -287,9 +291,10 @@ public class SubscriberProjectServiceTest extends DatabaseTest {
 	@Transactional 
 	@Test
 	@ExpectedDatabase(
-		    value="/dbunit/service/SubscriberProjectServiceTest/expect/accept_1.xml"
+		    value="/dbunit/service/SubscriberProjectServiceTest/expect/accept_1.xml",
+		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
-	public void accept_1() {
+	public void accept_1() throws NotFoundValueException, BadRequestException {
 		var userId = 3;
 		var publicProjectId = 6;
 		
@@ -322,7 +327,7 @@ public class SubscriberProjectServiceTest extends DatabaseTest {
 		    value="/dbunit/service/SubscriberProjectServiceTest/expect/block_1.xml",
 		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
-	public void block_1() {
+	public void block_1() throws NotFoundValueException, BadRequestException {
 		var userId = 3;
 		var publicProjectId = 6;
 		
@@ -345,7 +350,7 @@ public class SubscriberProjectServiceTest extends DatabaseTest {
 		var userId = 3;
 		var publicProjectId = 5;
 		
-		assertThrows(NotFoundValueException.class ,
+		assertThrows(BadRequestException.class ,
 				() -> service.bloak(userId, publicProjectId));	
 	}
 	
@@ -355,7 +360,7 @@ public class SubscriberProjectServiceTest extends DatabaseTest {
 		    value="/dbunit/service/SubscriberProjectServiceTest/expect/exit_1.xml",
 		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
-	public void exit_1() {
+	public void exit_1() throws BadRequestException, NotFoundValueException, NotJoinedPublicProjectException {
 		var userId = 1;
 		var publicProjectId = 6;
 		
