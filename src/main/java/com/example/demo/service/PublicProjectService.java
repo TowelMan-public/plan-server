@@ -150,8 +150,6 @@ public class PublicProjectService {
 	 */
 	public void delete(Integer userId, Integer publicProjectId) throws NotFoundValueException, NotHaveAuthorityToOperateProjectException {
 		this.validateUserCanOperationToProject(userId, publicProjectId);
-		var subscriberList = subscriberLogic.getSubscriberByPublicProjectId(publicProjectId);
-			
 		publicProjectLogic.delete(publicProjectId);
 	}
 

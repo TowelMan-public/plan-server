@@ -50,7 +50,7 @@ public class TodoServiceTest extends DatabaseTest {
 		    value="/dbunit/service/TodoServiceTest/expect/insert_1.xml",
 		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
-	public void insert_1() {
+	public void insert_1() throws NotFoundValueException, NotJoinedPublicProjectException, NotHaveAuthorityToOperateProjectException, BadRequestException {
 		var userId = 2;
 		var form = new TodoForm();
 		form.setProjectId(4);
@@ -144,15 +144,15 @@ public class TodoServiceTest extends DatabaseTest {
 		    value="/dbunit/service/TodoServiceTest/expect/get_1.xml",
 		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
-	public void get_1() {
+	public void get_1() throws NotFoundValueException, NotJoinedPublicProjectException {
 		var userId = 1;
 		var todoOnProjectId = 5;
 		var expect = new TodoOnProjectResponse();
 		expect.setProjectId(6);
-		expect.setTodoName("todo_3");
-		expect.setTodoOnProjectId(5);
-		expect.setStartDate(utillity.stringToDate("2021-09-1"));
-		expect.setFinishDate(utillity.stringToDate("2021-10-16"));
+		expect.setTodoName("todo_2");
+		expect.setTodoOnProjectId(todoOnProjectId);
+		expect.setStartDate(utillity.stringToDate("2021-09-10"));
+		expect.setFinishDate(utillity.stringToDate("2021-09-20"));
 		expect.setIsCompleted(false);
 		expect.setIsCopyContentsToUsers(false);
 		
@@ -165,15 +165,15 @@ public class TodoServiceTest extends DatabaseTest {
 		    value="/dbunit/service/TodoServiceTest/expect/get_4.xml",
 		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
-	public void get_4() {
+	public void get_4() throws NotFoundValueException, NotJoinedPublicProjectException {
 		var userId = 3;
 		var todoOnProjectId = 5;
 		var expect = new TodoOnProjectResponse();
 		expect.setProjectId(6);
-		expect.setTodoName("todo_3");
-		expect.setTodoOnProjectId(5);
-		expect.setStartDate(utillity.stringToDate("2021-09-1"));
-		expect.setFinishDate(utillity.stringToDate("2021-10-16"));
+		expect.setTodoName("todo_2");
+		expect.setTodoOnProjectId(todoOnProjectId);
+		expect.setStartDate(utillity.stringToDate("2021-09-10"));
+		expect.setFinishDate(utillity.stringToDate("2021-09-20"));
 		expect.setIsCompleted(false);
 		expect.setIsCopyContentsToUsers(false);
 		
@@ -202,41 +202,11 @@ public class TodoServiceTest extends DatabaseTest {
 	
 	@Transactional 
 	@Test
-	public void getList_1(){//指定なし
+	public void getList_1() throws NotFoundValueException, NotJoinedPublicProjectException{//指定なし
 		var userId = 1;
 		var form = new TodoForm();
 		List<TodoOnProjectResponse> expectList = new ArrayList<>();
 		var expect = new TodoOnProjectResponse();
-		expect.setProjectId(1);
-		expect.setTodoOnProjectId(1);
-		expect.setTodoName("todo_1");
-		expect.setStartDate(utillity.stringToDate("2021-06-30"));
-		expect.setFinishDate(utillity.stringToDate("2021-06-30"));
-		expect.setIsCopyContentsToUsers(false);
-		expect.setIsCompleted(false);
-		expectList.add(expect);
-		
-		expect = new TodoOnProjectResponse();
-		expect.setProjectId(1);
-		expect.setTodoOnProjectId(2);
-		expect.setTodoName("todo_2");
-		expect.setStartDate(utillity.stringToDate("2021-06-30"));
-		expect.setFinishDate(utillity.stringToDate("2021-06-30"));
-		expect.setIsCopyContentsToUsers(false);
-		expect.setIsCompleted(false);
-		expectList.add(expect);
-		
-		expect = new TodoOnProjectResponse();
-		expect.setProjectId(1);
-		expect.setTodoOnProjectId(3);
-		expect.setTodoName("todo_3");
-		expect.setStartDate(utillity.stringToDate("2021-06-30"));
-		expect.setFinishDate(utillity.stringToDate("2021-06-30"));
-		expect.setIsCopyContentsToUsers(false);
-		expect.setIsCompleted(true);
-		expectList.add(expect);
-		
-		expect = new TodoOnProjectResponse();
 		expect.setProjectId(6);
 		expect.setTodoOnProjectId(4);
 		expect.setTodoName("todo_1");
@@ -248,20 +218,20 @@ public class TodoServiceTest extends DatabaseTest {
 		
 		expect = new TodoOnProjectResponse();
 		expect.setProjectId(6);
-		expect.setTodoOnProjectId(5);
 		expect.setTodoName("todo_2");
-		expect.setStartDate(utillity.stringToDate("2021-09-1"));
+		expect.setTodoOnProjectId(5);
+		expect.setStartDate(utillity.stringToDate("2021-09-10"));
 		expect.setFinishDate(utillity.stringToDate("2021-09-20"));
-		expect.setIsCopyContentsToUsers(false);
 		expect.setIsCompleted(false);
+		expect.setIsCopyContentsToUsers(false);
 		expectList.add(expect);
 		
 		expect = new TodoOnProjectResponse();
 		expect.setProjectId(6);
 		expect.setTodoOnProjectId(6);
 		expect.setTodoName("todo_3");
-		expect.setStartDate(utillity.stringToDate("2021-10-5"));
-		expect.setFinishDate(utillity.stringToDate("2021-10-9"));
+		expect.setStartDate(utillity.stringToDate("2021-09-1"));
+		expect.setFinishDate(utillity.stringToDate("2021-10-16"));
 		expect.setIsCopyContentsToUsers(false);
 		expect.setIsCompleted(false);
 		expectList.add(expect);
@@ -270,28 +240,18 @@ public class TodoServiceTest extends DatabaseTest {
 		expect.setProjectId(6);
 		expect.setTodoOnProjectId(7);
 		expect.setTodoName("todo_4");
-		expect.setStartDate(utillity.stringToDate("2021-10-16"));
+		expect.setStartDate(utillity.stringToDate("2021-10-5"));
 		expect.setFinishDate(utillity.stringToDate("2021-10-9"));
 		expect.setIsCopyContentsToUsers(true);
 		expect.setIsCompleted(false);
 		expectList.add(expect);
 		
-		expect = new TodoOnProjectResponse();
-		expect.setProjectId(6);
-		expect.setTodoOnProjectId(8);
-		expect.setTodoName("todo_5");
-		expect.setStartDate(utillity.stringToDate("2021-10-20"));
-		expect.setFinishDate(utillity.stringToDate("2021-10-23"));
-		expect.setIsCopyContentsToUsers(false);
-		expect.setIsCompleted(true);
-		expectList.add(expect);
-		
-		assertThat(service.getList(userId, form)).containsExactlyElementsOf(expectList);
+		assertThat(service.getList(userId, form)).containsExactlyInAnyOrderElementsOf(expectList);
 	}
 	
 	@Transactional 
 	@Test
-	public void getList_2(){//指定あり
+	public void getList_2() throws NotFoundValueException, NotJoinedPublicProjectException{//指定あり
 		var userId = 1;
 		var form = new TodoForm();
 		form.setProjectId(6);
@@ -312,15 +272,15 @@ public class TodoServiceTest extends DatabaseTest {
 		
 		expect = new TodoOnProjectResponse();
 		expect.setProjectId(6);
-		expect.setTodoOnProjectId(5);
 		expect.setTodoName("todo_2");
-		expect.setStartDate(utillity.stringToDate("2021-09-1"));
+		expect.setTodoOnProjectId(5);
+		expect.setStartDate(utillity.stringToDate("2021-09-10"));
 		expect.setFinishDate(utillity.stringToDate("2021-09-20"));
-		expect.setIsCopyContentsToUsers(false);
 		expect.setIsCompleted(false);
+		expect.setIsCopyContentsToUsers(false);
 		expectList.add(expect);
 				
-		assertThat(service.getList(userId, form)).containsExactlyElementsOf(expectList);
+		assertThat(service.getList(userId, form)).containsExactlyInAnyOrderElementsOf(expectList);
 	}
 	
 	@Transactional 
@@ -329,7 +289,8 @@ public class TodoServiceTest extends DatabaseTest {
 		    value="/dbunit/service/TodoServiceTest/expect/updateIsCopyContentsToResponsible_1.xml",
 		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
-	public void updateIsCopyContentsToResponsible_1() {//権限者
+	public void updateIsCopyContentsToResponsible_1()
+			throws NotFoundValueException, NotJoinedPublicProjectException, NotSelectedAsTodoResponsibleException {//権限者
 		var userId = 2;
 		var todoOnProjectId = 5;
 		var isCopyContentsToResponsible = true;
@@ -343,7 +304,8 @@ public class TodoServiceTest extends DatabaseTest {
 		    value="/dbunit/service/TodoServiceTest/expect/updateIsCopyContentsToResponsible_2.xml",
 		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
-	public void updateIsCopyContentsToResponsible_2() {//権限はないけど担当者である
+	public void updateIsCopyContentsToResponsible_2() 
+			throws NotFoundValueException, NotJoinedPublicProjectException, NotSelectedAsTodoResponsibleException {//権限はないけど担当者である
 		var userId = 1;
 		var todoOnProjectId = 4;
 		var isCopyContentsToResponsible = true;
@@ -379,7 +341,7 @@ public class TodoServiceTest extends DatabaseTest {
 		    value="/dbunit/service/TodoServiceTest/expect/updateTodoName_1.xml",
 		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
-	public void updateTodoName_1() {
+	public void updateTodoName_1() throws NotFoundValueException, NotJoinedPublicProjectException, NotHaveAuthorityToOperateProjectException {
 		var userId = 2;
 		var todoOnProjectId = 5;
 		var todoName = "newer";
@@ -415,7 +377,7 @@ public class TodoServiceTest extends DatabaseTest {
 		    value="/dbunit/service/TodoServiceTest/expect/updateStartDate_1.xml",
 		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
-	public void updateStartDate_1() {
+	public void updateStartDate_1() throws BadRequestException, NotFoundValueException, NotJoinedPublicProjectException, NotHaveAuthorityToOperateProjectException {
 		var userId = 2;
 		var todoOnProjectId = 5;
 		var startDate = utillity.stringToDate("2021-9-5");
@@ -473,7 +435,7 @@ public class TodoServiceTest extends DatabaseTest {
 		    value="/dbunit/service/TodoServiceTest/expect/updateFinishDate_1.xml",
 		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
-	public void updateFinishDate_1() {
+	public void updateFinishDate_1() throws BadRequestException, NotFoundValueException, NotJoinedPublicProjectException, NotHaveAuthorityToOperateProjectException {
 		var userId = 2;
 		var todoOnProjectId = 5;
 		var finishDate = utillity.stringToDate("2021-9-18");
@@ -531,7 +493,7 @@ public class TodoServiceTest extends DatabaseTest {
 		    value="/dbunit/service/TodoServiceTest/expect/delete_1.xml",
 		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
-	public void delete_1() {
+	public void delete_1() throws NotFoundValueException, NotJoinedPublicProjectException, NotHaveAuthorityToOperateProjectException {
 		var userId = 2;
 		var todoOnProjectId = 6;
 		
@@ -564,7 +526,7 @@ public class TodoServiceTest extends DatabaseTest {
 		    value="/dbunit/service/TodoServiceTest/expect/setIsCompleted_1.xml",
 		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
-	public void setIsCompleted_1() {
+	public void setIsCompleted_1() throws NotFoundValueException, NotJoinedPublicProjectException, NotHaveAuthorityToOperateProjectException {
 		var userId = 2;
 		var todoOnProjectId = 4;
 		var isCompleted = true;
@@ -578,9 +540,9 @@ public class TodoServiceTest extends DatabaseTest {
 		    value="/dbunit/service/TodoServiceTest/expect/setIsCompleted_2.xml",
 		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
-	public void setIsCompleted_2() {
+	public void setIsCompleted_2() throws NotFoundValueException, NotJoinedPublicProjectException, NotHaveAuthorityToOperateProjectException {
 		var userId = 2;
-		var todoOnProjectId = 4;
+		var todoOnProjectId = 8;
 		var isCompleted = false;
 		
 		service.setIsCompleted(userId, todoOnProjectId, isCompleted);

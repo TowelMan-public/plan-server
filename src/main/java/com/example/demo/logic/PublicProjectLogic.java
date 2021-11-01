@@ -153,4 +153,13 @@ public class PublicProjectLogic {
 		publicProjectEntityMapper.updateByPrimaryKeySelective(entity);
 	}
 
+	/**
+	 * パブリックプロジェクトが存在するかを返す
+	 * @param publicProjectId パブリックプロジェクトID
+	 * @return ブリックプロジェクトが存在すればtrue、存在しなければfalseを返す
+	 */
+	public boolean isFound(Integer publicProjectId) {
+		return this.getNonThrow(publicProjectId) != null;
+	}
+
 }

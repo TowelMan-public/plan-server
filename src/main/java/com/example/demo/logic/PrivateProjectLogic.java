@@ -36,6 +36,18 @@ public class PrivateProjectLogic {
 	}
 
 	/**
+	 * プロジェクトIDが、指定されたユーザーのプライベートプロジェクトであるかどうかを調べる
+	 * @param projectId プロジェクトID
+	 * @param userId ユーザーID
+	 * @return プライベートプロジェクトであればtrue、そうでなければfalse
+	 */
+	public boolean isPrivateProject(Integer projectId, Integer userId) {
+		var entity = privateProjectEntityMapper.selectByPrimaryKey(projectId);
+		
+		return entity != null && !entity.getIsDeleted() && entity.getUserId().equals(userId);
+	}
+	
+	/**
 	 * プライベートプロジェクトを作成する
 	 * @param userId ユーザーID
 	 * @param projectName プライベートプロジェクト名

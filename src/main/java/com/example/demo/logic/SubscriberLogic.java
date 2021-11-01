@@ -76,6 +76,13 @@ public class SubscriberLogic {
 			return entityList.get(0);
 	}
 
+	/**
+	 * ユーザーの、パブリックプロジェクト内での権限を取得します。
+	 * <br>但し、例外を投げないで、存在しない場合はnullを返すため、気をつけてください、
+	 * @param publicProjectId パブリックプロジェクトID
+	 * @param userId ユーザーID
+	 * @return ユーザーの、パブリックプロジェクト内での権限
+	 */
 	public SubscriberInPublicProjectEntity getAuthorityNonThorow(Integer publicProjectId, Integer userId) {
 		var dto = new SubscriberInPublicProjectEntityExample();
 		dto.or()
@@ -208,7 +215,8 @@ public class SubscriberLogic {
 	}
 
 	/**
-	 * ユーザーが参画しているかを検証する
+	 * ユーザーが参画しているかを検証する<br>
+	 * 勧誘中のユーザーは省く
 	 * @param publicProjectId パブリックプロジェクトID
 	 * @param userId ユーザーID
 	 * @throws NotJoinedPublicProjectException
