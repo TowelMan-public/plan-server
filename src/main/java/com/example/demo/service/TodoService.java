@@ -285,7 +285,6 @@ public class TodoService {
 		
 		if(todoOnProjectId != null) {
 			result.setTodoOnProject(todoOnProjectLogic.get(todoOnProjectId));
-			result.setTodoOnResponsibleEntityList(todoOnResponsibeLogic.getTodoOnResponsibleList(todoOnProjectId));
 			projectId = result.getProjectId();
 		}
 		
@@ -372,10 +371,6 @@ public class TodoService {
 		@Getter
 		@Setter
 		private TodoOnProjectEntity todoOnProject;
-		
-		@Getter
-		@Setter
-		private List<TodoOnResponsibleEntity> todoOnResponsibleEntityList;
 
 		/**
 		 * 検証した結果、プロジェクトがprivateであるかどうかを調べる

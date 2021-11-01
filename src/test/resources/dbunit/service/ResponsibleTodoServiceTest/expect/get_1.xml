@@ -6,7 +6,7 @@
     <users user_id="4" user_name="tester4" user_nickname="n4" password="$2a$10$4BGnHULkeXgi2zwPgTX9LOVyDTrj7LZIFCrV3iSip2UvqkU2iayZK" is_deleted="1" />
     
     <user_config user_id="1" before_deadline_for_todo_notice="0" before_deadline_for_project_notice="0" is_push_inserted_started_todo_notice="0" is_push_inserted_todo_notice="0"/>
-    <user_config user_id="2" before_deadline_for_todo_notice="0" before_deadline_for_project_notice="0" is_push_inserted_started_todo_notice="0" is_push_inserted_todo_notice="0" />
+    <user_config user_id="2" before_deadline_for_todo_notice="0" before_deadline_for_project_notice="0" is_push_inserted_started_todo_notice="0" is_push_inserted_todo_notice="" />
     <user_config user_id="3" before_deadline_for_todo_notice="0" before_deadline_for_project_notice="0" is_push_inserted_started_todo_notice="0" is_push_inserted_todo_notice="0" />
     <user_config user_id="4" before_deadline_for_todo_notice="0" before_deadline_for_project_notice="0" is_push_inserted_started_todo_notice="0" is_push_inserted_todo_notice="0" />
     

@@ -6,7 +6,7 @@
     <users user_id="4" user_name="tester4" user_nickname="n4" password="$2a$10$4BGnHULkeXgi2zwPgTX9LOVyDTrj7LZIFCrV3iSip2UvqkU2iayZK" is_deleted="1" />
     
     <user_config user_id="1" before_deadline_for_todo_notice="0" before_deadline_for_project_notice="0" is_push_inserted_started_todo_notice="0" is_push_inserted_todo_notice="0"/>
-    <user_config user_id="2" before_deadline_for_todo_notice="0" before_deadline_for_project_notice="0" is_push_inserted_started_todo_notice="0" is_push_inserted_todo_notice="0" />
+    <user_config user_id="2" before_deadline_for_todo_notice="0" before_deadline_for_project_notice="0" is_push_inserted_started_todo_notice="0" is_push_inserted_todo_notice="1" />
     <user_config user_id="3" before_deadline_for_todo_notice="0" before_deadline_for_project_notice="0" is_push_inserted_started_todo_notice="0" is_push_inserted_todo_notice="0" />
     <user_config user_id="4" before_deadline_for_todo_notice="0" before_deadline_for_project_notice="0" is_push_inserted_started_todo_notice="0" is_push_inserted_todo_notice="0" />
     
@@ -93,7 +93,7 @@
     <todo_on_responsible todo_on_project_id="4" user_id="1" todo_on_responsible_id="11" project_id="6" is_completed="0" is_deleted="0" />
 	<todo_on_responsible todo_on_project_id="4" user_id="2" todo_on_responsible_id="12" project_id="6" is_completed="0" is_deleted="0" />
 	<todo_on_responsible todo_on_project_id="5" user_id="1" todo_on_responsible_id="13" project_id="6" is_completed="0" is_deleted="0" />
-	<todo_on_responsible todo_on_project_id="6" user_id="1" todo_on_responsible_id="14" project_id="6" is_completed="0" is_deleted="0" />
+	<todo_on_responsible todo_on_project_id="6" user_id="1" todo_on_responsible_id="14" project_id="6" is_completed="1" is_deleted="0" />
     <todo_on_responsible todo_on_project_id="7" user_id="1" todo_on_responsible_id="15" project_id="6" is_completed="0" is_deleted="0" />
     
     

@@ -6,7 +6,7 @@
     <users user_id="4" user_name="tester4" user_nickname="n4" password="$2a$10$4BGnHULkeXgi2zwPgTX9LOVyDTrj7LZIFCrV3iSip2UvqkU2iayZK" is_deleted="1" />
     
     <user_config user_id="1" before_deadline_for_todo_notice="0" before_deadline_for_project_notice="0" is_push_inserted_started_todo_notice="0" is_push_inserted_todo_notice="0"/>
-    <user_config user_id="2" before_deadline_for_todo_notice="0" before_deadline_for_project_notice="0" is_push_inserted_started_todo_notice="0" is_push_inserted_todo_notice="0" />
+    <user_config user_id="2" before_deadline_for_todo_notice="0" before_deadline_for_project_notice="0" is_push_inserted_started_todo_notice="0" is_push_inserted_todo_notice="1" />
     <user_config user_id="3" before_deadline_for_todo_notice="0" before_deadline_for_project_notice="0" is_push_inserted_started_todo_notice="0" is_push_inserted_todo_notice="0" />
     <user_config user_id="4" before_deadline_for_todo_notice="0" before_deadline_for_project_notice="0" is_push_inserted_started_todo_notice="0" is_push_inserted_todo_notice="0" />
     
@@ -114,5 +114,5 @@
     <content content_id="7" todo_id="7" content_title="content_7" content_explanation="content_explanation_7_for_project6" is_completed="1" is_deleted="0" />
     <content content_id="8" todo_id="7" content_title="content_8" content_explanation="content_explanation_4_for_project6" is_completed="0" is_deleted="0" />
     <content content_id="9" todo_id="16" content_title="content_5" content_explanation="content_explanation_5_for_project6" is_completed="0" is_deleted="0" />
-    <content content_id="10" todo_id="16" content_title="content_6" content_explanation="content_explanation_6_for_project6" is_completed="0" is_deleted="1" />
+    <content content_id="10" todo_id="16" content_title="content_8" content_explanation="content_explanation_4_for_project6" is_completed="0" is_deleted="0" />
 </dataset>

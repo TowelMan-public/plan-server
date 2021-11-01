@@ -20,6 +20,7 @@ import com.example.demo.exception.AlreadySelectedAsTodoResponsibleException;
 import com.example.demo.exception.BadRequestException;
 import com.example.demo.exception.NotFoundValueException;
 import com.example.demo.exception.NotHaveAuthorityToOperateProjectException;
+import com.example.demo.exception.NotJoinedPublicProjectException;
 import com.example.demo.exception.NotSelectedAsTodoResponsibleException;
 import com.example.demo.form.ResponsibleTodoForm;
 import com.example.demo.response.TodoOnResponsibleResponse;
@@ -50,7 +51,7 @@ public class ResponsibleTodoServiceTest extends DatabaseTest {
 		    value="/dbunit/service/ResponsibleTodoServiceTest/expect/insert_1.xml",
 		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
-	public void insert_1() {
+	public void insert_1() throws NotFoundValueException, NotJoinedPublicProjectException, NotHaveAuthorityToOperateProjectException, AlreadySelectedAsTodoResponsibleException, BadRequestException {
 		var userId = 2;
 		var todoOnProjectId = 5;
 		var userName = "tester2";
@@ -64,12 +65,15 @@ public class ResponsibleTodoServiceTest extends DatabaseTest {
 		    value="/dbunit/service/ResponsibleTodoServiceTest/expect/insert_5.xml",
 		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
-	public void insert_5() {//contentのコピーあり
+	public void insert_5() 
+			throws NotFoundValueException, NotJoinedPublicProjectException, NotHaveAuthorityToOperateProjectException, AlreadySelectedAsTodoResponsibleException, BadRequestException
+	{//contentのコピーあり
 		var userId = 2;
 		var todoOnProjectId = 7;
 		var userName = "tester2";
 		
 		service.insert(userId, todoOnProjectId, userName);
+		
 	}
 	
 	@Transactional 
@@ -118,7 +122,7 @@ public class ResponsibleTodoServiceTest extends DatabaseTest {
 	
 	@Transactional 
 	@Test
-	public void insert_6() {//public_project is completed
+	public void insert_6() {//todo in public_project is completed
 		var userId = 2;
 		var todoOnProjectId = 8;
 		var userName = "tester1";
@@ -129,8 +133,8 @@ public class ResponsibleTodoServiceTest extends DatabaseTest {
 	
 	@Transactional 
 	@Test
-	public void getList_1() {//指定有
-		var userId = -1;
+	public void getList_1() throws NotFoundValueException, NotJoinedPublicProjectException, NotSelectedAsTodoResponsibleException {//指定有
+		var userId = 1;
 		var form = new ResponsibleTodoForm();
 		form.setPublicProjectId(6);
 		form.setStartDate(utillity.stringToDate("2021-09-1"));
@@ -140,7 +144,7 @@ public class ResponsibleTodoServiceTest extends DatabaseTest {
 		var expect = new TodoOnResponsibleResponse();
 		expect.setProjectId(6);
 		expect.setTodoName("todo_1");
-		expect.setTodoOnResponsibleId(12);
+		expect.setTodoOnResponsibleId(11);
 		expect.setStartDate(utillity.stringToDate("2021-09-8"));
 		expect.setFinishDate(utillity.stringToDate("2021-09-16"));
 		expect.setIsCompleted(false);
@@ -157,19 +161,19 @@ public class ResponsibleTodoServiceTest extends DatabaseTest {
 		expect.setTodoOnProjectId(5);
 		expectList.add(expect);
 		
-		assertThat(service.getList(userId, form)).containsExactlyElementsOf(expectList);
+		assertThat(service.getList(userId, form)).containsExactlyInAnyOrderElementsOf(expectList);
 	}
 	
 	@Transactional 
 	@Test
-	public void getList_2() {//指定なし
+	public void getList_2() throws NotFoundValueException, NotJoinedPublicProjectException, NotSelectedAsTodoResponsibleException {//指定なし
 		var userId = 1;
 		var form = new ResponsibleTodoForm();
 		List<TodoOnResponsibleResponse> expectList = new ArrayList<>();
 		var expect = new TodoOnResponsibleResponse();
 		expect.setProjectId(6);
 		expect.setTodoName("todo_1");
-		expect.setTodoOnResponsibleId(12);
+		expect.setTodoOnResponsibleId(11);
 		expect.setStartDate(utillity.stringToDate("2021-09-8"));
 		expect.setFinishDate(utillity.stringToDate("2021-09-16"));
 		expect.setIsCompleted(false);
@@ -206,16 +210,12 @@ public class ResponsibleTodoServiceTest extends DatabaseTest {
 		expect.setTodoOnProjectId(7);
 		expectList.add(expect);
 		
-		assertThat(service.getList(userId, form)).containsExactlyElementsOf(expectList);
+		assertThat(service.getList(userId, form)).containsExactlyInAnyOrderElementsOf(expectList);
 	}
 	
 	@Transactional 
 	@Test
-	@ExpectedDatabase(
-		    value="/dbunit/service/ResponsibleTodoServiceTest/expect/get_1.xml",
-		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
-	)
-	public void get_1() {
+	public void get_1() throws NotFoundValueException, NotJoinedPublicProjectException, NotSelectedAsTodoResponsibleException {
 		var userId = 1;
 		var todoOnProjectId = 5;
 		var expect = new TodoOnResponsibleResponse();
@@ -252,7 +252,7 @@ public class ResponsibleTodoServiceTest extends DatabaseTest {
 	
 	@Transactional 
 	@Test
-	public void getResponsiblePeopleList_1() {//担当者
+	public void getResponsiblePeopleList_1() throws NotFoundValueException, NotJoinedPublicProjectException {//担当者
 		var userId = 1;
 		var todoOnProjectId = 5;
 		List<UserInTodoOnResponsibleResponse> expectList = new ArrayList<>();
@@ -267,7 +267,7 @@ public class ResponsibleTodoServiceTest extends DatabaseTest {
 	
 	@Transactional 
 	@Test
-	public void getResponsiblePeopleList_2() {//担当者じゃないけど権限者
+	public void getResponsiblePeopleList_2() throws NotFoundValueException, NotJoinedPublicProjectException {//担当者じゃないけど権限者
 		var userId = 2;
 		var todoOnProjectId = 5;
 		List<UserInTodoOnResponsibleResponse> expectList = new ArrayList<>();
@@ -278,16 +278,6 @@ public class ResponsibleTodoServiceTest extends DatabaseTest {
 		expectList.add(expect);
 		
 		assertThat(service.getResponsiblePeopleList(userId, todoOnProjectId)).containsExactlyElementsOf(expectList);
-	}
-	
-	@Transactional 
-	@Test
-	public void getResponsiblePeopleList_3() {
-		var userId = 3;
-		var todoOnProjectId = 5;
-		
-		assertThrows(NotSelectedAsTodoResponsibleException.class ,
-				() -> service.getResponsiblePeopleList(userId, todoOnProjectId));
 	}
 	
 	@Transactional 
@@ -306,7 +296,8 @@ public class ResponsibleTodoServiceTest extends DatabaseTest {
 		    value="/dbunit/service/ResponsibleTodoServiceTest/expect/delete_1.xml",
 		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
-	public void delete_1() {
+	public void delete_1()
+			throws NotFoundValueException, NotJoinedPublicProjectException, NotHaveAuthorityToOperateProjectException, NotSelectedAsTodoResponsibleException {
 		var userId = 2;
 		var todoOnProjectId = 5;
 		var userName = "tester1";
@@ -321,7 +312,7 @@ public class ResponsibleTodoServiceTest extends DatabaseTest {
 		var todoOnProjectId = 5;
 		var userName = "tester2";
 		
-		assertThrows(NotFoundValueException.class ,
+		assertThrows(NotSelectedAsTodoResponsibleException.class ,
 				() -> service.delete(userId, todoOnProjectId, userName));
 	}
 	
@@ -353,7 +344,7 @@ public class ResponsibleTodoServiceTest extends DatabaseTest {
 		    value="/dbunit/service/ResponsibleTodoServiceTest/expect/exit_1.xml",
 		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
-	public void exit_1() {
+	public void exit_1() throws NotFoundValueException, NotJoinedPublicProjectException, NotSelectedAsTodoResponsibleException {
 		var userId = 1;
 		var todoOnProjectId = 4;
 		
@@ -386,7 +377,7 @@ public class ResponsibleTodoServiceTest extends DatabaseTest {
 		    value="/dbunit/service/ResponsibleTodoServiceTest/expect/setIsCompletedAll_1.xml",
 		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
-	public void setIsCompletedAll_1() {
+	public void setIsCompletedAll_1() throws NotFoundValueException, NotJoinedPublicProjectException, NotHaveAuthorityToOperateProjectException {
 		var userId = 2;
 		var todoOnProjectId = 4;
 		var isCompleted = true;
@@ -400,7 +391,8 @@ public class ResponsibleTodoServiceTest extends DatabaseTest {
 		    value="/dbunit/service/ResponsibleTodoServiceTest/expect/setIsCompletedAll_2.xml",
 		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
-	public void setIsCompletedAll_2() {
+	public void setIsCompletedAll_2() 
+			throws NotFoundValueException, NotJoinedPublicProjectException, NotHaveAuthorityToOperateProjectException {//結果的に何も起こらない
 		var userId = 2;
 		var todoOnProjectId = 4;
 		var isCompleted = false;
@@ -436,7 +428,7 @@ public class ResponsibleTodoServiceTest extends DatabaseTest {
 		    value="/dbunit/service/ResponsibleTodoServiceTest/expect/setIsCompleted_1.xml",
 		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
-	public void setIsCompleted_1() {//通知なし
+	public void setIsCompleted_1() throws NotFoundValueException, NotJoinedPublicProjectException, NotSelectedAsTodoResponsibleException {//通知なし
 		var userId = 1;
 		var todoOnProjectId = 6;
 		var isCompleted = true;
@@ -450,7 +442,7 @@ public class ResponsibleTodoServiceTest extends DatabaseTest {
 		    value="/dbunit/service/ResponsibleTodoServiceTest/expect/setIsCompleted_2.xml",
 		    assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
-	public void setIsCompleted_2() {//通知なし
+	public void setIsCompleted_2() throws NotFoundValueException, NotJoinedPublicProjectException, NotSelectedAsTodoResponsibleException {//通知なし
 		var userId = 1;
 		var todoOnProjectId = 6;
 		var isCompleted = false;

@@ -6,7 +6,7 @@
     <users user_id="4" user_name="tester4" user_nickname="n4" password="$2a$10$4BGnHULkeXgi2zwPgTX9LOVyDTrj7LZIFCrV3iSip2UvqkU2iayZK" is_deleted="1" />
     
     <user_config user_id="1" before_deadline_for_todo_notice="0" before_deadline_for_project_notice="0" is_push_inserted_started_todo_notice="0" is_push_inserted_todo_notice="0"/>
-    <user_config user_id="2" before_deadline_for_todo_notice="0" before_deadline_for_project_notice="0" is_push_inserted_started_todo_notice="0" is_push_inserted_todo_notice="0" />
+    <user_config user_id="2" before_deadline_for_todo_notice="0" before_deadline_for_project_notice="0" is_push_inserted_started_todo_notice="0" is_push_inserted_todo_notice="1" />
     <user_config user_id="3" before_deadline_for_todo_notice="0" before_deadline_for_project_notice="0" is_push_inserted_started_todo_notice="0" is_push_inserted_todo_notice="0" />
     <user_config user_id="4" before_deadline_for_todo_notice="0" before_deadline_for_project_notice="0" is_push_inserted_started_todo_notice="0" is_push_inserted_todo_notice="0" />
     
@@ -30,8 +30,6 @@
     <unsent_notice unsend_notice_id="5" notice_id="5" terminal_id="5" />
     <unsent_notice unsend_notice_id="6" notice_id="5" terminal_id="6" />
     
-    <notice_todo notice_id="1" todo_id="4" message="" />
-    <notice_todo notice_id="2" todo_id="4" message="" />
     <notice_todo notice_id="3" todo_id="5" message="" />
     <notice_todo notice_id="4" todo_id="4" message="todo_1が完了しました。頑張りましたね！" />
     <notice_todo notice_id="5" todo_id="4" message="todo_1が完了しました。頑張りましたね！" />
