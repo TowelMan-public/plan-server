@@ -42,9 +42,9 @@
 			) AS project_table
 			USING(public_project_id) 
 		WHERE
-		  	project_table.finish_date &lt;= #{nowRunDate} + INTERVAL user_table.before_deadline_for_project_notice SECOND
+		  	project_table.finish_date &lt;= DATE_ADD(#{nowRunDate} , INTERVAL user_table.before_deadline_for_project_notice SECOND)
 		  AND
-		  	project_table.finish_date > #{lastRunDate} + INTERVAL user_table.before_deadline_for_project_notice SECOND
+		  	project_table.finish_date > DATE_ADD(#{lastRunDate} , INTERVAL user_table.before_deadline_for_project_notice SECOND)
 		  
 	</select>
 	
@@ -75,7 +75,7 @@
 		INNER JOIN
 			(
 				SELECT * FROM user_config
-				WHERE before_deadline_for_project_notice > 0
+				WHERE before_deadline_for_todo_notice > 0
 			) AS user_table
 			USING(user_id)
 		INNER JOIN 
@@ -88,13 +88,12 @@
 			) AS todo_table
 			USING(todo_on_project_id) 
 		WHERE
+		  	todo_table.finish_date &lt;= DATE_ADD(#{nowRunDate} , INTERVAL user_table.before_deadline_for_todo_notice SECOND)
 		  AND
-		  	todo_table.finish_date &lt;= #{nowRunDate} + INTERVAL user_table.befor_deadline_for_todo_notice SECOND
-		  AND
-		  	todo_table.finish_date > #{lastRunDate} + INTERVAL user_table.befor_deadline_for_todo_notice SECOND
+		  	todo_table.finish_date > DATE_ADD(#{lastRunDate} , INTERVAL user_table.before_deadline_for_todo_notice SECOND)
 	</select>
 	
-	<select id="getDealyPeriodTodo" resultMap="TodoBaseResultMap">
+	<select id="getDelayApproachingTodo" resultMap="TodoBaseResultMap">
 		SELECT * FROM todo_on_responsible AS body_table
 		INNER JOIN
 			(
@@ -112,7 +111,6 @@
 			) AS todo_table
 			USING(todo_on_project_id) 
 		WHERE
-		  AND
 		  	todo_table.finish_date &lt;= #{nowRunDate}
 		  AND
 		  	todo_table.finish_date > #{lastRunDate}
@@ -136,7 +134,6 @@
 			) AS todo_table
 			USING(todo_on_project_id) 
 		WHERE
-		  AND
 		  	todo_table.start_date &lt;= #{nowRunDate}
 		  AND
 		  	todo_table.start_date > #{lastRunDate}
@@ -149,7 +146,7 @@
 				WHERE
 					is_deleted = 1
 			) AS project_table
-			ON project_table.public_projet_id = delete_table.project_id
+			ON project_table.public_project_id = delete_table.project_id
 	</delete>
 	
 	<delete id="eraseTodoNoticeAuto">
@@ -158,12 +155,12 @@
 				SELECT * FROM todo_on_project
 				WHERE
 					is_deleted = 1
-			) AS todo_project
-			ON project_table.public_projet_id = delete_table.project_id
+			) AS todo_project_table
+			ON todo_project_table.todo_on_project_id = delete_table.todo_id
 	</delete>
 	
 	<delete id="eraseUnNeededNotice">
-		DELETE delete_table FROM unsend_notice AS delete_table
+		DELETE delete_table FROM unsent_notice AS delete_table
 		INNER JOIN notice AS notice_table
 			USING(notice_id)	
 		LEFT JOIN notice_project AS notice_project_table
