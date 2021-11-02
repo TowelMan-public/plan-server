@@ -9,6 +9,7 @@ import com.example.demo.dto.TodoOnResponsibleEntityExample;
 import com.example.demo.entity.TodoEntity;
 import com.example.demo.entity.TodoOnResponsibleEntity;
 import com.example.demo.exception.AlreadySelectedAsTodoResponsibleException;
+import com.example.demo.exception.NotFoundValueException;
 import com.example.demo.exception.NotSelectedAsTodoResponsibleException;
 import com.example.demo.repository.TodoEntityMapper;
 import com.example.demo.repository.TodoOnResponsibleEntityMapper;
@@ -143,6 +144,25 @@ public class TodoOnResponsibeLogic {
 		entity.setIsCompleted(isCompleted);
 		
 		todoOnResponsibleEntityMapper.updateByExampleSelective(entity, dto);
+	}
+
+	/**
+	 * 担当者向け「やること」を取得する
+	 * @param todoOnResponsibleId 担当者向け「やること」ID
+	 * @return 担当者向け「やること」
+	 * @throws NotFoundValueException 指定された担当者向け「やること」が見つからない時に投げられる例外
+	 */
+	public TodoOnResponsibleEntity getByTodoOnResponsibleId(Integer todoOnResponsibleId) throws NotFoundValueException {
+		var dto = new TodoOnResponsibleEntityExample();
+		dto.or()
+			.andTodoOnResponsibleIdEqualTo(todoOnResponsibleId)
+			.andIsDeletedEqualTo(false);
+		
+		var entityList = todoOnResponsibleEntityMapper.selectByExample(dto);
+		if(entityList.isEmpty())
+			throw new NotFoundValueException("todoOnResponsibleId", todoOnResponsibleId.toString());
+		else
+			return entityList.get(0);
 	}
 
 }

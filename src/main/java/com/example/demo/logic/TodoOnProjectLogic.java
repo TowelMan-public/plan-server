@@ -32,7 +32,12 @@ public class TodoOnProjectLogic {
 	 * @return 「やること」、存在しない場合null
 	 */
 	public TodoOnProjectEntity getNonThrow(Integer todoOnProjectId) {
-		return todoOnProjectEntityMapper.selectByPrimaryKey(todoOnProjectId);
+		var entity = todoOnProjectEntityMapper.selectByPrimaryKey(todoOnProjectId);
+		
+		if(entity == null || entity.getIsDeleted())
+			return null;
+		else
+			return entity;
 	}
 
 

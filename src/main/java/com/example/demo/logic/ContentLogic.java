@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.example.demo.dto.ContentEntityExample;
 import com.example.demo.entity.ContentEntity;
+import com.example.demo.exception.NotFoundValueException;
 import com.example.demo.repository.ContentEntityMapper;
 
 /**
@@ -50,5 +51,75 @@ public class ContentLogic {
 		
 		contentEntityMapper.insertSelective(entity);
 		return entity.getContentId();
+	}
+
+	/**
+	 * 内容の取得
+	 * @param contentId 内容ID
+	 * @return 内容
+	 * @throws NotFoundValueException 指定された内容が見つからないときに投げられる
+	 */
+	public ContentEntity get(Integer contentId) throws NotFoundValueException {
+		var dto = new ContentEntityExample();
+		dto.or()
+			.andContentIdEqualTo(contentId)
+			.andIsDeletedEqualTo(false);
+		
+		var entityList = contentEntityMapper.selectByExample(dto);
+		if(entityList.isEmpty())
+			throw new NotFoundValueException("contentId", contentId.toString());
+		else
+			return entityList.get(0);
+	}
+
+	/**
+	 * 内容の名前を変更する
+	 * @param contentId 内容ID
+	 * @param contentTitle 内容名
+	 */
+	public void updateTitle(Integer contentId, String contentTitle) {
+		var entity = new ContentEntity();
+		entity.setContentId(contentId);
+		entity.setContentTitle(contentTitle);
+		
+		contentEntityMapper.updateByPrimaryKeySelective(entity);
+	}
+
+	/**
+	 * 内容の説明を変更する
+	 * @param contentId 内容ID
+	 * @param contentExplanation 内容の説明
+	 */
+	public void updateExplanation(Integer contentId, String contentExplanation) {
+		var entity = new ContentEntity();
+		entity.setContentId(contentId);
+		entity.setContentExplanation(contentExplanation);
+		
+		contentEntityMapper.updateByPrimaryKeySelective(entity);
+	}
+
+	/**
+	 * 内容を削除する
+	 * @param contentId 内容ID
+	 */
+	public void delete(Integer contentId) {
+		var entity = new ContentEntity();
+		entity.setContentId(contentId);
+		entity.setIsDeleted(true);
+		
+		contentEntityMapper.updateByPrimaryKeySelective(entity);
+	}
+
+	/**
+	 * 内容に完了状況をセットする
+	 * @param contentId 内容ID
+	 * @param isCompleted 完了状況
+	 */
+	public void updateIsCompleted(Integer contentId, Boolean isCompleted) {
+		var entity = new ContentEntity();
+		entity.setContentId(contentId);
+		entity.setIsCompleted(isCompleted);
+		
+		contentEntityMapper.updateByPrimaryKeySelective(entity);
 	}
 }

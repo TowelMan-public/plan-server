@@ -98,7 +98,7 @@
     <todo_on_responsible todo_on_project_id="7" user_id="1" todo_on_responsible_id="15" project_id="6" is_completed="0" is_deleted="0" />
     
     
-    <content content_id="1" todo_id="1" content_title="content_1" content_explanation="content_explanation_1" is_completed="0" is_deleted="1" />
+    <content content_id="1" todo_id="1" content_title="content_1" content_explanation="content_explanation_1" is_completed="0" is_deleted="0" />
     <content content_id="2" todo_id="2" content_title="content_2" content_explanation="content_explanation_2" is_completed="0" is_deleted="1" />
     <content content_id="3" todo_id="3" content_title="content_3" content_explanation="content_explanation_3" is_completed="1" is_deleted="0" />
     <content content_id="4" todo_id="4" content_title="content_4" content_explanation="content_explanation_4_for_project6" is_completed="0" is_deleted="0" />
@@ -108,4 +108,9 @@
     <content content_id="8" todo_id="7" content_title="content_8" content_explanation="content_explanation_8_for_project6" is_completed="0" is_deleted="0" />
     <content content_id="9" todo_id="15" content_title="content_9" content_explanation="content_9" is_completed="0" is_deleted="0" />
     
+    <project project_id="11" />    
+    <private_project project_id="11" project_name="TEST_7" user_id="1" is_deleted="0" />
+    <todo todo_id="16" />
+    <todo_on_project todo_on_project_id="16" project_id="11" todo_name="todo_1" start_date="2021-10-25" finish_date="2021-10-30" is_copy_contents_to_users="0" is_completed="0" is_deleted="0" />
+    <content content_id="10" todo_id="16" content_title="private_1" content_explanation="private_1_explanation_1" is_completed="0" is_deleted="1" />
 </dataset>

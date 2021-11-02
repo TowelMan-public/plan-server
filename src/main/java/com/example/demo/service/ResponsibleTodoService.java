@@ -320,7 +320,7 @@ public class ResponsibleTodoService {
 	}
 	
 	/**
-	 * TodoServiceのvalidateUserと頭につく関数を実行したときに成功時に返される、検証結果
+	 * ResponsibleTodoServiceのvalidateUserと頭につく関数を実行したときに成功時に返される、検証結果
 	 * @author towelman
 	 *
 	 */
