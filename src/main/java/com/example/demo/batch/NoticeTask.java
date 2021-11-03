@@ -5,6 +5,7 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.logic.NoticeLogic;
 import com.example.demo.logic.OtherConfigLogic;
@@ -25,6 +26,7 @@ public class NoticeTask {
 	 * 通知の定期実行したい処理たち
 	 */
 	@Scheduled(cron="0 0 * * * *")
+	@Transactional 
 	public void runNoticeTask() {
 		var lastDate = otherConfigLogic.getLastRunNoticeTaskDate();
 		var nowDate = new Date();

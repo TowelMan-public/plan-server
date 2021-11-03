@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.repository.OriginalForEraseAndDeleteRepository">
+	<update id="deletePublicProject">
+		UPDATE public_project
+		SET is_deleted = 1
+		WHERE EXISTS (
+			SELECT * FROM subscriber_in_public_project
+			WHERE
+				public_project.public_project_id = subscriber_in_public_project.public_project_id
+			  AND
+				authority_id = 2
+		)
+	</update>
+	
+	<delete id="eraseTodo">
+		DELETE FROM todo
+		WHERE EXISTS (
+			SELECT * FROM todo_on_project
+			WHERE
+				todo.todo_id = todo_on_project.todo_on_project_id
+			UNION(
+				SELECT * FROM todo_on_responsible
+				WHERE
+					todo.todo_id = todo_on_responsible.todo_on_responsible_id
+			)
+		)
+	</delete>
+	
+	<delete id="eraseProject">
+		DELETE FROM project
+		WHERE EXISTS (
+			SELECT * FROM public_project
+			WHERE
+				project.project_id = public_project.public_project_id
+			UNION(
+				SELECT * FROM private_project
+				WHERE
+					project.project_id = private_project.project_id
+			)
+		)
+	</delete>
+</mapper>
