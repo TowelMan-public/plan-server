@@ -1,13 +1,13 @@
 package com.example.demo;
 
-import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class DatabaseTest {
 	@Autowired
 	TestMapper testMapper;
 	
-	@AfterEach
+	@BeforeEach
 	public void reset() {
 		testMapper.runSql("notice");
 		testMapper.runSql("unsent_notice");		

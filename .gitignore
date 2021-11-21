@@ -31,3 +31,11 @@ build/
 
 ### VS Code ###
 .vscode/
+test-db/init.sql
+conf/application.properties
+run.sh
+plan-server-docker-file
+plan-server-builder-docker-file
+docker run.bat
+docker-compose.yml
+plan-0.0.1-SNAPSHOT.conf

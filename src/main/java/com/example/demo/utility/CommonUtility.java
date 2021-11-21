@@ -3,6 +3,7 @@ package com.example.demo.utility;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 
 import org.springframework.stereotype.Component;
 
@@ -13,6 +14,8 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class CommonUtility {
+	private static final TimeZone TIME_ZONE = TimeZone.getTimeZone("Asia/Tokyo");
+
 	/**
 	 * 文字列から日付を取得する。
 	 * フォーマットはデフォルトで"yyyy-M-d"となる。
@@ -34,6 +37,7 @@ public class CommonUtility {
 	public Date stringToDate(String str, String formatString) {
 		try {
 			var format = new SimpleDateFormat(formatString);
+			format.setTimeZone(TIME_ZONE);
 			return format.parse(str);
 		}catch(ParseException e) {
 			throw new RuntimeException(e.getMessage());
@@ -58,6 +62,7 @@ public class CommonUtility {
 	 */
 	public String dateToString(Date date, String formatString) {
 		var format = new SimpleDateFormat(formatString);
+		format.setTimeZone(TIME_ZONE);
 		return format.format(date);
 	}
 }

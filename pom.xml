@@ -9,12 +9,12 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>android-sample-server</artifactId>
+	<artifactId>plan</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>android-sample-server</name>
-	<description>Demo project for Spring Boot</description>
+	<name>plan-server</name>
+	<description>plan server for plan system</description>
 	<properties>
-		<java.version>14</java.version>
+		<java.version>12</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -107,11 +107,6 @@
 		  <scope>test</scope>
 		</dependency>
 		<dependency>
-		    <groupId>com.h2database</groupId>
-		    <artifactId>h2</artifactId>
-		    <scope>runtime</scope>
-		</dependency>
-		<dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-batch</artifactId>
         </dependency>
@@ -152,7 +147,26 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				
+				<executions>
+		        	<execution>
+		          		<goals>
+		            		<goal>repackage</goal>
+		          		</goals>
+		          		
+		          		<configuration>
+		                    <tasks>
+		                        <delete>
+		                            <fileset dir="${project.build.outputDirectory}" includes="*.properties" />
+		                        </delete>
+		                    </tasks>
+		                </configuration>
+		          		
+		        	</execution>
+		       	</executions>
+				
 				<configuration>
+					<layout>ZIP</layout>
 					<excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>
