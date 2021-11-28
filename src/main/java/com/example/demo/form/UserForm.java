@@ -2,6 +2,7 @@ package com.example.demo.form;
 
 import com.example.demo.exception.ValidateException;
 import com.example.demo.validate.ValidateManager;
+import com.example.demo.validate.validatable.LengthStringValidatable;
 import com.example.demo.validate.validatable.NotBlankStringValidatable;
 import com.example.demo.validate.validator.StringValidator;
 
@@ -29,11 +30,14 @@ public class UserForm {
 		new ValidateManager()
 			.or()
 				.add(new StringValidator(userName)
+						.addValidatable(new LengthStringValidatable(100))
 						.addValidatable(new NotBlankStringValidatable()))
 				.add(new StringValidator(password)
+						.addValidatable(new LengthStringValidatable(100))
 						.addValidatable(new NotBlankStringValidatable()))
 			.or()
 				.add(new StringValidator(refreshJwtToken)
+						.addValidatable(new LengthStringValidatable(100))
 						.addValidatable(new NotBlankStringValidatable()))
 			.run();
 	}
@@ -42,10 +46,13 @@ public class UserForm {
 		new ValidateManager()
 			.or()
 				.add(new StringValidator(userName)
+						.addValidatable(new LengthStringValidatable(100))
 						.addValidatable(new NotBlankStringValidatable()))
 				.add(new StringValidator(userNickName)
+						.addValidatable(new LengthStringValidatable(100))
 						.addValidatable(new NotBlankStringValidatable()))
 				.add(new StringValidator(password)
+						.addValidatable(new LengthStringValidatable(100))
 						.addValidatable(new NotBlankStringValidatable()))
 			.run();
 	}
@@ -54,12 +61,15 @@ public class UserForm {
 		new ValidateManager()
 		.or()
 			.add(new StringValidator(userName)
+					.addValidatable(new LengthStringValidatable(100))
 					.addValidatable(new NotBlankStringValidatable()))
 		.or()
 			.add(new StringValidator(userNickName)
+					.addValidatable(new LengthStringValidatable(100))
 					.addValidatable(new NotBlankStringValidatable()))
 		.or()
 			.add(new StringValidator(password)
+					.addValidatable(new LengthStringValidatable(100))
 					.addValidatable(new NotBlankStringValidatable()))
 		.run();
 	}

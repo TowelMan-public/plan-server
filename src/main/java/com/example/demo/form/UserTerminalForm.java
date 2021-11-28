@@ -2,6 +2,7 @@ package com.example.demo.form;
 
 import com.example.demo.exception.ValidateException;
 import com.example.demo.validate.ValidateManager;
+import com.example.demo.validate.validatable.LengthStringValidatable;
 import com.example.demo.validate.validatable.NotBlankStringValidatable;
 import com.example.demo.validate.validator.StringValidator;
 
@@ -25,6 +26,7 @@ public class UserTerminalForm {
 		new ValidateManager()
 			.or()
 				.add(new StringValidator(terminalName)
+						.addValidatable(new LengthStringValidatable(100))
 						.addValidatable(new NotBlankStringValidatable()))
 			.run();
 	}
@@ -33,8 +35,10 @@ public class UserTerminalForm {
 		new ValidateManager()
 			.or()
 				.add(new StringValidator(oldTerminalName)
+						.addValidatable(new LengthStringValidatable(100))
 						.addValidatable(new NotBlankStringValidatable()))
 				.add(new StringValidator(newTerminalName)
+						.addValidatable(new LengthStringValidatable(100))
 						.addValidatable(new NotBlankStringValidatable()))
 			.run();
 	}
@@ -43,6 +47,7 @@ public class UserTerminalForm {
 		new ValidateManager()
 			.or()
 				.add(new StringValidator(terminalName)
+						.addValidatable(new LengthStringValidatable(100))
 						.addValidatable(new NotBlankStringValidatable()))
 			.run();
 	}

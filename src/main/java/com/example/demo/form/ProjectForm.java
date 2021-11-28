@@ -5,6 +5,7 @@ import java.util.Date;
 import com.example.demo.exception.ValidateException;
 import com.example.demo.validate.ValidateManager;
 import com.example.demo.validate.validatable.DateAfterValidatable;
+import com.example.demo.validate.validatable.LengthStringValidatable;
 import com.example.demo.validate.validatable.NotBlankStringValidatable;
 import com.example.demo.validate.validatable.NotNullValidatable;
 import com.example.demo.validate.validator.DateValidator;
@@ -39,6 +40,7 @@ public class ProjectForm {
 		new ValidateManager()
 			.or()
 				.add(new StringValidator(projectName)
+						.addValidatable(new LengthStringValidatable(100))
 						.addValidatable(new NotBlankStringValidatable()))
 				.add(new DateValidator(startDate)
 						.addValidatable(new NotNullValidatable()))

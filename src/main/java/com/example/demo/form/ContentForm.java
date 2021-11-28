@@ -6,6 +6,7 @@ import com.example.demo.validate.validatable.NotBlankStringValidatable;
 import com.example.demo.validate.validatable.NotNullValidatable;
 import com.example.demo.validate.validator.ObjectValidator;
 import com.example.demo.validate.validator.StringValidator;
+import com.example.demo.validate.validatable.LengthStringValidatable;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -33,8 +34,10 @@ public class ContentForm {
 			.add(new ObjectValidator(todoId)
 					.addValidatable(new NotNullValidatable()))
 			.add(new StringValidator(contentTitle)
+					.addValidatable(new LengthStringValidatable(100))
 					.addValidatable(new NotBlankStringValidatable()))
 			.add(new StringValidator(contentExplanation)
+					.addValidatable(new LengthStringValidatable(2000))
 					.addValidatable(new NotBlankStringValidatable()))
 		.run();
 	}

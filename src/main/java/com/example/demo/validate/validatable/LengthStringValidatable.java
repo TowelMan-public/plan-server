@@ -5,9 +5,9 @@ public class LengthStringValidatable implements StringValidatable{
 	private Integer max = null;
 	private Integer min = null;
 	
-	LengthStringValidatable(int max){this.max = max;}
+	public LengthStringValidatable(int max){this.max = max;}
 	
-	LengthStringValidatable(int min, int max){
+	public LengthStringValidatable(int min, int max){
 		this.max = max;
 		this.min = min;
 	}
