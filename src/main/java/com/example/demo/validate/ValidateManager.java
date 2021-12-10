@@ -18,7 +18,7 @@ public class ValidateManager {
 	}
 	
 	public void run() throws ValidateException {
-		String validateMessage = "";
+		String validateMessage = "have no validator!";
 		
 		for(OrValidator it: orValidatorList) {
 			var message = it.doValidateList();
@@ -37,6 +37,7 @@ public class ValidateManager {
 		
 		public OrValidator(ValidateManager manager) {
 			this.manager = manager;
+			manager.add(this);
 		}
 		
 		public OrValidator add(Validator validator) {
@@ -45,7 +46,6 @@ public class ValidateManager {
 		}
 		
 		public OrValidator or() {
-			manager.add(this);
 			return new OrValidator(manager);
 		}
 		
