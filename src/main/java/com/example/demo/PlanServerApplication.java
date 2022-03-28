@@ -15,6 +15,7 @@ public class PlanServerApplication {
 
 	public static void main(String[] args) {
 		//run
+		int a = 5+6;
 		SpringApplication.run(PlanServerApplication.class, args);
 	}
 
