@@ -14,6 +14,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 public class PlanServerApplication {
 
 	public static void main(String[] args) {
+		//run
 		SpringApplication.run(PlanServerApplication.class, args);
 	}
 
