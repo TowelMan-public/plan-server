@@ -132,7 +132,7 @@ public class PublicProjectService {
 	 * @throws NotFoundValueException パブリックプロジェクトが見つからない
 	 */
 	public void updateStartDate(Integer userId, Integer publicProjectId, Date startDate) throws BadRequestException, NotFoundValueException, NotHaveAuthorityToOperateProjectException {
-		var projectFinishDate = this.getProjectAndValidateUserCanOperationToProject(userId, publicProjectId).getStartDate();
+		var projectFinishDate = this.getProjectAndValidateUserCanOperationToProject(userId, publicProjectId).getFinishDate();
 		
 		if(!projectFinishDate.after(startDate))
 			throw new BadRequestException("startDate is unfair");

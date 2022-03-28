@@ -26,29 +26,29 @@ public class UserTerminalForm {
 		new ValidateManager()
 			.or()
 				.add(new StringValidator(terminalName)
-						.addValidatable(new LengthStringValidatable(100))
-						.addValidatable(new NotBlankStringValidatable()))
-			.run();
-	}
-	
-	public void validateDelete() throws ValidateException {
-		new ValidateManager()
-			.or()
-				.add(new StringValidator(oldTerminalName)
-						.addValidatable(new LengthStringValidatable(100))
-						.addValidatable(new NotBlankStringValidatable()))
-				.add(new StringValidator(newTerminalName)
-						.addValidatable(new LengthStringValidatable(100))
-						.addValidatable(new NotBlankStringValidatable()))
+						.addValidatable(new NotBlankStringValidatable())
+						.addValidatable(new LengthStringValidatable(100)))	
 			.run();
 	}
 	
 	public void validatePut() throws ValidateException {
 		new ValidateManager()
 			.or()
+				.add(new StringValidator(oldTerminalName)
+						.addValidatable(new NotBlankStringValidatable())
+						.addValidatable(new LengthStringValidatable(100)))	
+				.add(new StringValidator(newTerminalName)
+						.addValidatable(new NotBlankStringValidatable())
+						.addValidatable(new LengthStringValidatable(100)))	
+			.run();
+	}
+	
+	public void validateDelete() throws ValidateException {
+		new ValidateManager()
+			.or()
 				.add(new StringValidator(terminalName)
-						.addValidatable(new LengthStringValidatable(100))
-						.addValidatable(new NotBlankStringValidatable()))
+						.addValidatable(new NotBlankStringValidatable())
+						.addValidatable(new LengthStringValidatable(100)))	
 			.run();
 	}
 }

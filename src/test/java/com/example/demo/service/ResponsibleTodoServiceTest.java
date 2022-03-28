@@ -160,6 +160,16 @@ public class ResponsibleTodoServiceTest extends DatabaseTest {
 		expect.setIsCompleted(false);
 		expect.setTodoOnProjectId(5);
 		expectList.add(expect);
+
+		expect = new TodoOnResponsibleResponse();
+		expect.setProjectId(6);
+		expect.setTodoName("todo_3");
+		expect.setTodoOnResponsibleId(14);
+		expect.setStartDate(utillity.stringToDate("2021-09-1"));
+		expect.setFinishDate(utillity.stringToDate("2021-10-16"));
+		expect.setIsCompleted(false);
+		expect.setTodoOnProjectId(6);
+		expectList.add(expect);
 		
 		assertThat(service.getList(userId, form)).containsExactlyInAnyOrderElementsOf(expectList);
 	}

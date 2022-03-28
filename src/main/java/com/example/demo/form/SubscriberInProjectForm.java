@@ -6,6 +6,7 @@ import com.example.demo.validate.validatable.LengthStringValidatable;
 import com.example.demo.validate.validatable.MaxValueIntegerValidatable;
 import com.example.demo.validate.validatable.MinValueIntegerValidatable;
 import com.example.demo.validate.validatable.NotBlankStringValidatable;
+import com.example.demo.validate.validatable.NotNullValidatable;
 import com.example.demo.validate.validator.IntegerValidator;
 import com.example.demo.validate.validator.StringValidator;
 
@@ -34,9 +35,10 @@ public class SubscriberInProjectForm {
 		new ValidateManager()
 		.or()
 			.add(new StringValidator(userName)
-					.addValidatable(new LengthStringValidatable(100))
-					.addValidatable(new NotBlankStringValidatable()))
+					.addValidatable(new NotBlankStringValidatable())
+					.addValidatable(new LengthStringValidatable(100)))
 			.add(new IntegerValidator(authorityId)
+					.addValidatable(new NotNullValidatable())
 					.addValidatable(new MaxValueIntegerValidatable(3))
 					.addValidatable(new MinValueIntegerValidatable(1)))
 		.run();
@@ -46,8 +48,8 @@ public class SubscriberInProjectForm {
 		new ValidateManager()
 		.or()
 			.add(new StringValidator(userName)
-					.addValidatable(new LengthStringValidatable(100))
-					.addValidatable(new NotBlankStringValidatable()))
+					.addValidatable(new NotBlankStringValidatable())
+					.addValidatable(new LengthStringValidatable(100)))
 		.run();
 	}
 }

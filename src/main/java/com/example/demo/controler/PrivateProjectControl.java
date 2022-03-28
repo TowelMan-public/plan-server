@@ -101,4 +101,17 @@ public class PrivateProjectControl {
 			throws NotFoundValueException {
 		service.delete(user.getUserId(), privateProjectId);
 	}
+
+	/**
+	 * 指定されたプロジェクトがプライベートプロジェクトかどうかを応答する
+	 * @param user
+	 * @param privateProjectId
+	 * @return trueならプライベートプロジェクト、そうでなければfalse
+	 * @throws NotFoundValueException
+	 */
+	@GetMapping("{privateProjectId}/isPrivate")
+	public Boolean getIsPrivateProject(@AuthenticationPrincipal UserDetailsImp user, @PathVariable("privateProjectId") Integer privateProjectId)
+			throws NotFoundValueException{
+		return service.isPrivateProject(user.getUserId(), privateProjectId);
+	}
 }

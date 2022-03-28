@@ -34,7 +34,8 @@ public class TodoOnResponsibeLogic {
 	public List<TodoOnResponsibleEntity> getTodoOnResponsibleList(Integer todoOnProjectId) {
 		var dto = new TodoOnResponsibleEntityExample();
 		dto.or()
-			.andTodoOnProjectIdEqualTo(todoOnProjectId);
+			.andTodoOnProjectIdEqualTo(todoOnProjectId)
+			.andIsDeletedEqualTo(false);
 		
 		return todoOnResponsibleEntityMapper.selectByExample(dto);
 	}
@@ -106,6 +107,27 @@ public class TodoOnResponsibeLogic {
 		var entityList = todoOnResponsibleEntityMapper.selectByExample(dto);
 		if(entityList.isEmpty())
 			throw new NotSelectedAsTodoResponsibleException();
+		else
+			return entityList.get(0);
+			
+	}
+
+	/**
+	 * 「やること」の担当者を取得する。例外を投げない。
+	 * @param todoOnProjectId 「やること」ID
+	 * @param userId ユーザID
+	 * @return 「やること」の担当者
+	 */
+	public TodoOnResponsibleEntity getNonThrow(Integer todoOnProjectId, Integer userId) throws NotSelectedAsTodoResponsibleException {
+		var dto = new TodoOnResponsibleEntityExample();
+		dto.or()
+			.andTodoOnProjectIdEqualTo(todoOnProjectId)
+			.andUserIdEqualTo(userId)
+			.andIsDeletedEqualTo(false);
+		
+		var entityList = todoOnResponsibleEntityMapper.selectByExample(dto);
+		if(entityList.isEmpty())
+			return null;
 		else
 			return entityList.get(0);
 			

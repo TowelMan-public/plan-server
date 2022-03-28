@@ -279,6 +279,16 @@ public class TodoServiceTest extends DatabaseTest {
 		expect.setIsCompleted(false);
 		expect.setIsCopyContentsToUsers(false);
 		expectList.add(expect);
+
+		expect = new TodoOnProjectResponse();
+		expect.setProjectId(6);
+		expect.setTodoName("todo_3");
+		expect.setTodoOnProjectId(6);
+		expect.setStartDate(utillity.stringToDate("2021-09-1"));
+		expect.setFinishDate(utillity.stringToDate("2021-10-16"));
+		expect.setIsCompleted(false);
+		expect.setIsCopyContentsToUsers(false);
+		expectList.add(expect);
 				
 		assertThat(service.getList(userId, form)).containsExactlyInAnyOrderElementsOf(expectList);
 	}

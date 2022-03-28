@@ -2,6 +2,7 @@ package com.example.demo.form;
 
 import java.util.Date;
 
+import com.example.demo.configurer.DateFormatConfig;
 import com.example.demo.exception.ValidateException;
 import com.example.demo.validate.ValidateManager;
 import com.example.demo.validate.validatable.DateAfterValidatable;
@@ -11,6 +12,9 @@ import com.example.demo.validate.validatable.NotNullValidatable;
 import com.example.demo.validate.validator.DateValidator;
 import com.example.demo.validate.validator.ObjectValidator;
 import com.example.demo.validate.validator.StringValidator;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -22,10 +26,14 @@ public class ProjectForm {
 	
 	@Getter
 	@Setter
+	@JsonFormat(pattern=DateFormatConfig.FORMAT)
+	@DateTimeFormat(pattern=DateFormatConfig.FORMAT)
 	private Date startDate;
 	
 	@Getter
 	@Setter
+	@JsonFormat(pattern=DateFormatConfig.FORMAT)
+	@DateTimeFormat(pattern=DateFormatConfig.FORMAT)
 	private Date finishDate;
 	
 	@Getter
@@ -40,8 +48,8 @@ public class ProjectForm {
 		new ValidateManager()
 			.or()
 				.add(new StringValidator(projectName)
-						.addValidatable(new LengthStringValidatable(100))
-						.addValidatable(new NotBlankStringValidatable()))
+						.addValidatable(new NotBlankStringValidatable())
+						.addValidatable(new LengthStringValidatable(100)))
 				.add(new DateValidator(startDate)
 						.addValidatable(new NotNullValidatable()))
 				.add(new DateValidator(finishDate)

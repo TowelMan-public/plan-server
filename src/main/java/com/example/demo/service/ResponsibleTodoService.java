@@ -118,8 +118,9 @@ public class ResponsibleTodoService {
 			var todoOnProjectList = todoOnProjectLogic.getListByExampleIf(projectId, form.getStartDate(), form.getFinishDate(), form.getIsInclideCompletedTodo());
 			
 			for(var todoOnProject: todoOnProjectList) {
-				var todoOnResponsible = todoOnResponsibeLogic.get(todoOnProject.getTodoOnProjectId(), userId);
-				responseList.add(new TodoOnResponsibleResponse(todoOnResponsible, todoOnProject));
+				var todoOnResponsible = todoOnResponsibeLogic.getNonThrow(todoOnProject.getTodoOnProjectId(), userId);
+				if(todoOnResponsible != null)
+					responseList.add(new TodoOnResponsibleResponse(todoOnResponsible, todoOnProject));
 			}
 		}
 		
@@ -221,17 +222,16 @@ public class ResponsibleTodoService {
 		
 		var todoOnResponsibleList = todoOnResponsibeLogic.getTodoOnResponsibleList(todoOnProjectId);
 		var todoOnProject = result.getTodoOnProject();
-		if(!todoOnProject.getIsCompleted().booleanValue() && isCompleted) {
-			for(var todoOnResposible: todoOnResponsibleList) {
-				todoOnResponsibeLogic.updateIsCompleted(todoOnProjectId, todoOnResposible.getUserId(), true);
-				todoOnProjectLogic.updateIsCompleted(todoOnProjectId, true);
+
+		todoOnProjectLogic.updateIsCompleted(todoOnProjectId, isCompleted);
+
+		for(var todoOnResposible: todoOnResponsibleList) {
+			todoOnResponsibeLogic.updateIsCompleted(todoOnProjectId, todoOnResposible.getUserId(), isCompleted);
+			
+			if (!todoOnProject.getIsCompleted().booleanValue() && isCompleted) {
 				noticeLogic.eraseTodoNotice(todoOnResposible.getUserId(), todoOnProjectId);
 				noticeLogic.createCompletedTodoNotice(todoOnResposible.getUserId(), todoOnProjectId);
-			}
-		}else if(todoOnProject.getIsCompleted().booleanValue() && !isCompleted) {
-			for(var todoOnResposible: todoOnResponsibleList) {
-				todoOnResponsibeLogic.updateIsCompleted(todoOnProjectId, todoOnResposible.getUserId(), false);
-				todoOnProjectLogic.updateIsCompleted(todoOnProjectId, false);
+			}else if(todoOnProject.getIsCompleted().booleanValue() && !isCompleted) {
 				noticeLogic.eraseTodoNotice(todoOnResposible.getUserId(), todoOnProjectId);
 				noticeLogic.createUnCompletedTodoNotice(todoOnResposible.getUserId(), todoOnProjectId);
 			}

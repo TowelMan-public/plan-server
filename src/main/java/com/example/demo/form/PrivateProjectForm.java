@@ -18,8 +18,9 @@ public class PrivateProjectForm {
 		new ValidateManager()
 			.or()
 				.add(new StringValidator(projectName)
-						.addValidatable(new LengthStringValidatable(100))
-						.addValidatable(new NotBlankStringValidatable()))
+						.addValidatable(new NotBlankStringValidatable())
+						.addValidatable(new LengthStringValidatable(100)))
+						
 			.run();
 	}
 }

@@ -178,10 +178,17 @@ public class TodoOnProjectLogic {
 				.andProjectIdEqualTo(projectId)
 				.andIsDeletedEqualTo(false);
 		
-		if(startDate != null)
-			or.andStartDateGreaterThanOrEqualTo(startDate);
-		if(finishDate != null)
-			or.andFinishDateLessThanOrEqualTo(finishDate);
+		if(startDate != null && finishDate != null){
+			or
+				.andStartDateLessThanOrEqualTo(finishDate)
+				.andFinishDateGreaterThanOrEqualTo(startDate);
+
+		}else{
+			if(startDate != null)
+				or.andStartDateGreaterThanOrEqualTo(startDate);
+			if(finishDate != null)
+				or.andFinishDateLessThanOrEqualTo(finishDate);
+		}
 		if(isInclideCompletedTodo == null || !isInclideCompletedTodo)
 			or.andIsCompletedEqualTo(false);		
 		

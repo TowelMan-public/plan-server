@@ -70,7 +70,7 @@ public class ResponsibleTodoControl {
 	 * @throws NotSelectedAsTodoResponsibleException
 	 */
 	@GetMapping("responsible_todo")
-	public List<TodoOnResponsibleResponse> getResponsibleTodoList(@AuthenticationPrincipal UserDetailsImp user, @RequestBody ResponsibleTodoForm form) 
+	public List<TodoOnResponsibleResponse> getResponsibleTodoList(@AuthenticationPrincipal UserDetailsImp user, ResponsibleTodoForm form) 
 			throws NotFoundValueException, NotJoinedPublicProjectException, NotSelectedAsTodoResponsibleException {
 		return service.getList(user.getUserId(), form);
 	}

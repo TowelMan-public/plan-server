@@ -12,7 +12,6 @@ import com.example.demo.configurer.AuthorityListInPublicProject;
 import com.example.demo.entity.PublicProjectEntity;
 import com.example.demo.entity.SubscriberInPublicProjectEntity;
 import com.example.demo.entity.TodoOnProjectEntity;
-import com.example.demo.entity.TodoOnResponsibleEntity;
 import com.example.demo.exception.BadRequestException;
 import com.example.demo.exception.NotFoundValueException;
 import com.example.demo.exception.NotHaveAuthorityToOperateProjectException;

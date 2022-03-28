@@ -85,4 +85,14 @@ public class PrivateProjectService {
 		privateProjectLogic.delete(privateProjectId);
 	}
 
+	/**
+	 * プライベートプロジェクトかどうかを判定する
+	 * @param userId
+	 * @param privateProjectId
+	 * @return プライベートプロジェクトならtrue、それ以外はfalse
+	 */
+    public Boolean isPrivateProject(Integer userId, Integer privateProjectId) {
+        return privateProjectLogic.isPrivateProject(privateProjectId);
+    }
+
 }
